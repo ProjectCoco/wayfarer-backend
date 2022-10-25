@@ -4,19 +4,29 @@ plugins {
 	id 'java'
 }
 
-group = 'com.wayfarer'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-
 repositories {
 	mavenCentral()
 }
 
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
+subprojects {
+	group 'com.wayfarer'
+	version '0.0.1-SNAPSHOT'
 
-tasks.named('test') {
-	useJUnitPlatform()
+	apply plugin: 'java'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+
+	sourceCompatibility = 11
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+
+	}
+
+	test{
+		useJUnitPlatform()
+	}
 }
