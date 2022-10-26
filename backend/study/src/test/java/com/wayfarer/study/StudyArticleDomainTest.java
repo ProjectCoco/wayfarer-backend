@@ -2,34 +2,72 @@ package com.wayfarer.study;
 
 import com.wayfarer.study.entity.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
+import javax.persistence.PersistenceException;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+@DataJpaTest
 class StudyArticleDomainTest {
+
+    @Autowired
+    private TestEntityManager entityManager;
+
+    @TestFactory
+    Stream<DynamicTest> studyArticleNullException() {
+        List<StudyArticle> articles = List.of(
+                StudyArticle.builder()
+                        .contentVersion("content")
+                        .status("status")
+                        .build(),
+                StudyArticle.builder()
+                        .title("title")
+                        .status("status")
+                        .build(),
+                StudyArticle.builder()
+                        .title("title")
+                        .contentVersion("content")
+                        .build()
+        );
+
+        return articles.stream()
+                .map(article -> DynamicTest.dynamicTest(
+                        "STUDY_ARTICLE null exception 테스트",
+                        () -> {
+                            assertThatThrownBy(() -> entityManager.persist(article)).isInstanceOf(PersistenceException.class);
+                        }
+                ));
+    }
 
     @DisplayName("STUDY_ARTICLE 엔터티 테스트")
     @Test
-    void studyArticleTest() {
-        long studyArticleId = 1L;
+    void saveStudyArticle() {
         String title = "title";
         String contentVersion = "contentVersion";
         String status = "status";
 
         StudyArticle studyArticle = StudyArticle.builder()
-                .studyArticleId(studyArticleId)
                 .title(title)
                 .contentVersion(contentVersion)
                 .status(status)
                 .build();
 
-        assertThat(studyArticle.getStudyArticleId(), is(studyArticleId));
-        assertThat(studyArticle.getTitle(), is(title));
-        assertThat(studyArticle.getContentVersion(), is(contentVersion));
-        assertThat(studyArticle.getStatus(), is(status));
+        StudyArticle savedStudyArticle = entityManager.persistFlushFind(studyArticle);
+
+        assertThat(savedStudyArticle.getTitle(), is(title));
+        assertThat(savedStudyArticle.getContentVersion(), is(contentVersion));
+        assertThat(savedStudyArticle.getStatus(), is(status));
     }
 
     @DisplayName("STUDY_CONTENT 엔터티 테스트")
