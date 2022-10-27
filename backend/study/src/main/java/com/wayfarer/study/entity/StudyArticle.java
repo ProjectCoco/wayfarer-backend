@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Builder
@@ -18,7 +15,7 @@ import javax.persistence.Id;
 public class StudyArticle {
 
     @Id
-    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long studyArticleId;
 
     @Column(nullable = false)
@@ -29,4 +26,5 @@ public class StudyArticle {
 
     @Column(nullable = false)
     private String status;
+
 }
