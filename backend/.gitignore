@@ -37,7 +37,7 @@ out/
 .vscode/
 
 ### env ###
-**/application*.*
+**/application*.yml
 
 ### DS_Store ###
 .DS_Store
