@@ -13,9 +13,4 @@ public class TestController {
         this.studyService = studyService;
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return studyService.test();
-    }
-
 }
