@@ -23,8 +23,8 @@ public class ApplicationController {
         return new ResponseEntity<>(studyService.readAllStudyArticles(), HttpStatus.OK);
     }
 
-    @GetMapping("")
-    public ResponseEntity readStudy() {
+    @GetMapping("/{target}")
+    public ResponseEntity readStudy(@PathVariable String target) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
