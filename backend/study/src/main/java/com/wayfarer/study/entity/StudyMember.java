@@ -7,8 +7,8 @@ import lombok.Getter;
 @Getter
 public class StudyMember {
     private long studyMemberId;
-    String studyRole;
-    int memberCount;
-    int memberGoalCount;
-    long studyArticleId;
+    private String studyRole;
+    private int memberCount;
+    private int memberGoalCount;
+    private long studyArticleId;
 }

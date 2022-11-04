@@ -1,8 +1,5 @@
 package com.wayfarer.study.dto;
 
-import com.wayfarer.study.entity.StudyContent;
-import com.wayfarer.study.entity.StudyInfo;
-import com.wayfarer.study.entity.StudyTime;
 import lombok.*;
 @Getter @Setter
 @Builder

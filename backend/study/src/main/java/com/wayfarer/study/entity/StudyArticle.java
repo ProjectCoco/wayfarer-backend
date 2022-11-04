@@ -1,5 +1,9 @@
 package com.wayfarer.study.entity;
 
+import com.wayfarer.study.entity.vo.StudyContent;
+import com.wayfarer.study.entity.vo.StudyInfo;
+import com.wayfarer.study.entity.vo.StudyOwner;
+import com.wayfarer.study.entity.vo.StudyTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,15 +20,24 @@ public class StudyArticle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long studyArticleId;
+    private Long studyArticleId;
 
     @Column(nullable = false)
     private String title;
 
     @Column(nullable = false)
-    private String contentVersion;
-
-    @Column(nullable = false)
     private String status;
+
+    @Embedded
+    private StudyContent studyContent;
+
+    @Embedded
+    private StudyTime studyTime;
+
+    @Embedded
+    private StudyInfo studyInfo;
+
+    @Embedded
+    private StudyOwner studyOwner;
 
 }
