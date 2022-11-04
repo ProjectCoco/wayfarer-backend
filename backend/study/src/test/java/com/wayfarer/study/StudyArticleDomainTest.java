@@ -1,6 +1,11 @@
 package com.wayfarer.study;
 
 import com.wayfarer.study.entity.*;
+import com.wayfarer.study.entity.vo.StudyContent;
+import com.wayfarer.study.entity.vo.StudyInfo;
+import com.wayfarer.study.entity.StudyMember;
+import com.wayfarer.study.entity.vo.StudyOwner;
+import com.wayfarer.study.entity.vo.StudyTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;

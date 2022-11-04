@@ -1,13 +1,16 @@
-package com.wayfarer.study.entity;
+package com.wayfarer.study.entity.vo;
 
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.persistence.Embeddable;
+
 @Builder
 @Getter
+@Embeddable
 public class StudyContent {
-        private long studyContentId;
+
         private String content;
         private String version;
-        private long studyArticleId;
+
 }
