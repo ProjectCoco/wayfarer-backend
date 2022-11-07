@@ -30,7 +30,6 @@ public class StudyArticleEntityTests {
 
     private StudyArticle studyArticle;
     private StudyArticle studyArticleWithoutTitle;
-    private StudyArticle studyArticleWithoutContentVersion;
     private StudyArticle studyArticleWithoutStatus;
 
 
@@ -38,20 +37,13 @@ public class StudyArticleEntityTests {
     public void setup() {
         studyArticle = StudyArticle.builder()
                 .title("title")
-                .contentVersion("content")
                 .status("status")
                 .build();
         studyArticleWithoutTitle = StudyArticle.builder()
-                .contentVersion("content")
-                .status("status")
-                .build();
-        studyArticleWithoutContentVersion = StudyArticle.builder()
-                .title("title")
                 .status("status")
                 .build();
         studyArticleWithoutStatus = StudyArticle.builder()
                 .title("title")
-                .contentVersion("content")
                 .build();
     }
 
@@ -65,11 +57,8 @@ public class StudyArticleEntityTests {
             StudyArticle saveStudyArticle = testEntityManager.persistFlushFind(studyArticle);
 
             assertThat(saveStudyArticle.getTitle(), equalTo(studyArticle.getTitle()));
-            assertThat(saveStudyArticle.getContentVersion(), equalTo(studyArticle.getContentVersion()));
             assertThat(saveStudyArticle.getStatus(), equalTo(studyArticle.getStatus()));
         }
-
-
     }
 
     @Nested
@@ -80,12 +69,6 @@ public class StudyArticleEntityTests {
         @DisplayName("엔터티의 Title 필드가 null일때 Exception이 발생한다.")
         public void saveEntityNullTitleException() {
             assertThatThrownBy(() -> testEntityManager.persist(studyArticleWithoutTitle)).isInstanceOf(PersistenceException.class);
-        }
-
-        @Test
-        @DisplayName("엔터티의 ContentVersion 필드가 null일때 Exception이 발생한다.")
-        public void saveEntityNullContentVersionException() {
-            assertThatThrownBy(() -> testEntityManager.persist(studyArticleWithoutContentVersion)).isInstanceOf(PersistenceException.class);
         }
 
         @Test

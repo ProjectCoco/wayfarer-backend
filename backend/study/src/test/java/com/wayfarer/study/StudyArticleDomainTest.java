@@ -33,16 +33,10 @@ class StudyArticleDomainTest {
     Stream<DynamicTest> studyArticleNullException() {
         List<StudyArticle> articles = List.of(
                 StudyArticle.builder()
-                        .contentVersion("content")
                         .status("status")
                         .build(),
                 StudyArticle.builder()
                         .title("title")
-                        .status("status")
-                        .build(),
-                StudyArticle.builder()
-                        .title("title")
-                        .contentVersion("content")
                         .build()
         );
 
@@ -59,23 +53,20 @@ class StudyArticleDomainTest {
     @Test
     void saveStudyArticle() {
         String title = "title";
-        String contentVersion = "contentVersion";
         String status = "status";
 
         StudyArticle studyArticle = StudyArticle.builder()
                 .title(title)
-                .contentVersion(contentVersion)
                 .status(status)
                 .build();
 
         StudyArticle savedStudyArticle = entityManager.persistFlushFind(studyArticle);
 
         assertThat(savedStudyArticle.getTitle(), is(title));
-        assertThat(savedStudyArticle.getContentVersion(), is(contentVersion));
         assertThat(savedStudyArticle.getStatus(), is(status));
     }
 
-    @DisplayName("STUDY_CONTENT 엔터티 테스트")
+/*    @DisplayName("STUDY_CONTENT 엔터티 테스트")
     @Test
     void studyContentTest() {
         long studyContentId = 1L;
@@ -217,7 +208,7 @@ class StudyArticleDomainTest {
         assertThat(studyTag.getStudyTagId(), is(studyTagId));
         assertThat(studyTag.getTagId(), is(tagId));
         assertThat(studyTag.getStudyArticleId(), is(studyArticleId));
-    }
+    }*/
 
 
 }

@@ -3,6 +3,7 @@ package com.wayfarer.study.entity.vo;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Builder
@@ -10,7 +11,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class StudyContent {
 
-        private String content;
-        private String version;
-
+        @Column(nullable = false)
+     private String content;
+     private String version;
 }
