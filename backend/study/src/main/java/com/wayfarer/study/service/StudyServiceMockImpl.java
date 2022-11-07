@@ -9,31 +9,31 @@ import com.wayfarer.study.helper.StudyStubData;
 
 import java.util.List;
 
-public class StudyServiceMockImpl implements StudyService {
-
-    @Override
-    public List<StudyResponseDto> readAllStudyArticles() {
-        return StudyStubData.getAllStudyResponseDto();
-    }
-
-    @Override
-    public StudyDetailResponseDto readStudyArticle(Long studyId) {
-        return null;
-    }
-
-    @Override
-    public void createStudyArticle(StudyArticleRequestDto studyArticleRequestDto) {
-
-    }
-
-    @Override
-    public void updateStudyArticle(StudyAriticleUpdateRequestDto studyAriticleUpdateRequestDto) {
-
-    }
-
-    @Override
-    public void deleteStudyArticle(Long studyId) {
-
-    }
-}
+//public class StudyServiceMockImpl implements StudyService {
+//
+//    @Override
+//    public List<StudyResponseDto> readAllStudyArticles() {
+//        return StudyStubData.getAllStudyResponseDto();
+//    }
+//
+//    @Override
+//    public StudyDetailResponseDto readStudyArticle(Long studyId) {
+//        return null;
+//    }
+//
+//    @Override
+//    public void createStudyArticle(StudyArticleRequestDto studyArticleRequestDto) {
+//
+//    }
+//
+//    @Override
+//    public void updateStudyArticle(StudyAriticleUpdateRequestDto studyAriticleUpdateRequestDto) {
+//
+//    }
+//
+//    @Override
+//    public void deleteStudyArticle(Long studyId) {
+//
+//    }
+//}
 

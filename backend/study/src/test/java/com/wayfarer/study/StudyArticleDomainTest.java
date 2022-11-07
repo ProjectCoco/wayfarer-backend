@@ -23,48 +23,48 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-@DataJpaTest
-class StudyArticleDomainTest {
+//@DataJpaTest
+//class StudyArticleDomainTest {
+//
+//    @Autowired
+//    private TestEntityManager entityManager;
+//
+//    @TestFactory
+//    Stream<DynamicTest> studyArticleNullException() {
+//        List<StudyArticle> articles = List.of(
+//                StudyArticle.builder()
+//                        .status("status")
+//                        .build(),
+//                StudyArticle.builder()
+//                        .title("title")
+//                        .build()
+//        );
 
-    @Autowired
-    private TestEntityManager entityManager;
+//        return articles.stream()
+//                .map(article -> DynamicTest.dynamicTest(
+//                        "STUDY_ARTICLE null exception 테스트",
+//                        () -> {
+//                            assertThatThrownBy(() -> entityManager.persist(article)).isInstanceOf(PersistenceException.class);
+//                        }
+//                ));
+//    }
 
-    @TestFactory
-    Stream<DynamicTest> studyArticleNullException() {
-        List<StudyArticle> articles = List.of(
-                StudyArticle.builder()
-                        .status("status")
-                        .build(),
-                StudyArticle.builder()
-                        .title("title")
-                        .build()
-        );
+//    @DisplayName("STUDY_ARTICLE 엔터티 테스트")
+//    @Test
+//    void saveStudyArticle() {
+//        String title = "title";
+//        String status = "status";
 
-        return articles.stream()
-                .map(article -> DynamicTest.dynamicTest(
-                        "STUDY_ARTICLE null exception 테스트",
-                        () -> {
-                            assertThatThrownBy(() -> entityManager.persist(article)).isInstanceOf(PersistenceException.class);
-                        }
-                ));
-    }
+//        StudyArticle studyArticle = StudyArticle.builder()
+//                .title(title)
+//                .status(status)
+//                .build();
 
-    @DisplayName("STUDY_ARTICLE 엔터티 테스트")
-    @Test
-    void saveStudyArticle() {
-        String title = "title";
-        String status = "status";
-
-        StudyArticle studyArticle = StudyArticle.builder()
-                .title(title)
-                .status(status)
-                .build();
-
-        StudyArticle savedStudyArticle = entityManager.persistFlushFind(studyArticle);
-
-        assertThat(savedStudyArticle.getTitle(), is(title));
-        assertThat(savedStudyArticle.getStatus(), is(status));
-    }
+//        StudyArticle savedStudyArticle = entityManager.persistFlushFind(studyArticle);
+//
+//        assertThat(savedStudyArticle.getTitle(), is(title));
+//        assertThat(savedStudyArticle.getStatus(), is(status));
+//    }
 
 /*    @DisplayName("STUDY_CONTENT 엔터티 테스트")
     @Test
@@ -211,4 +211,4 @@ class StudyArticleDomainTest {
     }*/
 
 
-}
+//}

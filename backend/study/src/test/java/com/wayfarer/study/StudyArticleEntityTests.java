@@ -25,7 +25,7 @@ import static org.hamcrest.Matchers.equalTo;
 @DisplayName("StudyArticle Entity Tests")
 public class StudyArticleEntityTests {
 
-    @Autowired
+/*    @Autowired
     private TestEntityManager testEntityManager;
 
     private StudyArticle studyArticle;
@@ -35,16 +35,16 @@ public class StudyArticleEntityTests {
 
     @BeforeEach
     public void setup() {
-        studyArticle = StudyArticle.builder()
-                .title("title")
-                .status("status")
-                .build();
-        studyArticleWithoutTitle = StudyArticle.builder()
-                .status("status")
-                .build();
-        studyArticleWithoutStatus = StudyArticle.builder()
-                .title("title")
-                .build();
+//        studyArticle = StudyArticle.builder()
+//                .title("title")
+//                .status("status")
+//                .build();
+//        studyArticleWithoutTitle = StudyArticle.builder()
+//                .status("status")
+//                .build();
+//        studyArticleWithoutStatus = StudyArticle.builder()
+//                .title("title")
+//                .build();
     }
 
     @Nested
@@ -54,10 +54,10 @@ public class StudyArticleEntityTests {
         @Test
         @DisplayName("엔티티가 생성되는지 테스트한다.")
         public void saveEntity() {
-            StudyArticle saveStudyArticle = testEntityManager.persistFlushFind(studyArticle);
-
-            assertThat(saveStudyArticle.getTitle(), equalTo(studyArticle.getTitle()));
-            assertThat(saveStudyArticle.getStatus(), equalTo(studyArticle.getStatus()));
+//            StudyArticle saveStudyArticle = testEntityManager.persistFlushFind(studyArticle);
+//
+//            assertThat(saveStudyArticle.getTitle(), equalTo(studyArticle.getTitle()));
+//            assertThat(saveStudyArticle.getStatus(), equalTo(studyArticle.getStatus()));
         }
     }
 
@@ -77,5 +77,5 @@ public class StudyArticleEntityTests {
             assertThatThrownBy(() -> testEntityManager.persist(studyArticleWithoutStatus)).isInstanceOf(PersistenceException.class);
         }
 
-    }
+    }*/
 }

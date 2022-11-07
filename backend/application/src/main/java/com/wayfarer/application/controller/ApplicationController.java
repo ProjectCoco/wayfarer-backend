@@ -1,5 +1,6 @@
 package com.wayfarer.application.controller;
 
+import com.wayfarer.study.dto.StudyArticleRequestDto;
 import com.wayfarer.study.dto.StudyResponseDto;
 import com.wayfarer.study.repository.StudyArticleRepository;
 import com.wayfarer.study.service.StudyService;
@@ -29,7 +30,8 @@ public class ApplicationController {
     }
 
     @PostMapping("")
-    public ResponseEntity createStudy() {
+    public ResponseEntity createStudy(@RequestBody StudyArticleRequestDto studyArticleRequestDto) {
+        studyService.createStudyArticle(studyArticleRequestDto);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 

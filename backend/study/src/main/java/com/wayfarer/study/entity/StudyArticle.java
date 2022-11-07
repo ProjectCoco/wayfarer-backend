@@ -4,16 +4,14 @@ import com.wayfarer.study.entity.vo.StudyContent;
 import com.wayfarer.study.entity.vo.StudyInfo;
 import com.wayfarer.study.entity.vo.StudyOwner;
 import com.wayfarer.study.entity.vo.StudyTime;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jdk.jfr.StackTrace;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Builder
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudyArticle {
@@ -22,10 +20,10 @@ public class StudyArticle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studyArticleId;
 
-    @Column(nullable = false)
+    @Column()
     private String title;
 
-    @Column(nullable = false)
+    @Column()
     private String status;
 
     @Embedded
