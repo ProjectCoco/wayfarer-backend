@@ -1,15 +1,22 @@
 package com.wayfarer.study.dto;
 
 import lombok.*;
+
+import java.time.LocalDateTime;
+
 @Getter @Setter
 @Builder
 public class StudyArticleResponseDto {
-    private long studyArticleId;
+    private Long studyArticleId;
+
     private String title;
-    private String contentVersion;
+
     private String status;
 
-/*    private StudyContentDto studyContent;
-    private StudyInfoDto studyInfo;
-    private StudyTimeDto studyTime;*/
+    private LocalDateTime startTime;
+
+    private LocalDateTime deadline;
+
+    private String active;
+
 }

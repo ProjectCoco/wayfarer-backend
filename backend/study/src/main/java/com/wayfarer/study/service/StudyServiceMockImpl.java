@@ -1,14 +1,5 @@
 package com.wayfarer.study.service;
 
-import com.wayfarer.study.dto.StudyAriticleUpdateRequestDto;
-import com.wayfarer.study.dto.StudyArticleRequestDto;
-import com.wayfarer.study.dto.StudyDetailResponseDto;
-import com.wayfarer.study.dto.StudyResponseDto;
-import com.wayfarer.study.helper.StudyStubData;
-
-
-import java.util.List;
-
 //public class StudyServiceMockImpl implements StudyService {
 //
 //    @Override

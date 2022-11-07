@@ -1,15 +1,11 @@
 package com.wayfarer.application.controller;
 
 import com.wayfarer.study.dto.StudyArticleRequestDto;
-import com.wayfarer.study.dto.StudyResponseDto;
-import com.wayfarer.study.repository.StudyArticleRepository;
 import com.wayfarer.study.service.StudyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,8 +16,8 @@ public class ApplicationController {
 
     @GetMapping("")
     //todo page
-    public ResponseEntity<List<StudyResponseDto>> readAllStudy() {
-        return new ResponseEntity<>(studyService.readAllStudyArticles(), HttpStatus.OK);
+    public ResponseEntity readAllStudy(@RequestParam int page) {
+        return new ResponseEntity<>(studyService.readAllStudyArticles(page), HttpStatus.OK);
     }
 
     @GetMapping("/{target}")
