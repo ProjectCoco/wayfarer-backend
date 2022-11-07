@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
-@Service
 @RequiredArgsConstructor
 public class StudyServiceImpl implements StudyService{
 
