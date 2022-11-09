@@ -1,9 +1,6 @@
 package com.wayfarer.study.service;
 
 import com.wayfarer.study.dto.*;
-import org.springframework.data.domain.Page;
-
-import java.util.List;
 
 public interface StudyService {
 
@@ -16,7 +13,7 @@ public interface StudyService {
 
     void createStudyArticle(StudyArticleRequestDto studyArticleRequestDto);
 
-    void updateStudyArticle(StudyAriticleUpdateRequestDto studyAriticleUpdateRequestDto);
+    void updateStudyArticle(Long studyId, StudyArticleUpdateRequestDto studyArticleUpdateRequestDto);
 
     void deleteStudyArticle(Long studyId);
 }

@@ -6,10 +6,10 @@ import com.wayfarer.study.mapper.StudyMapper;
 import com.wayfarer.study.repository.StudyArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
+
 
 
 @RequiredArgsConstructor
@@ -36,7 +36,7 @@ public class StudyServiceImpl implements StudyService{
     }
 
     @Override
-    public void updateStudyArticle(StudyAriticleUpdateRequestDto studyAriticleUpdateRequestDto) {
+    public void updateStudyArticle(Long studyId, StudyArticleUpdateRequestDto studyArticleUpdateRequestDto) {
 
     }
 

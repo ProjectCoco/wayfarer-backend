@@ -1,24 +1,5 @@
 package com.wayfarer.study;
 
-import com.wayfarer.study.entity.*;
-import com.wayfarer.study.entity.vo.StudyContent;
-import com.wayfarer.study.entity.vo.StudyInfo;
-import com.wayfarer.study.entity.StudyMember;
-import com.wayfarer.study.entity.vo.StudyOwner;
-import com.wayfarer.study.entity.vo.StudyTime;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.DynamicTest;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-
-import javax.persistence.PersistenceException;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Stream;
-
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;

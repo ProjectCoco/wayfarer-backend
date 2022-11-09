@@ -8,6 +8,7 @@ import jdk.jfr.StackTrace;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,6 +26,10 @@ public class StudyArticle {
 
     @Column()
     private String status;
+
+    @Convert(converter = StudyMemberListConverter.class)
+    @Column
+    private List<Long> studyMemberList;
 
     @Embedded
     private StudyContent studyContent;

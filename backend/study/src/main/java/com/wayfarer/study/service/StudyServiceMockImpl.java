@@ -1,7 +1,7 @@
 package com.wayfarer.study.service;
 
 import com.wayfarer.study.dto.MultiResponseDto;
-import com.wayfarer.study.dto.StudyAriticleUpdateRequestDto;
+import com.wayfarer.study.dto.StudyArticleUpdateRequestDto;
 import com.wayfarer.study.dto.StudyArticleDetailResponseDto;
 import com.wayfarer.study.dto.StudyArticleRequestDto;
 
@@ -24,7 +24,7 @@ public class StudyServiceMockImpl implements StudyService {
     }
 
     @Override
-    public void updateStudyArticle(StudyAriticleUpdateRequestDto studyAriticleUpdateRequestDto) {
+    public void updateStudyArticle(Long studyId, StudyArticleUpdateRequestDto studyArticleUpdateRequestDto) {
 
     }
 

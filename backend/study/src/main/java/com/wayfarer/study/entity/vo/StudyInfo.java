@@ -17,12 +17,6 @@ import java.time.LocalDateTime;
 public class StudyInfo {
 
     @Column()
-    private String purpose;
-
-    @Column()
-    private String meetTime;
-
-    @Column()
     private String active;
 
 }
