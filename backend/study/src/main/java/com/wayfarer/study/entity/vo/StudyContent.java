@@ -1,15 +1,13 @@
 package com.wayfarer.study.entity.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Builder
 @Getter
+@Setter
 @Embeddable
 @NoArgsConstructor
 @AllArgsConstructor

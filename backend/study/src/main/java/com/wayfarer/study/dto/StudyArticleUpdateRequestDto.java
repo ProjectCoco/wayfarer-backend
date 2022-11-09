@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class StudyArticleUpdateRequestDto {
 
+    private String target;
     private String title;
     private String content;
     private String purpose;

@@ -4,7 +4,11 @@ import com.wayfarer.study.dto.MultiResponseDto;
 import com.wayfarer.study.dto.StudyArticleUpdateRequestDto;
 import com.wayfarer.study.dto.StudyArticleDetailResponseDto;
 import com.wayfarer.study.dto.StudyArticleRequestDto;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
+@Qualifier("StudyServiceMock")
+@Service
 public class StudyServiceMockImpl implements StudyService {
 
 
