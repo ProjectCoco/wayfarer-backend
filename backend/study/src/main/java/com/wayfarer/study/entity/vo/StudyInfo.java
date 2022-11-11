@@ -1,5 +1,6 @@
 package com.wayfarer.study.entity.vo;
 
+import com.wayfarer.study.entity.StudyStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,6 +18,6 @@ import java.time.LocalDateTime;
 public class StudyInfo {
 
     @Column()
-    private String active;
+    private StudyStatus active;
 
 }
