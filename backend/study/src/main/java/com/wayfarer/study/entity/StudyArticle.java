@@ -4,9 +4,7 @@ package com.wayfarer.study.entity;
 import com.wayfarer.study.entity.converter.BooleanToYNConverter;
 import com.wayfarer.study.entity.converter.StudyMemberListConverter;
 import com.wayfarer.study.entity.enummodel.StudyStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudyArticle {

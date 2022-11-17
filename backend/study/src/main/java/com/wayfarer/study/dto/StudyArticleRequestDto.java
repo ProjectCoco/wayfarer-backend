@@ -14,9 +14,6 @@ public class StudyArticleRequestDto {
 
     private String title;
     private String content;
-
-    private String purpose;
-
     private String meetTime;
 
 

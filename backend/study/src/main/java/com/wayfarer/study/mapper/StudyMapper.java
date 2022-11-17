@@ -13,8 +13,6 @@ import java.util.List;
 public interface StudyMapper {
 
     @Mapping(source = "studyContent.content", target = "content")
-    @Mapping(source = "studyInfo.purpose", target = "purpose")
-    @Mapping(source = "studyInfo.meetTime", target = "meetTime")
     @Mapping(source = "studyInfo.active", target = "active")
     @Mapping(source = "studyTime.startTime", target = "startTime")
     @Mapping(source = "studyTime.deadline", target = "deadline")
@@ -28,8 +26,6 @@ public interface StudyMapper {
     List<StudyArticleResponseDto> studyArticleListToStudyArticleResponseDtoList(List<StudyArticle> studyArticleList);
 
     @Mapping(source = "content", target = "studyContent.content")
-    @Mapping(source = "meetTime", target = "studyInfo.meetTime")
-    @Mapping(source = "purpose", target = "studyInfo.purpose")
     StudyArticle std(StudyArticleRequestDto s);
 
 
