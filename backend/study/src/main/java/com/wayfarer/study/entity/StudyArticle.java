@@ -1,21 +1,19 @@
 package com.wayfarer.study.entity;
 
+
 import com.wayfarer.study.entity.converter.BooleanToYNConverter;
-import com.wayfarer.study.entity.vo.StudyContent;
-import com.wayfarer.study.entity.vo.StudyInfo;
-import com.wayfarer.study.entity.vo.StudyOwner;
-import com.wayfarer.study.entity.vo.StudyTime;
+import com.wayfarer.study.entity.converter.StudyMemberListConverter;
+import com.wayfarer.study.entity.enummodel.StudyStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudyArticle {
@@ -46,14 +44,28 @@ public class StudyArticle {
     @Embedded
     private StudyOwner studyOwner;
 
-
-    public StudyArticle changeContent(StudyContent studyContent) {
-        this.studyContent = studyContent;
-        return this;
-    }
-
+    
     public void changeTitle(String title) {
-
+        this.title = title;
     }
 
+    public void updateStudyContent(String content) {
+        this.studyContent.setContent(content);
+    }
+
+    public void changeStudyMemberList(List<Long> studyMemberList) {
+        this.studyMemberList = studyMemberList;
+    }
+
+    public void changeDeadLine(LocalDateTime deadLine) {
+        this.studyTime.setDeadline(deadLine);
+    }
+
+    public void changeActive(StudyStatus active) {
+        this.studyInfo.setActive(active);
+    }
+
+    public void changeStatus(boolean status) {
+        this.status = status;
+    }
 }

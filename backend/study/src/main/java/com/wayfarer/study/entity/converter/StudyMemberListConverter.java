@@ -1,4 +1,4 @@
-package com.wayfarer.study.entity;
+package com.wayfarer.study.entity.converter;
 
 
 import javax.persistence.AttributeConverter;

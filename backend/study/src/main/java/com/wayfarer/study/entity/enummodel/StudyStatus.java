@@ -1,4 +1,4 @@
-package com.wayfarer.study.entity;
+package com.wayfarer.study.entity.enummodel;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

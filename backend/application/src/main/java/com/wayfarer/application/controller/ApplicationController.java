@@ -41,7 +41,7 @@ public class ApplicationController {
     }
 
     @DeleteMapping("/{studyId}")
-    public ResponseEntity deleteSutdy(@PathVariable Long studyId) {
+    public ResponseEntity deleteStudy(@PathVariable Long studyId) {
         //delete -> status 변경
         studyService.deleteStudyArticle(studyId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
