@@ -14,6 +14,6 @@ import javax.persistence.Embeddable;
 @AllArgsConstructor
 public class StudyOwner {
 
-    private Long ownerId;
+    private Long ownerId; // null
 
 }

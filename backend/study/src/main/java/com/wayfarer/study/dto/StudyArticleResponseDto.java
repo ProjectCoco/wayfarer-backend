@@ -1,5 +1,6 @@
 package com.wayfarer.study.dto;
 
+import com.wayfarer.study.entity.enummodel.StudyStatus;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -17,6 +18,6 @@ public class StudyArticleResponseDto {
 
     private LocalDateTime deadline;
 
-    private String active;
+    private StudyStatus active;
 
 }

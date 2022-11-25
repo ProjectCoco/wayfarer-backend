@@ -39,7 +39,10 @@ public class StudyServiceImpl implements StudyService{
 
     @Override
     public void createStudyArticle(StudyArticleRequestDto studyArticleRequestDto) {
-        studyArticleRepository.save(studyMapper.std(studyArticleRequestDto));
+        //todo: 코드 단축시키기 init을 mapper default로
+        StudyArticle studyArticle = studyMapper.studyRequestDtoToStudyArticle(studyArticleRequestDto);
+        studyArticle.initStudyArticle();
+        studyArticleRepository.save(studyArticle);
     }
 
     @Override
@@ -48,23 +51,23 @@ public class StudyServiceImpl implements StudyService{
         String target = studyArticleUpdateRequestDto.getTarget();
 
         if (target.equals(StudyArticleEnum.CONTENT.getValue())) {
-            extracted(studyArticleUpdateRequestDto, studyArticle);
+            updateContent(studyArticleUpdateRequestDto, studyArticle);
             return;
         }
         if (target.equals(StudyArticleEnum.TITLE.getValue())) {
-            extracted1(studyArticleUpdateRequestDto, studyArticle);
+            updateTitle(studyArticleUpdateRequestDto, studyArticle);
             return;
         }
         if (target.equals(StudyArticleEnum.STUDY_MEMBER_LIST.getValue())) {
-            extracted2(studyArticleUpdateRequestDto, studyArticle);
+            updateMemberList(studyArticleUpdateRequestDto, studyArticle);
             return;
         }
         if (target.equals(StudyArticleEnum.DEAD_LINE.getValue())) {
-            extracted3(studyArticleUpdateRequestDto, studyArticle);
+            updateDeadline(studyArticleUpdateRequestDto, studyArticle);
             return;
         }
         if (target.equals(StudyArticleEnum.ACTIVE.getValue())) {
-            extracted4(studyArticleUpdateRequestDto, studyArticle);
+            updateActive(studyArticleUpdateRequestDto, studyArticle);
             return;
         }
     }
@@ -76,27 +79,27 @@ public class StudyServiceImpl implements StudyService{
         studyArticleRepository.save(studyArticle);
     }
 
-    private void extracted4(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
+    private void updateActive(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
         studyArticle.changeActive(studyArticleUpdateRequestDto.getActive());
         studyArticleRepository.save(studyArticle);
     }
 
-    private void extracted3(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
+    private void updateDeadline(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
         studyArticle.changeDeadLine(studyArticleUpdateRequestDto.getDeadLine());
         studyArticleRepository.save(studyArticle);
     }
 
-    private void extracted2(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
+    private void updateMemberList(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
         studyArticle.changeStudyMemberList(studyArticleUpdateRequestDto.getStudyMemberList());
         studyArticleRepository.save(studyArticle);
     }
 
-    private void extracted1(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
+    private void updateTitle(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
         studyArticle.changeTitle(studyArticleUpdateRequestDto.getTitle());
         studyArticleRepository.save(studyArticle);
     }
 
-    private void extracted(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
+    private void updateContent(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
         studyArticle.updateStudyContent(studyArticleUpdateRequestDto.getContent());
         studyArticleRepository.save(studyArticle);
         return;

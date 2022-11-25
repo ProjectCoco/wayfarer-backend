@@ -7,6 +7,7 @@ import com.wayfarer.study.entity.StudyArticle;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
@@ -26,7 +27,9 @@ public interface StudyMapper {
     List<StudyArticleResponseDto> studyArticleListToStudyArticleResponseDtoList(List<StudyArticle> studyArticleList);
 
     @Mapping(source = "content", target = "studyContent.content")
-    StudyArticle std(StudyArticleRequestDto s);
+    @Mapping(source = "startTime", target = "studyTime.startTime")
+    @Mapping(source = "deadline", target = "studyTime.deadline")
+    StudyArticle studyRequestDtoToStudyArticle(StudyArticleRequestDto studyArticleRequestDto);
 
 
 }

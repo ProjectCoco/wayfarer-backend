@@ -5,6 +5,7 @@ import com.wayfarer.study.entity.converter.BooleanToYNConverter;
 import com.wayfarer.study.entity.converter.StudyMemberListConverter;
 import com.wayfarer.study.entity.enummodel.StudyStatus;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -31,6 +32,10 @@ public class StudyArticle {
     @Column
     private List<Long> studyMemberList;
 
+    @Column
+    @CreatedDate
+    private LocalDateTime createdTime; // null
+
     @Embedded
     private StudyContent studyContent;
 
@@ -43,7 +48,7 @@ public class StudyArticle {
     @Embedded
     private StudyOwner studyOwner;
 
-    
+
     public void changeTitle(String title) {
         this.title = title;
     }
@@ -66,5 +71,10 @@ public class StudyArticle {
 
     public void changeStatus(boolean status) {
         this.status = status;
+    }
+
+    public void initStudyArticle() {
+        this.status = true;
+        this.studyInfo = new StudyInfo(StudyStatus.PROCEED);
     }
 }

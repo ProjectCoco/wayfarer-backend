@@ -22,10 +22,6 @@ public class StudyArticleDetailResponseDto {
 
     private LocalDateTime deadline;
 
-    private String purpose;
-
-    private String meetTime;
-
     private String active;
 
 }

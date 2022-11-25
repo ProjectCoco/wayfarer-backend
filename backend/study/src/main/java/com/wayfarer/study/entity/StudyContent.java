@@ -16,5 +16,5 @@ public class StudyContent {
     @Column( )
      private String content;
 
-     private String version;
+     private String version; // null
 }

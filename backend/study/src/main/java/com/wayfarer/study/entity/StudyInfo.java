@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Builder
 @Getter
@@ -15,6 +17,7 @@ import javax.persistence.Embeddable;
 public class StudyInfo {
 
     @Column()
-    private StudyStatus active;
+    @Enumerated(EnumType.STRING)
+    private StudyStatus active; // null
 
 }
