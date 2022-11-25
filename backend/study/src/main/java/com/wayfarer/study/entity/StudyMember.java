@@ -1,14 +1,28 @@
 package com.wayfarer.study.entity;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Builder
+import javax.persistence.*;
+
+
+
+@Entity
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class StudyMember {
-    private long studyMemberId;
-    private String studyRole;
-    private int memberCount;
-    private int memberGoalCount;
-    private long studyArticleId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long studyMemberId;
+
+    @Column()
+    private String role;
+
+    @Column()
+    private Long count;
 }

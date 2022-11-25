@@ -9,26 +9,17 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudyArticleRequestDto {
+public class StudyArticleUpdateRequestDto {
 
+    private String target;
     private String title;
     private List<Long> studyMemberList;
     private String content;
-    private LocalDateTime startTime;
-    private LocalDateTime deadline;
+    private LocalDateTime deadLine;
+    private StudyStatus active;
 
 }
-//          {
-//        "title":"titleeeeeeeeeeeee",
-//        "studyMemberList": [
-//        1,2,3
-//        ],
-//        "content":"contentssssssssssssss",
-//        "startTime":"2007-12-03T10:15:30",
-//        "deadline":"2007-12-03T10:15:30"
-//        }

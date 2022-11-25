@@ -1,23 +1,24 @@
 package com.wayfarer.study.service;
 
-import com.wayfarer.study.dto.StudyAriticleUpdateRequestDto;
+import com.wayfarer.study.dto.MultiResponseDto;
+import com.wayfarer.study.dto.StudyArticleUpdateRequestDto;
+import com.wayfarer.study.dto.StudyArticleDetailResponseDto;
 import com.wayfarer.study.dto.StudyArticleRequestDto;
-import com.wayfarer.study.dto.StudyDetailResponseDto;
-import com.wayfarer.study.dto.StudyResponseDto;
-import com.wayfarer.study.helper.StudyStubData;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
-
-import java.util.List;
-
+@Qualifier("StudyServiceMock")
+@Service
 public class StudyServiceMockImpl implements StudyService {
 
+
     @Override
-    public List<StudyResponseDto> readAllStudyArticles() {
-        return StudyStubData.getAllStudyResponseDto();
+    public MultiResponseDto readAllStudyArticles(int page) {
+        return null;
     }
 
     @Override
-    public StudyDetailResponseDto readStudyArticle(Long studyId) {
+    public StudyArticleDetailResponseDto readStudyArticle(Long studyId) {
         return null;
     }
 
@@ -27,7 +28,7 @@ public class StudyServiceMockImpl implements StudyService {
     }
 
     @Override
-    public void updateStudyArticle(StudyAriticleUpdateRequestDto studyAriticleUpdateRequestDto) {
+    public void updateStudyArticle(Long studyId, StudyArticleUpdateRequestDto studyArticleUpdateRequestDto) {
 
     }
 
