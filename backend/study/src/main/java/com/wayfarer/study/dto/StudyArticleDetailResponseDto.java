@@ -1,23 +1,27 @@
 package com.wayfarer.study.dto;
 
-import com.wayfarer.study.entity.enummodel.StudyStatus;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Getter @Setter
-@Builder
-public class StudyArticleResponseDto {
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class StudyArticleDetailResponseDto {
+
     private Long studyArticleId;
 
     private String title;
 
     private String status;
 
+    private String content;
+
     private LocalDateTime startTime;
 
     private LocalDateTime deadline;
 
-    private StudyStatus active;
+    private String active;
 
 }

@@ -1,16 +1,23 @@
 package com.wayfarer.study.entity;
 
-import lombok.Builder;
-import lombok.Getter;
+import com.wayfarer.study.entity.enummodel.StudyStatus;
+import lombok.*;
 
-import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Builder
 @Getter
+@Setter(value = AccessLevel.PROTECTED)
+@Embeddable
+@NoArgsConstructor
+@AllArgsConstructor
 public class StudyInfo {
-    long studyInfoId;
-    String purpose;
-    LocalDateTime meetTime;
-    String active;
-    long studyArticleId;
+
+    @Column()
+    @Enumerated(EnumType.STRING)
+    private StudyStatus active; // null
+
 }

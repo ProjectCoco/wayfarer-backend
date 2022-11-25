@@ -1,13 +1,20 @@
 package com.wayfarer.study.entity;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 @Builder
 @Getter
+@Setter(value = AccessLevel.PROTECTED)
+@Embeddable
+@NoArgsConstructor
+@AllArgsConstructor
 public class StudyContent {
-        private long studyContentId;
-        private String content;
-        private String version;
-        private long studyArticleId;
+
+    @Column( )
+     private String content;
+
+     private String version; // null
 }

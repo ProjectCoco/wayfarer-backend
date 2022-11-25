@@ -1,15 +1,8 @@
 package com.wayfarer.study.helper;
 
 
-import com.wayfarer.study.dto.StudyResponseDto;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-
-import java.time.LocalDateTime;
-import java.util.List;
-
 public class StudyStubData {
-    public static List<StudyResponseDto> getAllStudyResponseDto() {
+/*    public static List<StudyResponseDto> getAllStudyResponseDto() {
         StudyResponseDto.StudyArticle studyArticle1 = StudyResponseDto.StudyArticle.builder()
                 .studyArticleId(1L)
                 .title("여성 아티스트의 성장을 지원하는 NFT 프로젝트")
@@ -60,5 +53,5 @@ public class StudyStubData {
         StudyResponseDto studyResponseDto2 = new StudyResponseDto(studyArticle2, studyInfo2, studyContent2, studyTime2);
 
         return List.of(studyResponseDto1, studyResponseDto2);
-    }
+    }*/
 }
