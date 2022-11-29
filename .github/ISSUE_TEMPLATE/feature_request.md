@@ -14,5 +14,5 @@ assignees: ''
 내용을 쓰세요
 
 ## 진행사항
-- [x] #739
-- [ ] https://github.com/octo-org/octo-repo/issues/740
+- [ ] 
+- [ ]
