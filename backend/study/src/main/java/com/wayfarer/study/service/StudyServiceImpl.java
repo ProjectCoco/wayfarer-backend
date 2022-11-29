@@ -1,8 +1,9 @@
 package com.wayfarer.study.service;
 
 import com.wayfarer.study.dto.*;
-import com.wayfarer.study.entity.StudyArticle;
+import com.wayfarer.study.entity.*;
 import com.wayfarer.study.entity.enummodel.StudyArticleEnum;
+import com.wayfarer.study.entity.enummodel.StudyStatus;
 import com.wayfarer.study.mapper.StudyMapper;
 import com.wayfarer.study.repository.StudyArticleRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,13 +15,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Primary
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class StudyServiceImpl implements StudyService{
+public class StudyServiceImpl implements StudyService {
 
     private final StudyArticleRepository studyArticleRepository;
     private final StudyMapper studyMapper;
@@ -50,26 +53,11 @@ public class StudyServiceImpl implements StudyService{
         StudyArticle studyArticle = studyArticleRepository.findById(studyId).orElseThrow();
         String target = studyArticleUpdateRequestDto.getTarget();
 
-        if (target.equals(StudyArticleEnum.CONTENT.getValue())) {
-            updateContent(studyArticleUpdateRequestDto, studyArticle);
-            return;
-        }
-        if (target.equals(StudyArticleEnum.TITLE.getValue())) {
-            updateTitle(studyArticleUpdateRequestDto, studyArticle);
-            return;
-        }
-        if (target.equals(StudyArticleEnum.STUDY_MEMBER_LIST.getValue())) {
-            updateMemberList(studyArticleUpdateRequestDto, studyArticle);
-            return;
-        }
-        if (target.equals(StudyArticleEnum.DEAD_LINE.getValue())) {
-            updateDeadline(studyArticleUpdateRequestDto, studyArticle);
-            return;
-        }
-        if (target.equals(StudyArticleEnum.ACTIVE.getValue())) {
-            updateActive(studyArticleUpdateRequestDto, studyArticle);
-            return;
-        }
+        if (updateTitle(studyArticleUpdateRequestDto, studyArticle, target)) return;
+        if (updateContent(studyArticleUpdateRequestDto, studyArticle, target)) return;
+        if (updateMemberList(studyArticleUpdateRequestDto, studyArticle, target)) return;
+        if (updateDeadLine(studyArticleUpdateRequestDto, studyArticle, target)) return;
+        if (updateActive(studyArticleUpdateRequestDto, studyArticle, target)) return;
     }
 
     @Override
@@ -79,29 +67,48 @@ public class StudyServiceImpl implements StudyService{
         studyArticleRepository.save(studyArticle);
     }
 
-    private void updateActive(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
-        studyArticle.changeActive(studyArticleUpdateRequestDto.getActive());
-        studyArticleRepository.save(studyArticle);
+    private boolean updateTitle(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
+        if (target.equals(StudyArticleEnum.TITLE.getValue())) {
+            studyArticle.changeTitle(studyArticleUpdateRequestDto.getTitle());
+            studyArticleRepository.save(studyArticle);
+            return true;
+        }
+        return false;
     }
 
-    private void updateDeadline(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
-        studyArticle.changeDeadLine(studyArticleUpdateRequestDto.getDeadLine());
-        studyArticleRepository.save(studyArticle);
+    private boolean updateContent(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
+        if (target.equals(StudyArticleEnum.CONTENT.getValue())) {
+            studyArticle.updateStudyContent(studyArticleUpdateRequestDto.getContent());
+            studyArticleRepository.save(studyArticle);
+            return true;
+        }
+        return false;
     }
 
-    private void updateMemberList(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
-        studyArticle.changeStudyMemberList(studyArticleUpdateRequestDto.getStudyMemberList());
-        studyArticleRepository.save(studyArticle);
+    private boolean updateMemberList(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
+        if (target.equals(StudyArticleEnum.STUDY_MEMBER_LIST.getValue())) {
+            studyArticle.changeStudyMemberList(studyArticleUpdateRequestDto.getStudyMemberList());
+            studyArticleRepository.save(studyArticle);
+            return true;
+        }
+        return false;
     }
 
-    private void updateTitle(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
-        studyArticle.changeTitle(studyArticleUpdateRequestDto.getTitle());
-        studyArticleRepository.save(studyArticle);
+    private boolean updateDeadLine(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
+        if (target.equals(StudyArticleEnum.DEAD_LINE.getValue())) {
+            studyArticle.changeDeadLine(studyArticleUpdateRequestDto.getDeadLine());
+            studyArticleRepository.save(studyArticle);
+            return true;
+        }
+        return false;
     }
 
-    private void updateContent(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
-        studyArticle.updateStudyContent(studyArticleUpdateRequestDto.getContent());
-        studyArticleRepository.save(studyArticle);
-        return;
+    private boolean updateActive(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
+        if (target.equals(StudyArticleEnum.ACTIVE.getValue())) {
+            studyArticle.changeActive(studyArticleUpdateRequestDto.getActive());
+            studyArticleRepository.save(studyArticle);
+            return true;
+        }
+        return false;
     }
 }
