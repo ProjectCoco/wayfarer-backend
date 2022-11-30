@@ -55,7 +55,8 @@ public class StudyServiceImpl implements StudyService {
 
         if (updateTitle(studyArticleUpdateRequestDto, studyArticle, target)) return;
         if (updateContent(studyArticleUpdateRequestDto, studyArticle, target)) return;
-        if (updateMemberList(studyArticleUpdateRequestDto, studyArticle, target)) return;
+        if (updateTotalMember(studyArticleUpdateRequestDto, studyArticle, target)) return;
+        if (updateCountMember(studyArticleUpdateRequestDto, studyArticle, target)) return;
         if (updateDeadLine(studyArticleUpdateRequestDto, studyArticle, target)) return;
         if (updateActive(studyArticleUpdateRequestDto, studyArticle, target)) return;
     }
@@ -85,9 +86,18 @@ public class StudyServiceImpl implements StudyService {
         return false;
     }
 
-    private boolean updateMemberList(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
-        if (target.equals(StudyArticleEnum.STUDY_MEMBER_LIST.getValue())) {
-            studyArticle.changeStudyMemberList(studyArticleUpdateRequestDto.getStudyMemberList());
+    private boolean updateTotalMember(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
+        if (target.equals(StudyArticleEnum.STUDY_TOTAL_MEMBER.getValue())) {
+            studyArticle.updateStudyTotalMember(studyArticleUpdateRequestDto.getTotalMember());
+            studyArticleRepository.save(studyArticle);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean updateCountMember(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
+        if (target.equals(StudyArticleEnum.STUDY_COUNT_MEMBER.getValue())) {
+            studyArticle.updateStudyCountMember(studyArticleUpdateRequestDto.getCountMember());
             studyArticleRepository.save(studyArticle);
             return true;
         }

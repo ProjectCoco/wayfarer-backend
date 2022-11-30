@@ -1,28 +1,22 @@
 package com.wayfarer.study.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 
 
-@Entity
+@Builder
 @Getter
-@Setter
+@Setter(value = AccessLevel.PROTECTED)
+@Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudyMember {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long studyMemberId;
+    @Column()
+    private Long totalMember;
 
     @Column()
-    private String role;
-
-    @Column()
-    private Long count;
+    private Long countMember;
 }

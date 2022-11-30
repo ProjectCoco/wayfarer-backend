@@ -14,7 +14,7 @@ import javax.persistence.Embeddable;
 public class StudyContent {
 
     @Column( )
-     private String content;
+    private String content;
 
-     private String version; // null
+    private String version; // null
 }
