@@ -9,6 +9,8 @@ public interface StudyService {
      */
     MultiResponseDto readAllStudyArticles(int page);
 
+    MultiResponseDto readStudyArticlesWithTag(int page, String tag);
+
     StudyArticleDetailResponseDto readStudyArticle(Long studyId);
 
     void createStudyArticle(StudyArticleRequestDto studyArticleRequestDto);
@@ -16,4 +18,6 @@ public interface StudyService {
     void updateStudyArticle(Long studyId, StudyArticleUpdateRequestDto studyArticleUpdateRequestDto);
 
     void deleteStudyArticle(Long studyId);
+
+
 }

@@ -30,8 +30,17 @@ public class StudyServiceImpl implements StudyService {
 
     @Override
     public MultiResponseDto<StudyArticleResponseDto> readAllStudyArticles(int page) {
-        Page<StudyArticle> studyArticleList = studyArticleRepository.findAll(PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
+        Page<StudyArticle> studyArticleList = studyArticleRepository
+                .findAll(PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
         return new MultiResponseDto<>(studyMapper.studyArticleListToStudyArticleResponseDtoList(studyArticleList.getContent()), studyArticleList);
+    }
+
+    @Override
+    public MultiResponseDto<StudyArticleResponseDto> readStudyArticlesWithTag(int page, String tag) {
+        System.out.println(tag);
+        Page<StudyArticle> studyArticleListWithTag = studyArticleRepository
+                .findByStudyTagsContains(tag, PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
+        return new MultiResponseDto<>(studyMapper.studyArticleListToStudyArticleResponseDtoList(studyArticleListWithTag.getContent()), studyArticleListWithTag);
     }
 
     @Override
@@ -59,6 +68,8 @@ public class StudyServiceImpl implements StudyService {
         if (updateCountMember(studyArticleUpdateRequestDto, studyArticle, target)) return;
         if (updateDeadLine(studyArticleUpdateRequestDto, studyArticle, target)) return;
         if (updateActive(studyArticleUpdateRequestDto, studyArticle, target)) return;
+        if (updateStudyTags(studyArticleUpdateRequestDto, studyArticle, target)) return;
+
     }
 
     @Override
@@ -80,6 +91,15 @@ public class StudyServiceImpl implements StudyService {
     private boolean updateContent(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
         if (target.equals(StudyArticleEnum.CONTENT.getValue())) {
             studyArticle.updateStudyContent(studyArticleUpdateRequestDto.getContent());
+            studyArticleRepository.save(studyArticle);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean updateStudyTags(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
+        if (target.equals(StudyArticleEnum.STUDY_TAGS.getValue())) {
+            studyArticle.updateStudyTags(studyArticleUpdateRequestDto.getStudyTags());
             studyArticleRepository.save(studyArticle);
             return true;
         }

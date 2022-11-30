@@ -2,7 +2,7 @@ package com.wayfarer.study.entity;
 
 
 import com.wayfarer.study.entity.converter.BooleanToYNConverter;
-import com.wayfarer.study.entity.converter.StudyMemberListConverter;
+import com.wayfarer.study.entity.converter.StudyTagConverter;
 import com.wayfarer.study.entity.enummodel.StudyStatus;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -27,6 +27,10 @@ public class StudyArticle {
 
     @Convert(converter = BooleanToYNConverter.class)
     private Boolean status;
+
+//    @Convert(converter = StudyTagConverter.class)
+    @Column
+    private String studyTags;
 
     @Column
     @CreatedDate
@@ -61,6 +65,9 @@ public class StudyArticle {
     }
     public void updateStudyCountMember(Long studyCountMember) {
         this.studyMember.setCountMember(studyCountMember);
+    }
+    public void updateStudyTags(String studyTags) {
+        this.studyTags = studyTags;
     }
 
     public void changeDeadLine(LocalDateTime deadLine) {

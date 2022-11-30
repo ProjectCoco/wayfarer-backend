@@ -21,6 +21,7 @@ public class StudyArticleUpdateRequestDto {
     private Long totalMember;
     private Long countMember;
     private String content;
+    private String studyTags;
     private LocalDateTime deadLine;
     private StudyStatus active;
 

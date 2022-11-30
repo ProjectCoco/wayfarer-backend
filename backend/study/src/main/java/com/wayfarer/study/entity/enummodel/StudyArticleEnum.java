@@ -13,6 +13,7 @@ public enum StudyArticleEnum {
     DEAD_LINE("deadLine"),
     STUDY_INFO("studyInfo"),
     ACTIVE("active"),
+    STUDY_TAGS("studyTags"),
     STUDY_OWNER("studyOwner");
 
     private final String value;
