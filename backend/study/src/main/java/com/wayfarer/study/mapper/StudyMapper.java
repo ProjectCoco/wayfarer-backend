@@ -17,11 +17,15 @@ public interface StudyMapper {
     @Mapping(source = "studyInfo.active", target = "active")
     @Mapping(source = "studyTime.startTime", target = "startTime")
     @Mapping(source = "studyTime.deadline", target = "deadline")
+    @Mapping(source = "studyMember.totalMember", target = "totalMember")
+    @Mapping(source = "studyMember.countMember", target = "countMember")
     StudyArticleDetailResponseDto studyArticleToStudyDetailResponseDto(StudyArticle studyArticle);
 
     @Mapping(source = "studyInfo.active", target = "active")
     @Mapping(source = "studyTime.startTime", target = "startTime")
     @Mapping(source = "studyTime.deadline", target = "deadline")
+    @Mapping(source = "studyMember.totalMember", target = "totalMember")
+    @Mapping(source = "studyMember.countMember", target = "countMember")
     StudyArticleResponseDto studyArticleToStudyResponseDto(StudyArticle studyArticle);
 
     List<StudyArticleResponseDto> studyArticleListToStudyArticleResponseDtoList(List<StudyArticle> studyArticleList);

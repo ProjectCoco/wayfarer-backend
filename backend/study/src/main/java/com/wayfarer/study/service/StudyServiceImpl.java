@@ -99,7 +99,7 @@ public class StudyServiceImpl implements StudyService {
 
     private boolean updateStudyTags(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
         if (target.equals(StudyArticleEnum.STUDY_TAGS.getValue())) {
-            studyArticle.updateStudyTags(studyArticleUpdateRequestDto.getStudyTags());
+            studyArticle.setStudyTags(studyArticleUpdateRequestDto.getStudyTags());
             studyArticleRepository.save(studyArticle);
             return true;
         }

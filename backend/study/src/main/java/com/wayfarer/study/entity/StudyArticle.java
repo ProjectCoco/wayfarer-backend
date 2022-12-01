@@ -96,7 +96,7 @@ public class StudyArticle {
         return strings;
     }
 
-    public void updateStudyTags(List<String> tags){
+    public void setStudyTags(List<String> tags){
         this.studyTags = String.join(",", tags);
     }
 
