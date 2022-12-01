@@ -86,4 +86,17 @@ public class StudyArticle {
         this.status = true;
         this.studyInfo = new StudyInfo(StudyStatus.PROCEED);
     }
+
+    public List<String> getStudyTags(){
+        List<String> strings = new ArrayList<>();
+        if (this.studyTags != null) {
+            strings = Arrays.asList(this.studyTags.split(","));
+        }
+        return strings;
+    }
+
+    public void updateStudyTags(List<String> tags){
+        this.studyTags = String.join(",", tags);
+    }
+
 }
