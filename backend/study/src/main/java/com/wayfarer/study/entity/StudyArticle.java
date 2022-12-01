@@ -9,7 +9,10 @@ import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -66,9 +69,6 @@ public class StudyArticle {
     public void updateStudyCountMember(Long studyCountMember) {
         this.studyMember.setCountMember(studyCountMember);
     }
-    public void updateStudyTags(String studyTags) {
-        this.studyTags = studyTags;
-    }
 
     public void changeDeadLine(LocalDateTime deadLine) {
         this.studyTime.setDeadline(deadLine);
@@ -85,6 +85,7 @@ public class StudyArticle {
     public void initStudyArticle() {
         this.status = true;
         this.studyInfo = new StudyInfo(StudyStatus.PROCEED);
+        this.studyMember.setCountMember(0L);
     }
 
     public List<String> getStudyTags(){
