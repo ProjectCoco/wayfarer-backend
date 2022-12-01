@@ -19,7 +19,7 @@ public class StudyArticleRequestDto {
     private String title;
     private Long totalMember;
     private String content;
-    private String studyTags;
+    private List<String> studyTags;
     private LocalDateTime startTime;
     private LocalDateTime deadline;
 

@@ -3,7 +3,9 @@ package com.wayfarer.study.dto;
 import com.wayfarer.study.entity.enummodel.StudyStatus;
 import lombok.*;
 
+import javax.persistence.Column;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter @Setter
 @Builder
@@ -13,6 +15,12 @@ public class StudyArticleResponseDto {
     private String title;
 
     private String status;
+
+    private List<String> studyTags;
+
+    private Long totalMember;
+
+    private Long countMember;
 
     private LocalDateTime startTime;
 

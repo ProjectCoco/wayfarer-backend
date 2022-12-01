@@ -3,6 +3,7 @@ package com.wayfarer.study.dto;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Setter
 @Getter
@@ -17,6 +18,12 @@ public class StudyArticleDetailResponseDto {
     private String status;
 
     private String content;
+
+    private List<String> studyTags;
+
+    private Long totalMember;
+
+    private Long countMember;
 
     private LocalDateTime startTime;
 
