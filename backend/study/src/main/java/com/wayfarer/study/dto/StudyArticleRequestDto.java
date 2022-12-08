@@ -17,8 +17,9 @@ import java.util.List;
 public class StudyArticleRequestDto {
 
     private String title;
-    private List<Long> studyMemberList;
+    private Long totalMember;
     private String content;
+    private String studyTags;
     private LocalDateTime startTime;
     private LocalDateTime deadline;
 

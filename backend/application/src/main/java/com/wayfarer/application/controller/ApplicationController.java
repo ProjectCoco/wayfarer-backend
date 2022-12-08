@@ -21,6 +21,11 @@ public class ApplicationController {
         return new ResponseEntity<>(studyService.readAllStudyArticles(page), HttpStatus.OK);
     }
 
+    @GetMapping("/tag")
+    public ResponseEntity readStudyWithTag(@RequestParam int page, String tag) {
+        return new ResponseEntity<>(studyService.readStudyArticlesWithTag(page, tag), HttpStatus.OK);
+    }
+
     @GetMapping("/{studyId}")
     public ResponseEntity readStudy(@PathVariable Long studyId) {
         return new ResponseEntity<>(studyService.readStudyArticle(studyId), HttpStatus.OK);

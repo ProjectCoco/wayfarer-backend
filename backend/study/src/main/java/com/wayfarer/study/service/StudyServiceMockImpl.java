@@ -18,6 +18,11 @@ public class StudyServiceMockImpl implements StudyService {
     }
 
     @Override
+    public MultiResponseDto readStudyArticlesWithTag(int page, String tag) {
+        return null;
+    }
+
+    @Override
     public StudyArticleDetailResponseDto readStudyArticle(Long studyId) {
         return null;
     }

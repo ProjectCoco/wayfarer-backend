@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,8 +18,10 @@ public class StudyArticleUpdateRequestDto {
 
     private String target;
     private String title;
-    private List<Long> studyMemberList;
+    private Long totalMember;
+    private Long countMember;
     private String content;
+    private String studyTags;
     private LocalDateTime deadLine;
     private StudyStatus active;
 

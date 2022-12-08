@@ -1,8 +1,9 @@
 package com.wayfarer.study.service;
 
 import com.wayfarer.study.dto.*;
-import com.wayfarer.study.entity.StudyArticle;
+import com.wayfarer.study.entity.*;
 import com.wayfarer.study.entity.enummodel.StudyArticleEnum;
+import com.wayfarer.study.entity.enummodel.StudyStatus;
 import com.wayfarer.study.mapper.StudyMapper;
 import com.wayfarer.study.repository.StudyArticleRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,21 +15,32 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Primary
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class StudyServiceImpl implements StudyService{
+public class StudyServiceImpl implements StudyService {
 
     private final StudyArticleRepository studyArticleRepository;
     private final StudyMapper studyMapper;
 
     @Override
     public MultiResponseDto<StudyArticleResponseDto> readAllStudyArticles(int page) {
-        Page<StudyArticle> studyArticleList = studyArticleRepository.findAll(PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
+        Page<StudyArticle> studyArticleList = studyArticleRepository
+                .findAll(PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
         return new MultiResponseDto<>(studyMapper.studyArticleListToStudyArticleResponseDtoList(studyArticleList.getContent()), studyArticleList);
+    }
+
+    @Override
+    public MultiResponseDto<StudyArticleResponseDto> readStudyArticlesWithTag(int page, String tag) {
+        System.out.println(tag);
+        Page<StudyArticle> studyArticleListWithTag = studyArticleRepository
+                .findByStudyTagsContains(tag, PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
+        return new MultiResponseDto<>(studyMapper.studyArticleListToStudyArticleResponseDtoList(studyArticleListWithTag.getContent()), studyArticleListWithTag);
     }
 
     @Override
@@ -50,26 +62,14 @@ public class StudyServiceImpl implements StudyService{
         StudyArticle studyArticle = studyArticleRepository.findById(studyId).orElseThrow();
         String target = studyArticleUpdateRequestDto.getTarget();
 
-        if (target.equals(StudyArticleEnum.CONTENT.getValue())) {
-            updateContent(studyArticleUpdateRequestDto, studyArticle);
-            return;
-        }
-        if (target.equals(StudyArticleEnum.TITLE.getValue())) {
-            updateTitle(studyArticleUpdateRequestDto, studyArticle);
-            return;
-        }
-        if (target.equals(StudyArticleEnum.STUDY_MEMBER_LIST.getValue())) {
-            updateMemberList(studyArticleUpdateRequestDto, studyArticle);
-            return;
-        }
-        if (target.equals(StudyArticleEnum.DEAD_LINE.getValue())) {
-            updateDeadline(studyArticleUpdateRequestDto, studyArticle);
-            return;
-        }
-        if (target.equals(StudyArticleEnum.ACTIVE.getValue())) {
-            updateActive(studyArticleUpdateRequestDto, studyArticle);
-            return;
-        }
+        if (updateTitle(studyArticleUpdateRequestDto, studyArticle, target)) return;
+        if (updateContent(studyArticleUpdateRequestDto, studyArticle, target)) return;
+        if (updateTotalMember(studyArticleUpdateRequestDto, studyArticle, target)) return;
+        if (updateCountMember(studyArticleUpdateRequestDto, studyArticle, target)) return;
+        if (updateDeadLine(studyArticleUpdateRequestDto, studyArticle, target)) return;
+        if (updateActive(studyArticleUpdateRequestDto, studyArticle, target)) return;
+        if (updateStudyTags(studyArticleUpdateRequestDto, studyArticle, target)) return;
+
     }
 
     @Override
@@ -79,29 +79,66 @@ public class StudyServiceImpl implements StudyService{
         studyArticleRepository.save(studyArticle);
     }
 
-    private void updateActive(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
-        studyArticle.changeActive(studyArticleUpdateRequestDto.getActive());
-        studyArticleRepository.save(studyArticle);
+    private boolean updateTitle(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
+        if (target.equals(StudyArticleEnum.TITLE.getValue())) {
+            studyArticle.changeTitle(studyArticleUpdateRequestDto.getTitle());
+            studyArticleRepository.save(studyArticle);
+            return true;
+        }
+        return false;
     }
 
-    private void updateDeadline(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
-        studyArticle.changeDeadLine(studyArticleUpdateRequestDto.getDeadLine());
-        studyArticleRepository.save(studyArticle);
+    private boolean updateContent(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
+        if (target.equals(StudyArticleEnum.CONTENT.getValue())) {
+            studyArticle.updateStudyContent(studyArticleUpdateRequestDto.getContent());
+            studyArticleRepository.save(studyArticle);
+            return true;
+        }
+        return false;
     }
 
-    private void updateMemberList(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
-        studyArticle.changeStudyMemberList(studyArticleUpdateRequestDto.getStudyMemberList());
-        studyArticleRepository.save(studyArticle);
+    private boolean updateStudyTags(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
+        if (target.equals(StudyArticleEnum.STUDY_TAGS.getValue())) {
+            studyArticle.updateStudyTags(studyArticleUpdateRequestDto.getStudyTags());
+            studyArticleRepository.save(studyArticle);
+            return true;
+        }
+        return false;
     }
 
-    private void updateTitle(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
-        studyArticle.changeTitle(studyArticleUpdateRequestDto.getTitle());
-        studyArticleRepository.save(studyArticle);
+    private boolean updateTotalMember(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
+        if (target.equals(StudyArticleEnum.STUDY_TOTAL_MEMBER.getValue())) {
+            studyArticle.updateStudyTotalMember(studyArticleUpdateRequestDto.getTotalMember());
+            studyArticleRepository.save(studyArticle);
+            return true;
+        }
+        return false;
     }
 
-    private void updateContent(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle) {
-        studyArticle.updateStudyContent(studyArticleUpdateRequestDto.getContent());
-        studyArticleRepository.save(studyArticle);
-        return;
+    private boolean updateCountMember(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
+        if (target.equals(StudyArticleEnum.STUDY_COUNT_MEMBER.getValue())) {
+            studyArticle.updateStudyCountMember(studyArticleUpdateRequestDto.getCountMember());
+            studyArticleRepository.save(studyArticle);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean updateDeadLine(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
+        if (target.equals(StudyArticleEnum.DEAD_LINE.getValue())) {
+            studyArticle.changeDeadLine(studyArticleUpdateRequestDto.getDeadLine());
+            studyArticleRepository.save(studyArticle);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean updateActive(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
+        if (target.equals(StudyArticleEnum.ACTIVE.getValue())) {
+            studyArticle.changeActive(studyArticleUpdateRequestDto.getActive());
+            studyArticleRepository.save(studyArticle);
+            return true;
+        }
+        return false;
     }
 }

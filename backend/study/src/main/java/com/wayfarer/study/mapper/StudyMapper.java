@@ -29,6 +29,7 @@ public interface StudyMapper {
     @Mapping(source = "content", target = "studyContent.content")
     @Mapping(source = "startTime", target = "studyTime.startTime")
     @Mapping(source = "deadline", target = "studyTime.deadline")
+    @Mapping(source = "totalMember", target = "studyMember.totalMember")
     StudyArticle studyRequestDtoToStudyArticle(StudyArticleRequestDto studyArticleRequestDto);
 
 
