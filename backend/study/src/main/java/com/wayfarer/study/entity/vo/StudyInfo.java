@@ -1,4 +1,4 @@
-package com.wayfarer.study.entity;
+package com.wayfarer.study.entity.vo;
 
 import com.wayfarer.study.entity.enummodel.StudyStatus;
 import lombok.*;
@@ -10,7 +10,7 @@ import javax.persistence.Enumerated;
 
 @Builder
 @Getter
-@Setter(value = AccessLevel.PROTECTED)
+@Setter
 @Embeddable
 @NoArgsConstructor
 @AllArgsConstructor

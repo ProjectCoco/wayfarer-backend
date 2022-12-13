@@ -2,9 +2,15 @@ package com.wayfarer.study.entity;
 
 
 import com.wayfarer.study.entity.converter.BooleanToYNConverter;
-import com.wayfarer.study.entity.converter.StudyTagConverter;
 import com.wayfarer.study.entity.enummodel.StudyStatus;
-import lombok.*;
+import com.wayfarer.study.entity.vo.StudyContent;
+import com.wayfarer.study.entity.vo.StudyInfo;
+import com.wayfarer.study.entity.vo.StudyMember;
+import com.wayfarer.study.entity.vo.StudyTime;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -12,7 +18,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Getter

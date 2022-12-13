@@ -1,4 +1,4 @@
-package com.wayfarer.study.entity;
+package com.wayfarer.study.entity.vo;
 
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Builder
 @Getter
-@Setter(value = AccessLevel.PROTECTED)
+@Setter
 @Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
