@@ -3,10 +3,7 @@ package com.wayfarer.study.entity;
 
 import com.wayfarer.study.entity.converter.BooleanToYNConverter;
 import com.wayfarer.study.entity.enummodel.StudyStatus;
-import com.wayfarer.study.entity.vo.StudyContent;
-import com.wayfarer.study.entity.vo.StudyInfo;
-import com.wayfarer.study.entity.vo.StudyMember;
-import com.wayfarer.study.entity.vo.StudyTime;
+import com.wayfarer.study.entity.vo.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -58,6 +55,9 @@ public class StudyArticle {
 
     @Embedded
     private StudyOwner studyOwner;
+
+    @Embedded
+    private StudyPosition studyPosition;
 
 
     public void changeTitle(String title) {
