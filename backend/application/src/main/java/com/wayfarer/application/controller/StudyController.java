@@ -26,6 +26,11 @@ public class StudyController {
         return new ResponseEntity<>(studyService.readStudyArticlesWithTag(page, tag), HttpStatus.OK);
     }
 
+    @GetMapping("/position")
+    public ResponseEntity readStudyWithPosition(@RequestParam int page, String position) {
+        return new ResponseEntity<>(studyService.readStudyArticlesWithPosition(page, position), HttpStatus.OK);
+    }
+
     @GetMapping("/{studyId}")
     public ResponseEntity readStudy(@PathVariable Long studyId) {
         return new ResponseEntity<>(studyService.readStudyArticle(studyId), HttpStatus.OK);
