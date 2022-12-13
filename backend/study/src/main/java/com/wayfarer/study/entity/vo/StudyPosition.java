@@ -10,6 +10,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class StudyPosition {
     private String positionName;
 }
