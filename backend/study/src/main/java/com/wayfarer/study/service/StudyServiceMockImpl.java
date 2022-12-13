@@ -41,5 +41,10 @@ public class StudyServiceMockImpl implements StudyService {
     public void deleteStudyArticle(Long studyId) {
 
     }
+
+    @Override
+    public MultiResponseDto readStudyArticlesWithPosition(int page, String positionName) {
+        return null;
+    }
 }
 

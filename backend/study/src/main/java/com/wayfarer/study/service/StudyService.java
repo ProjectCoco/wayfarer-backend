@@ -11,6 +11,9 @@ public interface StudyService {
 
     MultiResponseDto readStudyArticlesWithTag(int page, String tag);
 
+    // todo: readAll 메서드와 함께 동적쿼리로 가능?
+    MultiResponseDto readStudyArticlesWithPosition(int page, String positionName);
+
     StudyArticleDetailResponseDto readStudyArticle(Long studyId);
 
     void createStudyArticle(StudyArticleRequestDto studyArticleRequestDto);

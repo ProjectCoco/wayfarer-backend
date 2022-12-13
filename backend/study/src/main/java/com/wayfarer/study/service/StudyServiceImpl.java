@@ -1,22 +1,19 @@
 package com.wayfarer.study.service;
 
 import com.wayfarer.study.dto.*;
-import com.wayfarer.study.entity.*;
+import com.wayfarer.study.entity.StudyArticle;
 import com.wayfarer.study.entity.enummodel.StudyArticleEnum;
-import com.wayfarer.study.entity.enummodel.StudyStatus;
+import com.wayfarer.study.entity.vo.StudyPosition;
 import com.wayfarer.study.mapper.StudyMapper;
 import com.wayfarer.study.repository.StudyArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
-
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
-import java.util.List;
 
 
 @Primary
@@ -32,6 +29,13 @@ public class StudyServiceImpl implements StudyService {
     public MultiResponseDto<StudyArticleResponseDto> readAllStudyArticles(int page) {
         Page<StudyArticle> studyArticleList = studyArticleRepository
                 .findAll(PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
+        return new MultiResponseDto<>(studyMapper.studyArticleListToStudyArticleResponseDtoList(studyArticleList.getContent()), studyArticleList);
+    }
+
+    @Override
+    public MultiResponseDto<StudyArticleResponseDto> readStudyArticlesWithPosition(int page, String positionName) {
+        Page<StudyArticle> studyArticleList = studyArticleRepository
+                .findByStudyPosition(new StudyPosition(positionName), PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
         return new MultiResponseDto<>(studyMapper.studyArticleListToStudyArticleResponseDtoList(studyArticleList.getContent()), studyArticleList);
     }
 
@@ -141,4 +145,5 @@ public class StudyServiceImpl implements StudyService {
         }
         return false;
     }
+
 }
