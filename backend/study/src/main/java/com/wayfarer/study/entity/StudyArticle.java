@@ -31,7 +31,7 @@ public class StudyArticle {
     private String title;
 
     @Convert(converter = BooleanToYNConverter.class)
-    private Boolean status;
+    private Boolean enabled;
 
 //    @Convert(converter = StudyTagConverter.class)
     @Column
@@ -83,12 +83,12 @@ public class StudyArticle {
         this.studyInfo.setActive(active);
     }
 
-    public void changeStatus(boolean status) {
-        this.status = status;
+    public void changeStatus(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public void initStudyArticle() {
-        this.status = true;
+        this.enabled = true;
         this.studyInfo = new StudyInfo(StudyStatus.PROCEED);
         this.studyMember.setCountMember(0L);
     }

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StudyArticleRepository extends JpaRepository<StudyArticle, Long> {
 
-    Page<StudyArticle> findByStudyTagsContains(String tag, Pageable pageable);
+    Page<StudyArticle> findByStudyTagsContainsAndEnabled(String tag, Boolean enabled, Pageable pageable);
 
-    Page<StudyArticle> findByStudyPosition(StudyPosition studyPosition, Pageable pageable);
+    Page<StudyArticle> findByStudyPositionAndEnabled(StudyPosition studyPosition, Boolean enabled, Pageable pageable);
 }
