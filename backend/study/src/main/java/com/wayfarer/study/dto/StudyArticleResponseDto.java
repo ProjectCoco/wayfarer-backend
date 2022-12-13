@@ -16,6 +16,8 @@ public class StudyArticleResponseDto {
 
     private String status;
 
+    private String positionName;
+
     private List<String> studyTags;
 
     private Long totalMember;

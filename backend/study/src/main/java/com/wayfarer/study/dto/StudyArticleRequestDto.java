@@ -22,6 +22,7 @@ public class StudyArticleRequestDto {
     private List<String> studyTags;
     private LocalDateTime startTime;
     private LocalDateTime deadline;
+    private String positionName;
 
 }
 //          {

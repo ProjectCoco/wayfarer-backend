@@ -34,6 +34,7 @@ public interface StudyMapper {
     @Mapping(source = "startTime", target = "studyTime.startTime")
     @Mapping(source = "deadline", target = "studyTime.deadline")
     @Mapping(source = "totalMember", target = "studyMember.totalMember")
+    @Mapping(source = "positionName", target = "studyPosition.positionName")
     StudyArticle studyRequestDtoToStudyArticle(StudyArticleRequestDto studyArticleRequestDto);
 
 
