@@ -41,7 +41,6 @@ public class StudyServiceImpl implements StudyService {
 
     @Override
     public MultiResponseDto<StudyArticleResponseDto> readStudyArticlesWithTag(int page, String tag) {
-        System.out.println(tag);
         Page<StudyArticle> studyArticleListWithTag = studyArticleRepository
                 .findByStudyTagsContains(tag, PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
         return new MultiResponseDto<>(studyMapper.studyArticleListToStudyArticleResponseDtoList(studyArticleListWithTag.getContent()), studyArticleListWithTag);

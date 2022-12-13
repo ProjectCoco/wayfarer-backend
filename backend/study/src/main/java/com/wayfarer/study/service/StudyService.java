@@ -7,12 +7,12 @@ public interface StudyService {
     /**
      * @return
      */
-    MultiResponseDto readAllStudyArticles(int page);
+    MultiResponseDto<StudyArticleResponseDto> readAllStudyArticles(int page);
 
-    MultiResponseDto readStudyArticlesWithTag(int page, String tag);
+    MultiResponseDto<StudyArticleResponseDto> readStudyArticlesWithTag(int page, String tag);
 
     // todo: readAll 메서드와 함께 동적쿼리로 가능?
-    MultiResponseDto readStudyArticlesWithPosition(int page, String positionName);
+    MultiResponseDto<StudyArticleResponseDto> readStudyArticlesWithPosition(int page, String positionName);
 
     StudyArticleDetailResponseDto readStudyArticle(Long studyId);
 

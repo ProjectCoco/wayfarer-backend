@@ -1,7 +1,6 @@
 package com.wayfarer.application.controller;
 
-import com.wayfarer.study.dto.StudyArticleRequestDto;
-import com.wayfarer.study.dto.StudyArticleUpdateRequestDto;
+import com.wayfarer.study.dto.*;
 import com.wayfarer.study.service.StudyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,43 +16,45 @@ public class StudyController {
 
     @GetMapping("")
     //todo page
-    public ResponseEntity readAllStudy(@RequestParam int page) {
+    public ResponseEntity<MultiResponseDto<StudyArticleResponseDto>> readAllStudy(@RequestParam int page) {
         return new ResponseEntity<>(studyService.readAllStudyArticles(page), HttpStatus.OK);
     }
 
     @GetMapping("/tag")
-    public ResponseEntity readStudyWithTag(@RequestParam int page, String tag) {
+    public ResponseEntity<MultiResponseDto<StudyArticleResponseDto>> readStudyWithTag(@RequestParam int page,
+                                           @RequestParam(required = true) String tag) {
         return new ResponseEntity<>(studyService.readStudyArticlesWithTag(page, tag), HttpStatus.OK);
     }
 
     @GetMapping("/position")
-    public ResponseEntity readStudyWithPosition(@RequestParam int page, String position) {
+    public ResponseEntity<MultiResponseDto<StudyArticleResponseDto>> readStudyWithPosition(@RequestParam int page,
+                                                @RequestParam(required = true) String position) {
         return new ResponseEntity<>(studyService.readStudyArticlesWithPosition(page, position), HttpStatus.OK);
     }
 
     @GetMapping("/{studyId}")
-    public ResponseEntity readStudy(@PathVariable Long studyId) {
+    public ResponseEntity<StudyArticleDetailResponseDto> readStudy(@PathVariable Long studyId) {
         return new ResponseEntity<>(studyService.readStudyArticle(studyId), HttpStatus.OK);
     }
 
     @PostMapping("")
-    public ResponseEntity createStudy(@RequestBody StudyArticleRequestDto studyArticleRequestDto) {
+    public ResponseEntity<Void> createStudy(@RequestBody StudyArticleRequestDto studyArticleRequestDto) {
         studyService.createStudyArticle(studyArticleRequestDto);
-        return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PatchMapping("/{studyId}")
-    public ResponseEntity updateStudy(@PathVariable Long studyId,
+    public ResponseEntity<Void> updateStudy(@PathVariable Long studyId,
                                       @RequestBody StudyArticleUpdateRequestDto studyArticleUpdateRequestDto) {
         //target -> info, title, tag, time, contents, ....
         studyService.updateStudyArticle(studyId, studyArticleUpdateRequestDto);
-        return new ResponseEntity(HttpStatus.RESET_CONTENT);
+        return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
     }
 
     @DeleteMapping("/{studyId}")
-    public ResponseEntity deleteStudy(@PathVariable Long studyId) {
+    public ResponseEntity<Void> deleteStudy(@PathVariable Long studyId) {
         //delete -> status 변경
         studyService.deleteStudyArticle(studyId);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
