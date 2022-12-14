@@ -14,18 +14,19 @@ import java.util.List;
 public interface StudyMapper {
 
     @Mapping(source = "studyContent.content", target = "content")
-    @Mapping(source = "studyInfo.active", target = "active")
+    @Mapping(source = "studyInfo.status", target = "status")
     @Mapping(source = "studyTime.startTime", target = "startTime")
     @Mapping(source = "studyTime.deadline", target = "deadline")
     @Mapping(source = "studyMember.totalMember", target = "totalMember")
     @Mapping(source = "studyMember.countMember", target = "countMember")
     StudyArticleDetailResponseDto studyArticleToStudyDetailResponseDto(StudyArticle studyArticle);
 
-    @Mapping(source = "studyInfo.active", target = "active")
+    @Mapping(source = "studyInfo.status", target = "status")
     @Mapping(source = "studyTime.startTime", target = "startTime")
     @Mapping(source = "studyTime.deadline", target = "deadline")
     @Mapping(source = "studyMember.totalMember", target = "totalMember")
     @Mapping(source = "studyMember.countMember", target = "countMember")
+    @Mapping(source = "studyPosition.positionName", target = "positionName")
     StudyArticleResponseDto studyArticleToStudyResponseDto(StudyArticle studyArticle);
 
     List<StudyArticleResponseDto> studyArticleListToStudyArticleResponseDtoList(List<StudyArticle> studyArticleList);

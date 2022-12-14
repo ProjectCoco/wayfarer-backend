@@ -79,11 +79,11 @@ public class StudyArticle {
         this.studyTime.setDeadline(deadLine);
     }
 
-    public void changeActive(StudyStatus active) {
-        this.studyInfo.setActive(active);
+    public void changeStatus(StudyStatus status) {
+        this.studyInfo.setStatus(status);
     }
 
-    public void changeStatus(boolean enabled) {
+    public void changeEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 

@@ -15,7 +15,7 @@ public class StudyArticleDetailResponseDto {
 
     private String title;
 
-    private String status;
+    private String enabled;
 
     private String content;
 
@@ -29,6 +29,6 @@ public class StudyArticleDetailResponseDto {
 
     private LocalDateTime deadline;
 
-    private String active;
+    private String status;
 
 }

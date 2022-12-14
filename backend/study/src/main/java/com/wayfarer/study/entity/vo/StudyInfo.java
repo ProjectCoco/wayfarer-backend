@@ -18,6 +18,6 @@ public class StudyInfo {
 
     @Column()
     @Enumerated(EnumType.STRING)
-    private StudyStatus active; // null
+    private StudyStatus status; // null
 
 }
