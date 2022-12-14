@@ -16,20 +16,23 @@ public class StudyController {
 
     @GetMapping("")
     //todo page
-    public ResponseEntity<MultiResponseDto<StudyArticleResponseDto>> readAllStudy(@RequestParam int page) {
-        return new ResponseEntity<>(studyService.readAllStudyArticles(page), HttpStatus.OK);
+    public ResponseEntity<MultiResponseDto<StudyArticleResponseDto>> readAllStudy(@RequestParam int page,
+                                                                                  @RequestParam(defaultValue = "true") Boolean status) {
+        return new ResponseEntity<>(studyService.readAllStudyArticles(page, status), HttpStatus.OK);
     }
 
     @GetMapping("/tag")
     public ResponseEntity<MultiResponseDto<StudyArticleResponseDto>> readStudyWithTag(@RequestParam int page,
-                                           @RequestParam(required = true) String tag) {
-        return new ResponseEntity<>(studyService.readStudyArticlesWithTag(page, tag), HttpStatus.OK);
+                                                                                      @RequestParam(required = true) String tag,
+                                                                                      @RequestParam(defaultValue = "true") Boolean status) {
+        return new ResponseEntity<>(studyService.readStudyArticlesWithTag(page, tag, status), HttpStatus.OK);
     }
 
     @GetMapping("/position")
     public ResponseEntity<MultiResponseDto<StudyArticleResponseDto>> readStudyWithPosition(@RequestParam int page,
-                                                @RequestParam(required = true) String position) {
-        return new ResponseEntity<>(studyService.readStudyArticlesWithPosition(page, position), HttpStatus.OK);
+                                                                                           @RequestParam(required = true) String position,
+                                                                                           @RequestParam(defaultValue = "true") Boolean status) {
+        return new ResponseEntity<>(studyService.readStudyArticlesWithPosition(page, position, status), HttpStatus.OK);
     }
 
     @GetMapping("/{studyId}")
@@ -45,7 +48,7 @@ public class StudyController {
 
     @PatchMapping("/{studyId}")
     public ResponseEntity<Void> updateStudy(@PathVariable Long studyId,
-                                      @RequestBody StudyArticleUpdateRequestDto studyArticleUpdateRequestDto) {
+                                            @RequestBody StudyArticleUpdateRequestDto studyArticleUpdateRequestDto) {
         //target -> info, title, tag, time, contents, ....
         studyService.updateStudyArticle(studyId, studyArticleUpdateRequestDto);
         return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
