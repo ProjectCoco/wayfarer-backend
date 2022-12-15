@@ -16,5 +16,5 @@ import javax.persistence.Enumerated;
 public class ProjectInfo {
 
     @Enumerated(EnumType.STRING)
-    private ProjectStatus active;
+    private ProjectStatus status;
 }

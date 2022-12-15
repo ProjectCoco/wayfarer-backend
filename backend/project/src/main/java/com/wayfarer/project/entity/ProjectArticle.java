@@ -25,10 +25,10 @@ public class ProjectArticle {
     @Column()
     private String title;
 
-    private Boolean status;
+    private Boolean enabled;
 
     @Column
-    private String studyTags;
+    private String projectTags;
 
     @Column
     @CreatedDate
