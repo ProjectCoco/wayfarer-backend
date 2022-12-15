@@ -51,4 +51,13 @@ public class ProjectArticle {
 
     @Embedded
     private ProjectSkill projectSkill;
+
+    public void initStudyArticle() {
+        this.enabled = true;
+        this.projectInfo = new ProjectInfo();
+    }
+
+    public void changeEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 }
