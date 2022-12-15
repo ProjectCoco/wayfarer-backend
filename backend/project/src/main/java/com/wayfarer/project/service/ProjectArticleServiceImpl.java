@@ -29,7 +29,17 @@ public class ProjectArticleServiceImpl implements ProjectArticleService {
 
     @Override
     public MultiResponseDto<ProjectArticleResponseDto> readAllProjectArticles(int page, Boolean status) {
-        return null;
+        Page<ProjectArticle> projectArticleList = null;
+        if (status) {
+            projectArticleList = projectArticleRepository
+                    .findByEnabledAndProjectInfo(true, new ProjectInfo(ProjectStatus.PROCEED), PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
+        }
+
+        if (!status) {
+            projectArticleList = projectArticleRepository
+                    .findByEnabled(true, PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
+        }
+        return new MultiResponseDto<>(projectMapper.projectArticleListToProjectArticleResponseDtoList(projectArticleList.getContent()), projectArticleList);
     }
 
     @Override
