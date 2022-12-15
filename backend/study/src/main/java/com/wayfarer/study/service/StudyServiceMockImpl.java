@@ -1,9 +1,6 @@
 package com.wayfarer.study.service;
 
-import com.wayfarer.study.dto.MultiResponseDto;
-import com.wayfarer.study.dto.StudyArticleUpdateRequestDto;
-import com.wayfarer.study.dto.StudyArticleDetailResponseDto;
-import com.wayfarer.study.dto.StudyArticleRequestDto;
+import com.wayfarer.study.dto.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +10,17 @@ public class StudyServiceMockImpl implements StudyService {
 
 
     @Override
-    public MultiResponseDto readAllStudyArticles(int page) {
+    public MultiResponseDto<StudyArticleResponseDto> readAllStudyArticles(int page, Boolean status) {
         return null;
     }
 
     @Override
-    public MultiResponseDto readStudyArticlesWithTag(int page, String tag) {
+    public MultiResponseDto<StudyArticleResponseDto> readStudyArticlesWithTag(int page, String tag, Boolean status) {
+        return null;
+    }
+
+    @Override
+    public MultiResponseDto<StudyArticleResponseDto> readStudyArticlesWithPosition(int page, String positionName, Boolean status) {
         return null;
     }
 
