@@ -1,14 +1,18 @@
 package com.wayfarer.project.service;
 
+import com.wayfarer.project.dto.*;
+
 public interface ProjectArticleService {
 
     void createProjectArticle(ProjectArticleRequestDto projectArticleRequestDto);
 
-    MultiResponseDto<ProjectArticleDetailResponseDto> readProjectArticle(int page);
+    ProjectArticleDetailResponseDto readProjectArticle(Long projectId);
 
     void updateProjectArticle(Long projectId, ProjectArticleUpdateRequestDto projectArticleUpdateRequestDto);
 
     void deleteProjectArticle(Long projectId);
+
+    MultiResponseDto<ProjectArticleResponseDto> readAllProjectArticles(int page, Boolean status);
 
 
 }
