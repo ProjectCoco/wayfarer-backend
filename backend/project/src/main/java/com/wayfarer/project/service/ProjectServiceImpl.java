@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class ProjectArticleServiceImpl implements ProjectArticleService {
+public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectArticleRepository projectArticleRepository;
     private final ProjectMapper projectMapper;

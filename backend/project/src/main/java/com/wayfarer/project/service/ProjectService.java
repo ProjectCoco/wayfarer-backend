@@ -2,7 +2,7 @@ package com.wayfarer.project.service;
 
 import com.wayfarer.project.dto.*;
 
-public interface ProjectArticleService {
+public interface ProjectService {
 
     void createProjectArticle(ProjectArticleRequestDto projectArticleRequestDto);
 
