@@ -3,10 +3,16 @@ package com.wayfarer.project.service;
 
 import com.wayfarer.project.dto.*;
 import com.wayfarer.project.entity.ProjectArticle;
+import com.wayfarer.project.entity.enummodel.ProjectArticleEnum;
+import com.wayfarer.project.entity.enummodel.ProjectStatus;
+import com.wayfarer.project.entity.vo.ProjectInfo;
 import com.wayfarer.project.mapper.ProjectMapper;
 import com.wayfarer.project.repository.ProjectArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,7 +56,9 @@ public class ProjectArticleServiceImpl implements ProjectArticleService {
 
     @Override
     public void updateProjectArticle(Long projectId, ProjectArticleUpdateRequestDto projectArticleUpdateRequestDto) {
-
+        ProjectArticle projectArticle = projectArticleRepository.findById(projectId).orElseThrow();
+        projectArticle.updateAll(projectArticleUpdateRequestDto);
+        projectArticleRepository.save(projectArticle);
     }
 
     @Override

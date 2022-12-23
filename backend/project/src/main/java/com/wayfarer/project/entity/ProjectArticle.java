@@ -1,10 +1,12 @@
 package com.wayfarer.project.entity;
 
+import com.wayfarer.project.dto.ProjectArticleUpdateRequestDto;
 import com.wayfarer.project.entity.vo.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -59,5 +61,14 @@ public class ProjectArticle {
 
     public void changeEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public void updateAll(ProjectArticleUpdateRequestDto projectArticleUpdateRequestDto) {
+        this.title = projectArticleUpdateRequestDto.getTitle();
+        this.projectTags = projectArticleUpdateRequestDto.getProjectTags();
+        this.projectMember.setTotalMember(projectArticleUpdateRequestDto.getProjectTotalMember());
+        this.projectContent.setContent(projectArticleUpdateRequestDto.getProjectContent());
+        this.projectTime.setStartTime(projectArticleUpdateRequestDto.getStartTime());
+        this.projectSkill.setSkillId(projectArticleUpdateRequestDto.getProjectSkillId());
     }
 }
