@@ -1,6 +1,7 @@
 package com.wayfarer.project.entity;
 
 import com.wayfarer.project.dto.ProjectArticleUpdateRequestDto;
+import com.wayfarer.project.entity.converter.BooleanToYNConverter;
 import com.wayfarer.project.entity.vo.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +12,9 @@ import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,6 +31,7 @@ public class ProjectArticle {
     @Column()
     private String title;
 
+    @Convert(converter = BooleanToYNConverter.class)
     private Boolean enabled;
 
     @Column
@@ -70,5 +75,17 @@ public class ProjectArticle {
         this.projectContent.setContent(projectArticleUpdateRequestDto.getProjectContent());
         this.projectTime.setStartTime(projectArticleUpdateRequestDto.getStartTime());
         this.projectSkill.setSkillId(projectArticleUpdateRequestDto.getProjectSkillId());
+    }
+
+    public List<String> getProjectTags(){
+        List<String> strings = new ArrayList<>();
+        if (this.projectTags != null) {
+            strings = Arrays.asList(this.projectTags.split(","));
+        }
+        return strings;
+    }
+
+    public void setProjectTags(List<String> tags){
+        this.projectTags = String.join(",", tags);
     }
 }
