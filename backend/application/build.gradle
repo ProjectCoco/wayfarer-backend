@@ -6,4 +6,5 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     implementation project(':member')
     implementation project(':study')
+    implementation project(':project')
 }
