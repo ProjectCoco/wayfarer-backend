@@ -7,7 +7,7 @@ import javax.persistence.Embeddable;
 
 @Builder
 @Getter
-@Setter(value = AccessLevel.PROTECTED)
+@Setter
 @Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
