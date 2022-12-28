@@ -1,7 +1,10 @@
 package com.wayfarer.application.controller;
 
 
+import com.wayfarer.project.dto.MultiResponseDto;
+import com.wayfarer.project.dto.ProjectArticleDetailResponseDto;
 import com.wayfarer.project.dto.ProjectArticleRequestDto;
+import com.wayfarer.project.dto.ProjectArticleResponseDto;
 import com.wayfarer.project.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,34 +20,34 @@ public class ProjectController {
 
     @GetMapping("")
     //todo page
-    public ResponseEntity readAllProject(@RequestParam int page,
-                                         @RequestParam(defaultValue = "true") Boolean status) {
+    public ResponseEntity<MultiResponseDto<ProjectArticleResponseDto>> readAllProject(@RequestParam int page,
+                                                                                      @RequestParam(defaultValue = "true") Boolean status) {
         return new ResponseEntity<>(projectService.readAllProjectArticles(page, status), HttpStatus.OK);
     }
 
-    /*@GetMapping("/tag")
-    public ResponseEntity readProjectWithTag(@RequestParam int page,
+    @GetMapping("/tag")
+    public ResponseEntity<MultiResponseDto<ProjectArticleResponseDto>> readProjectWithTag(@RequestParam int page,
                                              @RequestParam(required = true) String tag,
                                              @RequestParam(defaultValue = "true") Boolean status) {
-        return new ResponseEntity<>(projectService.readProjectArticlesWithTag(page, tag), HttpStatus.OK);
-    }*/
+        return new ResponseEntity<>(projectService.readProjectArticlesWithTag(page, tag, status), HttpStatus.OK);
+    }
 
     @GetMapping("/{projectId}")
-    public ResponseEntity readStudy(@PathVariable Long projectId) {
+    public ResponseEntity<ProjectArticleDetailResponseDto> readStudy(@PathVariable Long projectId) {
         return new ResponseEntity<>(projectService.readProjectArticle(projectId), HttpStatus.OK);
     }
 
     @PostMapping("")
-    public ResponseEntity createProject(@RequestBody ProjectArticleRequestDto projectAritcleRequestDto) {
+    public ResponseEntity<Void> createProject(@RequestBody ProjectArticleRequestDto projectAritcleRequestDto) {
         projectService.createProjectArticle(projectAritcleRequestDto);
-        return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 
     @DeleteMapping("/{projectId}")
-    public ResponseEntity deleteProject(@PathVariable Long projectId) {
+    public ResponseEntity<Void> deleteProject(@PathVariable Long projectId) {
         //delete -> status 변경
         projectService.deleteProjectArticle(projectId);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

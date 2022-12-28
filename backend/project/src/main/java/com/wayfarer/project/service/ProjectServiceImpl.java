@@ -49,6 +49,23 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public MultiResponseDto<ProjectArticleResponseDto> readProjectArticlesWithTag(int page, String tag, Boolean status) {
+        Page<ProjectArticle> projectArticleListWithTag = null;
+        if (status) {
+            projectArticleListWithTag = projectArticleRepository
+                    .findByProjectTagsContainsAndEnabledAndProjectInfo(tag, true,
+                            new ProjectInfo(ProjectStatus.PROCEED),
+                            PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
+        }
+        if (!status) {
+            projectArticleListWithTag = projectArticleRepository
+                    .findByProjectTagsContainsAndEnabled(tag, true,
+                            PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
+        }
+        return new MultiResponseDto<>(projectMapper.projectArticleListToProjectArticleResponseDtoList(projectArticleListWithTag.getContent()), projectArticleListWithTag);
+    }
+
+    @Override
     public ProjectArticleDetailResponseDto readProjectArticle(Long projectId) {
         ProjectArticle projectArticle = projectArticleRepository.findById(projectId).orElseThrow(NullPointerException::new);
         return projectMapper.projectArticleToProjectArticleDetailResponseDto(projectArticle);
