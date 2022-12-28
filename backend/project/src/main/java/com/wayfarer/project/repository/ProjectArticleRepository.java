@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ProjectArticleRepository extends JpaRepository<ProjectArticle, Long>, ProjectArticleCustomRepository {
 
 
-    Page<ProjectArticle> findByEnabled(Boolean enabled, Pageable pageable);
+    Page<ProjectArticle> getByEnabled(Boolean enabled, Pageable pageable);
 
     Page<ProjectArticle> findByEnabledAndProjectInfo(boolean enabled, ProjectInfo projectInfo, Pageable pageable);
 
