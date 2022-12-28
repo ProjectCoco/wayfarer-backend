@@ -1,10 +1,6 @@
 package com.wayfarer.project.dto;
 
 
-import com.wayfarer.project.entity.vo.ProjectContent;
-import com.wayfarer.project.entity.vo.ProjectMember;
-import com.wayfarer.project.entity.vo.ProjectSkill;
-import com.wayfarer.project.entity.vo.ProjectTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +16,7 @@ public class ProjectArticleUpdateRequestDto {
     private String title;
     private String projectTags;
     private Long projectTotalMember;
-    private Long projectSkillId;
+    private String projectSkills;
     private LocalDateTime startTime;
     private String projectContent;
 

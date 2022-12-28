@@ -56,8 +56,8 @@ public class ProjectArticle {
     @Embedded
     private ProjectOwner projectOwner;
 
-    @Embedded
-    private ProjectSkill projectSkill;
+    @Column
+    private String projectSkills;
 
     public void initStudyArticle() {
         this.enabled = true;
@@ -74,7 +74,7 @@ public class ProjectArticle {
         this.projectMember.setTotalMember(projectArticleUpdateRequestDto.getProjectTotalMember());
         this.projectContent.setContent(projectArticleUpdateRequestDto.getProjectContent());
         this.projectTime.setStartTime(projectArticleUpdateRequestDto.getStartTime());
-        this.projectSkill.setSkillId(projectArticleUpdateRequestDto.getProjectSkillId());
+        this.projectSkills = projectArticleUpdateRequestDto.getProjectSkills();
     }
 
     public List<String> getProjectTags(){
@@ -85,7 +85,19 @@ public class ProjectArticle {
         return strings;
     }
 
+    public List<String> getProjectSkills(){
+        List<String> strings = new ArrayList<>();
+        if (this.projectSkills != null) {
+            strings = Arrays.asList(this.projectSkills.split(","));
+        }
+        return strings;
+    }
+
     public void setProjectTags(List<String> tags){
         this.projectTags = String.join(",", tags);
+    }
+
+    public void setProjectSkills(List<String> skills){
+        this.projectSkills = String.join(",", skills);
     }
 }
