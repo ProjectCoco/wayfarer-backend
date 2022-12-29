@@ -10,4 +10,8 @@ public enum ProjectStatus {
     ProjectStatus(String status){
         this.status = status;
     }
+
+    public String getValue() {
+        return status;
+    }
 }
