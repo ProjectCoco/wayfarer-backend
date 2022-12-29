@@ -59,9 +59,9 @@ public class ProjectArticle {
     @Column
     private String projectSkills;
 
-    public void initStudyArticle() {
+    public void initProjectArticle() {
         this.enabled = true;
-        this.projectInfo = new ProjectInfo();
+        this.projectInfo = new ProjectInfo(ProjectStatus.PROCEED);
     }
 
     public void changeEnabled(boolean enabled) {

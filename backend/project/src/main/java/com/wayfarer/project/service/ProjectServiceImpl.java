@@ -28,7 +28,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void createProjectArticle(ProjectArticleRequestDto projectArticleRequestDto) {
         ProjectArticle projectArticle = projectMapper.projectRequestDtoToProjectArticle(projectArticleRequestDto);
-        projectArticle.initStudyArticle();
+        projectArticle.initProjectArticle();
         projectArticleRepository.save(projectArticle);
 
     }
