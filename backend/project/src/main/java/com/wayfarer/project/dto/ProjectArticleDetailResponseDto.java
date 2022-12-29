@@ -1,6 +1,11 @@
-package com.wayfarer.study.dto;
+package com.wayfarer.project.dto;
 
-import lombok.*;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,9 +14,9 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudyArticleDetailResponseDto {
+public class ProjectArticleDetailResponseDto {
 
-    private Long studyArticleId;
+    private Long projectArticleId;
 
     private String title;
 
@@ -19,7 +24,7 @@ public class StudyArticleDetailResponseDto {
 
     private String content;
 
-    private List<String> studyTags;
+    private List<String> projectTags;
 
     private Long totalMember;
 
@@ -27,8 +32,5 @@ public class StudyArticleDetailResponseDto {
 
     private LocalDateTime startTime;
 
-    private LocalDateTime deadline;
-
     private String status;
-
 }

@@ -1,27 +1,21 @@
-package com.wayfarer.study.entity;
+package com.wayfarer.project.entity.vo;
 
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.time.LocalDateTime;
 
-
 @Builder
 @Getter
-@Setter(value = AccessLevel.PROTECTED)
+@Setter
 @Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudyTime {
+public class ProjectTime {
 
-    @Column()
     @CreatedDate
     private LocalDateTime startTime;
 
-    @Column()
     private LocalDateTime deadline;
-
 }

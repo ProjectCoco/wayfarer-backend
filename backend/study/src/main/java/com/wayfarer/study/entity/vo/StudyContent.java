@@ -1,4 +1,4 @@
-package com.wayfarer.study.entity;
+package com.wayfarer.study.entity.vo;
 
 import lombok.*;
 
@@ -7,14 +7,14 @@ import javax.persistence.Embeddable;
 
 @Builder
 @Getter
-@Setter(value = AccessLevel.PROTECTED)
+@Setter
 @Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudyContent {
 
     @Column( )
-     private String content;
+    private String content;
 
-     private String version; // null
+    private String version; // null
 }
