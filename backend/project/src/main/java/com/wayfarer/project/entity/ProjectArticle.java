@@ -2,12 +2,16 @@ package com.wayfarer.project.entity;
 
 import com.wayfarer.project.dto.ProjectArticleUpdateRequestDto;
 import com.wayfarer.project.entity.converter.BooleanToYNConverter;
-import com.wayfarer.project.entity.vo.*;
+import com.wayfarer.project.entity.enummodel.ProjectSkillEnum;
+import com.wayfarer.project.entity.enummodel.ProjectStatus;
+import com.wayfarer.project.entity.vo.ProjectContent;
+import com.wayfarer.project.entity.vo.ProjectInfo;
+import com.wayfarer.project.entity.vo.ProjectMember;
+import com.wayfarer.project.entity.vo.ProjectTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -15,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -97,7 +102,7 @@ public class ProjectArticle {
         this.projectTags = String.join(",", tags);
     }
 
-    public void setProjectSkills(List<String> skills){
-        this.projectSkills = String.join(",", skills);
+    public void setProjectSkills(List<ProjectSkillEnum> skills){
+        this.projectSkills = skills.stream().map(ProjectSkillEnum::getValue).collect(Collectors.joining(","));
     }
 }
