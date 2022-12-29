@@ -7,11 +7,11 @@ import javax.persistence.Embeddable;
 
 @Builder
 @Getter
-@Setter(value = AccessLevel.PROTECTED)
+@Setter
 @Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProjectSkill {
-    private String skillId;
+    private Long skillId;
 
 }

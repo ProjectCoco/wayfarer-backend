@@ -1,6 +1,13 @@
 package com.wayfarer.project.entity;
 
-import com.wayfarer.project.entity.vo.*;
+import com.wayfarer.project.dto.ProjectArticleUpdateRequestDto;
+import com.wayfarer.project.entity.converter.BooleanToYNConverter;
+import com.wayfarer.project.entity.enummodel.ProjectSkillEnum;
+import com.wayfarer.project.entity.enummodel.ProjectStatus;
+import com.wayfarer.project.entity.vo.ProjectContent;
+import com.wayfarer.project.entity.vo.ProjectInfo;
+import com.wayfarer.project.entity.vo.ProjectMember;
+import com.wayfarer.project.entity.vo.ProjectTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +16,10 @@ import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -25,6 +36,7 @@ public class ProjectArticle {
     @Column()
     private String title;
 
+    @Convert(converter = BooleanToYNConverter.class)
     private Boolean enabled;
 
     @Column
@@ -49,15 +61,48 @@ public class ProjectArticle {
     @Embedded
     private ProjectOwner projectOwner;
 
-    @Embedded
-    private ProjectSkill projectSkill;
+    @Column
+    private String projectSkills;
 
-    public void initStudyArticle() {
+    public void initProjectArticle() {
         this.enabled = true;
-        this.projectInfo = new ProjectInfo();
+        this.projectInfo = new ProjectInfo(ProjectStatus.PROCEED);
     }
 
     public void changeEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public void updateAll(ProjectArticleUpdateRequestDto projectArticleUpdateRequestDto) {
+        this.title = projectArticleUpdateRequestDto.getTitle();
+        this.projectTags = projectArticleUpdateRequestDto.getProjectTags();
+        this.projectMember.setTotalMember(projectArticleUpdateRequestDto.getProjectTotalMember());
+        this.projectContent.setContent(projectArticleUpdateRequestDto.getProjectContent());
+        this.projectTime.setStartTime(projectArticleUpdateRequestDto.getStartTime());
+        this.projectSkills = projectArticleUpdateRequestDto.getProjectSkills();
+    }
+
+    public List<String> getProjectTags(){
+        List<String> strings = new ArrayList<>();
+        if (this.projectTags != null) {
+            strings = Arrays.asList(this.projectTags.split(","));
+        }
+        return strings;
+    }
+
+    public List<String> getProjectSkills(){
+        List<String> strings = new ArrayList<>();
+        if (this.projectSkills != null) {
+            strings = Arrays.asList(this.projectSkills.split(","));
+        }
+        return strings;
+    }
+
+    public void setProjectTags(List<String> tags){
+        this.projectTags = String.join(",", tags);
+    }
+
+    public void setProjectSkills(List<ProjectSkillEnum> skills){
+        this.projectSkills = skills.stream().map(ProjectSkillEnum::getValue).collect(Collectors.joining(","));
     }
 }

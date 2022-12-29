@@ -2,7 +2,7 @@ package com.wayfarer.project.service;
 
 import com.wayfarer.project.dto.*;
 
-public interface ProjectArticleService {
+public interface ProjectService {
 
     void createProjectArticle(ProjectArticleRequestDto projectArticleRequestDto);
 
@@ -15,4 +15,5 @@ public interface ProjectArticleService {
     MultiResponseDto<ProjectArticleResponseDto> readAllProjectArticles(int page, Boolean status);
 
 
+    MultiResponseDto<ProjectArticleResponseDto> readProjectArticlesWithTag(int page, String tag, Boolean status);
 }
