@@ -8,12 +8,16 @@ import javax.persistence.Enumerated;
 
 
 public enum StudyStatus {
-    PROCEED("모집중"),
-    COMPLETE("모집완료");
+    PROCEED("PROCEED"),
+    COMPLETE("COMPLETE");
 
     private final String status;
 
     StudyStatus(String status){
         this.status = status;
+    }
+
+    public String getValue() {
+        return status;
     }
 }
