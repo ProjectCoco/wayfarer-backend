@@ -2,12 +2,14 @@ package com.wayfarer.study.service;
 
 import com.wayfarer.study.dto.*;
 import com.wayfarer.study.entity.StudyArticle;
+import com.wayfarer.study.entity.StudyMember;
 import com.wayfarer.study.entity.enummodel.StudyArticleEnum;
 import com.wayfarer.study.entity.enummodel.StudyStatus;
 import com.wayfarer.study.entity.vo.StudyInfo;
-import com.wayfarer.study.entity.vo.StudyPosition;
 import com.wayfarer.study.mapper.StudyMapper;
+import com.wayfarer.study.mapper.StudyMemberMapper;
 import com.wayfarer.study.repository.StudyArticleRepository;
+import com.wayfarer.study.repository.StudyMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Primary
@@ -25,7 +30,9 @@ import javax.transaction.Transactional;
 public class StudyServiceImpl implements StudyService {
 
     private final StudyArticleRepository studyArticleRepository;
+    private final StudyMemberRepository studyMemberRepository;
     private final StudyMapper studyMapper;
+    private final StudyMemberMapper studyMemberMapper;
 
     @Override
     public MultiResponseDto<StudyArticleResponseDto> readAllStudyArticles(int page, Boolean status) {
@@ -43,24 +50,19 @@ public class StudyServiceImpl implements StudyService {
     }
 
     @Override
-    public MultiResponseDto<StudyArticleResponseDto> readStudyArticlesWithPosition(int page, String positionName, Boolean status) {
-        Page<StudyArticle> studyArticleList = null;
-        if (status) {
-            studyArticleList = studyArticleRepository
-                    .findByStudyPositionAndEnabledAndStudyInfo(
-                            new StudyPosition(positionName),
-                            true,
-                            new StudyInfo(StudyStatus.PROCEED),
-                            PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
-        }
-        if (!status) {
-            studyArticleList = studyArticleRepository
-                    .findByStudyPositionAndEnabled(
-                            new StudyPosition(positionName),
-                            true,
-                            PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
-        }
-        return new MultiResponseDto<>(studyMapper.studyArticleListToStudyArticleResponseDtoList(studyArticleList.getContent()), studyArticleList);
+    public MultiResponseDto<StudyArticleResponseDto> readStudyArticlesWithPosition(int page, String positionName, StudyStatus status) {
+        Page<StudyArticle> studyArticleList = studyArticleRepository
+                .getByPositionAndStatus(status, positionName,
+                        PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
+
+        List<StudyArticleResponseDto> studyArticleResponseDtos = studyArticleList.getContent().stream()
+                .map(studyArticle -> {
+                    List<StudyMember> studyMembers = studyArticle.getStudyMembers().stream()
+                            .map(memberId -> studyMemberRepository.findById(Long.valueOf(memberId)).orElseThrow()).collect(Collectors.toList());
+                    return studyMapper.studyArticleToStudyResponseDto(studyArticle, studyMemberMapper.studyMembersToStudyMemberResponseDtos(studyMembers));
+                }).collect(Collectors.toList());
+
+        return new MultiResponseDto<>(studyArticleResponseDtos, studyArticleList);
     }
 
     @Override
