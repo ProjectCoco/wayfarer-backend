@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface StudyArticleRepository extends JpaRepository<StudyArticle, Long> {
+public interface StudyArticleRepository extends JpaRepository<StudyArticle, Long>, StudyArticleCustomRepository {
 
     Page<StudyArticle> findByStudyTagsContainsAndEnabled(String tag, Boolean enabled ,Pageable pageable);
 
