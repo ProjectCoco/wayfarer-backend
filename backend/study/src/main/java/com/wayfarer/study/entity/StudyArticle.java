@@ -41,10 +41,10 @@ public class StudyArticle {
 
     @Column
     @CreatedDate
-    private LocalDateTime createdTime; // null
+    private LocalDateTime createdTime;
 
-    @Embedded
-    private StudyMember studyMember;
+    @Column
+    private String studyMembers;
 
     @Embedded
     private StudyContent studyContent;
@@ -101,6 +101,18 @@ public class StudyArticle {
 
     public void setStudyTags(List<String> tags){
         this.studyTags = String.join(",", tags);
+    }
+
+    public List<String> getStudyMembers(){
+        List<String> strings = new ArrayList<>();
+        if (this.studyMembers != null) {
+            strings = Arrays.asList(this.studyMembers.split(","));
+        }
+        return strings;
+    }
+
+    public void setStudyMembers(List<String> studyMembers){
+        this.studyMembers = String.join(",", studyMembers);
     }
 
 }
