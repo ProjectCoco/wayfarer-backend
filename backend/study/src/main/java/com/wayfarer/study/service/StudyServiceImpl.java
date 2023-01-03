@@ -92,10 +92,35 @@ public class StudyServiceImpl implements StudyService {
 
     @Override
     public void createStudyArticle(StudyArticleRequestDto studyArticleRequestDto) {
-        //todo: 코드 단축시키기 init을 mapper default로
+        StudyArticle studyArticle = saveStudyArticle(studyArticleRequestDto);
+        List<String> studyMemberIds = createStudyMember(studyArticleRequestDto, studyArticle);
+        putStudyArticleMember(studyArticle, studyMemberIds);
+    }
+
+    public StudyArticle saveStudyArticle(StudyArticleRequestDto studyArticleRequestDto) {
         StudyArticle studyArticle = studyMapper.studyRequestDtoToStudyArticle(studyArticleRequestDto);
         studyArticle.initStudyArticle();
+        return studyArticleRepository.save(studyArticle);
+    }
+
+    private void putStudyArticleMember(StudyArticle studyArticle, List<String> studyMemberIds) {
+        studyArticle.setStudyMembers(studyMemberIds);
         studyArticleRepository.save(studyArticle);
+    }
+
+    private List<String> createStudyMember(StudyArticleRequestDto studyArticleRequestDto, StudyArticle savedStudyArticle) {
+        List<String> studyMemberIds = new ArrayList<>();
+        for (StudyMemberRequestDto studyMemberRequestDto : studyArticleRequestDto.getStudyMember()) {
+            StudyMemberDto studyMemberDto = StudyMemberDto.builder()
+                    .studyArticleId(savedStudyArticle.getStudyArticleId())
+                    .totalMember(studyMemberRequestDto.getTotalMember())
+                    .countMember(0)
+                    .position(studyMemberRequestDto.getPosition())
+                    .build();
+            StudyMember studyMember = studyMemberRepository.save(studyMemberMapper.studyMemberDtoToStudyMember(studyMemberDto));
+            studyMemberIds.add(String.valueOf(studyMember.getStudyMemberId()));
+        }
+        return studyMemberIds;
     }
 
     @Override
