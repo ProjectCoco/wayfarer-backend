@@ -66,17 +66,6 @@ public class StudyArticle {
         this.studyContent.setContent(content);
     }
 
-    public void updateStudyTotalMember(Long studyTotalMember) {
-        this.studyMember.setTotalMember(studyTotalMember);
-    }
-    public void updateStudyCountMember(Long studyCountMember) {
-        this.studyMember.setCountMember(studyCountMember);
-    }
-
-    public void changeDeadLine(LocalDateTime deadLine) {
-        this.studyTime.setDeadline(deadLine);
-    }
-
     public void changeStatus(StudyStatus status) {
         this.studyInfo.setStatus(status);
     }
@@ -88,7 +77,6 @@ public class StudyArticle {
     public void initStudyArticle() {
         this.enabled = true;
         this.studyInfo = new StudyInfo(StudyStatus.PROCEED);
-        this.studyMember.setCountMember(0L);
     }
 
     public List<String> getStudyTags(){
