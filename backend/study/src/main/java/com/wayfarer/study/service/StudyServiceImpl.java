@@ -174,7 +174,7 @@ public class StudyServiceImpl implements StudyService {
 
     private boolean updateTotalMember(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
         if (target.equals(StudyArticleEnum.STUDY_TOTAL_MEMBER.getValue())) {
-            studyArticle.updateStudyTotalMember(studyArticleUpdateRequestDto.getTotalMember());
+//            studyArticle.updateStudyTotalMember(studyArticleUpdateRequestDto.getTotalMember());
             studyArticleRepository.save(studyArticle);
             return true;
         }
@@ -183,16 +183,7 @@ public class StudyServiceImpl implements StudyService {
 
     private boolean updateCountMember(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
         if (target.equals(StudyArticleEnum.STUDY_COUNT_MEMBER.getValue())) {
-            studyArticle.updateStudyCountMember(studyArticleUpdateRequestDto.getCountMember());
-            studyArticleRepository.save(studyArticle);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean updateDeadLine(StudyArticleUpdateRequestDto studyArticleUpdateRequestDto, StudyArticle studyArticle, String target) {
-        if (target.equals(StudyArticleEnum.DEAD_LINE.getValue())) {
-            studyArticle.changeDeadLine(studyArticleUpdateRequestDto.getDeadLine());
+//            studyArticle.updateStudyCountMember(studyArticleUpdateRequestDto.getCountMember());
             studyArticleRepository.save(studyArticle);
             return true;
         }
