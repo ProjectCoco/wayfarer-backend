@@ -1,6 +1,5 @@
 package com.wayfarer.study.dto;
 
-import com.wayfarer.study.entity.enummodel.StudyStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,20 +16,9 @@ import java.util.List;
 public class StudyArticleRequestDto {
 
     private String title;
-    private Long totalMember;
     private String content;
     private List<String> studyTags;
     private LocalDateTime startTime;
-    private LocalDateTime deadline;
-    private String positionName;
+    private List<StudyMemberRequestDto> studyMember;
 
 }
-//          {
-//        "title":"titleeeeeeeeeeeee",
-//        "studyMemberList": [
-//        1,2,3
-//        ],
-//        "content":"contentssssssssssssss",
-//        "startTime":"2007-12-03T10:15:30",
-//        "deadline":"2007-12-03T10:15:30"
-//        }
