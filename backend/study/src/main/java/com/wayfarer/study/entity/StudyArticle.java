@@ -58,10 +58,6 @@ public class StudyArticle {
     @Embedded
     private StudyOwner studyOwner;
 
-    @Embedded
-    private StudyPosition studyPosition;
-
-
     public void changeTitle(String title) {
         this.title = title;
     }
