@@ -21,13 +21,11 @@ public class StudyArticleDetailResponseDto {
 
     private List<String> studyTags;
 
-    private Long totalMember;
-
-    private Long countMember;
+    private List<StudyMemberResponseDto> studyMemberResponses;
 
     private LocalDateTime startTime;
 
-    private LocalDateTime deadline;
+    private LocalDateTime createdTime;
 
     private String status;
 
