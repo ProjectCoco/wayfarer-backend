@@ -1,6 +1,7 @@
 package com.wayfarer.application.controller;
 
 import com.wayfarer.study.dto.*;
+import com.wayfarer.study.entity.enummodel.StudyStatus;
 import com.wayfarer.study.service.StudyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class StudyController {
     @GetMapping("/position")
     public ResponseEntity<MultiResponseDto<StudyArticleResponseDto>> readStudyWithPosition(@RequestParam int page,
                                                                                            @RequestParam(required = true) String position,
-                                                                                           @RequestParam(defaultValue = "true") Boolean status) {
+                                                                                           @RequestParam(required = false) StudyStatus status) {
         return new ResponseEntity<>(studyService.readStudyArticlesWithPosition(page, position, status), HttpStatus.OK);
     }
 
