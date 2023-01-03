@@ -38,7 +38,7 @@ public class StudyServiceImpl implements StudyService {
     public MultiResponseDto<StudyArticleResponseDto> readAllStudyArticles(int page, Boolean status) {
         Page<StudyArticle> studyArticleList = null;
         if (status) {
-             studyArticleList = studyArticleRepository
+            studyArticleList = studyArticleRepository
                     .findByEnabledAndStudyInfo(true, new StudyInfo(StudyStatus.PROCEED), PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
         }
 
@@ -85,7 +85,9 @@ public class StudyServiceImpl implements StudyService {
     @Override
     public StudyArticleDetailResponseDto readStudyArticle(Long studyId) {
         StudyArticle studyArticle = studyArticleRepository.findById(studyId).orElseThrow(() -> new NullPointerException());
-        return studyMapper.studyArticleToStudyDetailResponseDto(studyArticle);
+        List<StudyMember> studyMembers = studyMemberRepository.findByStudyArticleId(studyArticle.getStudyArticleId());
+        List<StudyMemberResponseDto> studyMemberResponseDtos = studyMemberMapper.studyMembersToStudyMemberResponseDtos(studyMembers);
+        return studyMapper.studyArticleToStudyDetailResponseDto(studyArticle, studyMemberResponseDtos);
     }
 
     @Override
