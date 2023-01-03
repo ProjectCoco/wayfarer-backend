@@ -15,8 +15,6 @@ public class StudyArticleDetailResponseDto {
 
     private String title;
 
-    private String enabled;
-
     private String content;
 
     private List<String> studyTags;

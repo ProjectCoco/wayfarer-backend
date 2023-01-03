@@ -14,10 +14,6 @@ public class StudyArticleResponseDto {
 
     private String title;
 
-    private String enabled;
-
-    private String positionName;
-
     private List<String> studyTags;
 
     private List<StudyMemberResponseDto> studyMemberResponses;
