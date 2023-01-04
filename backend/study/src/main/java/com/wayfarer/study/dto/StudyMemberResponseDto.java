@@ -10,6 +10,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class StudyMemberResponseDto {
+    private Long studyMemberId;
+
     private String position;
 
     private int totalMember;
