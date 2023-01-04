@@ -15,6 +15,8 @@ public interface StudyService {
 
     void createStudyArticle(StudyArticleRequestDto studyArticleRequestDto);
 
+    void putStudyArticle(Long studyId, StudyArticlePutRequestDto studyArticlePutRequestDto);
+
     void updateStudyArticle(Long studyId, StudyArticleUpdateRequestDto studyArticleUpdateRequestDto);
 
     void deleteStudyArticle(Long studyId);
