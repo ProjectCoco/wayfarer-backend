@@ -57,7 +57,6 @@ public class StudyController {
     @PatchMapping("/{studyId}")
     public ResponseEntity<Void> updateStudy(@PathVariable Long studyId,
                                             @RequestBody StudyArticleUpdateRequestDto studyArticleUpdateRequestDto) {
-        //target -> info, title, tag, time, contents, ....
         studyService.updateStudyArticle(studyId, studyArticleUpdateRequestDto);
         return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
     }
