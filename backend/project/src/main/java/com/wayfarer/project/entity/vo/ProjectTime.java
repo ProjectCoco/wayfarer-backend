@@ -17,5 +17,4 @@ public class ProjectTime {
     @CreatedDate
     private LocalDateTime startTime;
 
-    private LocalDateTime deadline;
 }
