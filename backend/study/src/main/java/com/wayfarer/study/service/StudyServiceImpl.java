@@ -124,6 +124,26 @@ public class StudyServiceImpl implements StudyService {
     }
 
     @Override
+    public void putStudyArticle(Long studyId, StudyArticlePutRequestDto studyArticlePutRequestDto) {
+        StudyArticle studyArticle = studyArticleRepository.findById(studyId).orElseThrow(NullPointerException::new);
+        studyArticle.setTitle(studyArticlePutRequestDto.getTitle());
+        studyArticle.getStudyTime().setStartTime(studyArticlePutRequestDto.getStartTime());
+        studyArticle.setStudyTags(studyArticlePutRequestDto.getStudyTags());
+        studyArticle.getStudyContent().setContent(studyArticlePutRequestDto.getStudyContent());
+
+        updateStudyMembers(studyArticlePutRequestDto);
+    }
+
+    private void updateStudyMembers(StudyArticlePutRequestDto studyArticlePutRequestDto) {
+        studyArticlePutRequestDto.getStudyMember().forEach(dto -> {
+            StudyMember studyMember = studyMemberRepository.findById(dto.getStudyMemberId()).orElseThrow();
+            studyMember.setPosition(dto.getPosition());
+            studyMember.setTotalMember(dto.getTotalMember());
+            studyMember.setCountMember(dto.getCountMember());
+        });
+    }
+
+    @Override
     public void updateStudyArticle(Long studyId, StudyArticleUpdateRequestDto studyArticleUpdateRequestDto) {
         StudyArticle studyArticle = studyArticleRepository.findById(studyId).orElseThrow();
         String target = studyArticleUpdateRequestDto.getTarget();
