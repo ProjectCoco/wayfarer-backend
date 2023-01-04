@@ -47,6 +47,13 @@ public class StudyController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PutMapping("/{studyId}")
+    public ResponseEntity<Void> putStudy(@PathVariable Long studyId,
+                                         @RequestBody StudyArticlePutRequestDto studyArticlePutRequestDto) {
+        studyService.putStudyArticle(studyId, studyArticlePutRequestDto);
+        return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
+    }
+
     @PatchMapping("/{studyId}")
     public ResponseEntity<Void> updateStudy(@PathVariable Long studyId,
                                             @RequestBody StudyArticleUpdateRequestDto studyArticleUpdateRequestDto) {
