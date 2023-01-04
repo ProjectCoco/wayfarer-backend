@@ -13,7 +13,7 @@ public interface StudyMapper {
     @Mapping(source = "studyArticle.studyContent.content", target = "content")
     @Mapping(source = "studyArticle.studyInfo.status", target = "status")
     @Mapping(source = "studyArticle.studyTime.startTime", target = "startTime")
-    StudyArticleDetailResponseDto studyArticleToStudyDetailResponseDto(StudyArticle studyArticle, List<StudyMemberResponseDto> studyMemberResponseDtos);
+    StudyArticleDetailResponseDto studyArticleToStudyDetailResponseDto(StudyArticle studyArticle, List<StudyMemberResponseDto> studyMemberResponses);
 
     @Mapping(source = "studyArticle.studyInfo.status", target = "status")
     StudyArticleResponseDto studyArticleToStudyResponseDto(StudyArticle studyArticle, List<StudyMemberResponseDto> studyMemberResponses);
