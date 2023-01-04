@@ -18,12 +18,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Primary
 @Service
-@RequiredArgsConstructor
 @Transactional
 public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectArticleRepository projectArticleRepository;
+    private final ProjectMemberRepository projectMemberRepository;
     private final ProjectMapper projectMapper;
+    private final ProjectMemberMapper projectMemberMapper;
+
+    public ProjectServiceImpl(ProjectArticleRepository projectArticleRepository,
+                              ProjectMemberRepository projectMemberRepository,
+                              ProjectMapper projectMapper,
+                              ProjectMemberMapper projectMemberMapper) {
+        this.projectArticleRepository = projectArticleRepository;
+        this.projectMemberRepository = projectMemberRepository;
+        this.projectMapper = projectMapper;
+        this.projectMemberMapper = projectMemberMapper;
+    }
 
     @Override
     public void createProjectArticle(ProjectArticleRequestDto projectArticleRequestDto) {
