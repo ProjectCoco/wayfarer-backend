@@ -16,9 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 public class ProjectArticleRequestDto {
     private String title;
-    private Long totalMember;
     private String content;
     private List<String> projectTags;
     private LocalDateTime startTime;
     private List<ProjectSkillEnum> projectSkills;
+    private List<ProjectMemberRequestDto> projectMember;
 }
