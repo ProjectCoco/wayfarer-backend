@@ -3,18 +3,23 @@ package com.wayfarer.project.service;
 
 import com.wayfarer.project.dto.*;
 import com.wayfarer.project.entity.ProjectArticle;
+import com.wayfarer.project.entity.ProjectMember;
 import com.wayfarer.project.entity.enummodel.ProjectArticleEnum;
 import com.wayfarer.project.entity.enummodel.ProjectStatus;
 import com.wayfarer.project.entity.vo.ProjectInfo;
 import com.wayfarer.project.mapper.ProjectMapper;
+import com.wayfarer.project.mapper.ProjectMemberMapper;
 import com.wayfarer.project.repository.ProjectArticleRepository;
-import lombok.RequiredArgsConstructor;
+import com.wayfarer.project.repository.ProjectMemberRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Primary
 @Service
@@ -38,10 +43,36 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void createProjectArticle(ProjectArticleRequestDto projectArticleRequestDto) {
+        ProjectArticle projectArticle = saveProjectArticle(projectArticleRequestDto);
+        List<String> projectMemberIds = createProjectMember(projectArticleRequestDto, projectArticle.getProjectArticleId());
+        putProjectArticleMember(projectArticle, projectMemberIds);
+    }
+
+    private void putProjectArticleMember(ProjectArticle projectArticle, List<String> projectMemberIds) {
+        projectArticle.setProjectMembers(projectMemberIds);
+        projectArticleRepository.save(projectArticle);
+    }
+
+    private List<String> createProjectMember(ProjectArticleRequestDto projectArticleRequestDto, Long savedProjectArticleId) {
+        List<String> projectMemberIds = new ArrayList<>();
+        for (ProjectMemberRequestDto projectMemberRequestDto : projectArticleRequestDto.getProjectMember()) {
+            ProjectMemberDto projectMemberDto = ProjectMemberDto.builder()
+                    .projectArticleId(savedProjectArticleId)
+                    .totalMember(projectMemberRequestDto.getTotalMember())
+                    .countMember(0)
+                    .position(projectMemberRequestDto.getPosition())
+                    .build();
+            ProjectMember projectMember = projectMemberRepository.save(projectMemberMapper.projectMemberDtoToProjectMember(projectMemberDto));
+            projectMemberIds.add(String.valueOf(projectMember.getProjectMemberId()));
+        }
+        return projectMemberIds;
+    }
+
+    private ProjectArticle saveProjectArticle(ProjectArticleRequestDto projectArticleRequestDto) {
         ProjectArticle projectArticle = projectMapper.projectRequestDtoToProjectArticle(projectArticleRequestDto);
         projectArticle.initProjectArticle();
         projectArticleRepository.save(projectArticle);
-
+        return projectArticle;
     }
 
     @Override
