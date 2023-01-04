@@ -6,7 +6,6 @@ import com.wayfarer.project.entity.enummodel.ProjectSkillEnum;
 import com.wayfarer.project.entity.enummodel.ProjectStatus;
 import com.wayfarer.project.entity.vo.ProjectContent;
 import com.wayfarer.project.entity.vo.ProjectInfo;
-import com.wayfarer.project.entity.vo.ProjectMember;
 import com.wayfarer.project.entity.vo.ProjectTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -48,8 +47,8 @@ public class ProjectArticle {
     @CreatedDate
     private LocalDateTime createdTime; // null
 
-    @Embedded
-    private ProjectMember projectMember;
+    @Column
+    private String projectMembers;
 
     @Embedded
     private ProjectContent projectContent;
@@ -107,4 +106,17 @@ public class ProjectArticle {
     public void setProjectSkills(List<ProjectSkillEnum> skills){
         this.projectSkills = skills.stream().map(ProjectSkillEnum::getValue).collect(Collectors.joining(","));
     }
+
+    public List<String> getProjectMembers(){
+        List<String> strings = new ArrayList<>();
+        if (this.projectMembers != null) {
+            strings = Arrays.asList(this.projectMembers.split(","));
+        }
+        return strings;
+    }
+
+    public void setProjectMembers(List<String> projectMembers){
+        this.projectMembers = String.join(",", projectMembers);
+    }
+
 }
