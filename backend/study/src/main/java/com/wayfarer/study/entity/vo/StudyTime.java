@@ -21,7 +21,4 @@ public class StudyTime {
     @CreatedDate
     private LocalDateTime startTime;
 
-    @Column()
-    private LocalDateTime deadline;
-
 }

@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -21,6 +22,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class StudyArticle {
 
     @Id
@@ -39,10 +41,10 @@ public class StudyArticle {
 
     @Column
     @CreatedDate
-    private LocalDateTime createdTime; // null
+    private LocalDateTime createdTime;
 
-    @Embedded
-    private StudyMember studyMember;
+    @Column
+    private String studyMembers;
 
     @Embedded
     private StudyContent studyContent;
@@ -56,27 +58,12 @@ public class StudyArticle {
     @Embedded
     private StudyOwner studyOwner;
 
-    @Embedded
-    private StudyPosition studyPosition;
-
-
     public void changeTitle(String title) {
         this.title = title;
     }
 
     public void updateStudyContent(String content) {
         this.studyContent.setContent(content);
-    }
-
-    public void updateStudyTotalMember(Long studyTotalMember) {
-        this.studyMember.setTotalMember(studyTotalMember);
-    }
-    public void updateStudyCountMember(Long studyCountMember) {
-        this.studyMember.setCountMember(studyCountMember);
-    }
-
-    public void changeDeadLine(LocalDateTime deadLine) {
-        this.studyTime.setDeadline(deadLine);
     }
 
     public void changeStatus(StudyStatus status) {
@@ -90,7 +77,6 @@ public class StudyArticle {
     public void initStudyArticle() {
         this.enabled = true;
         this.studyInfo = new StudyInfo(StudyStatus.PROCEED);
-        this.studyMember.setCountMember(0L);
     }
 
     public List<String> getStudyTags(){
@@ -103,6 +89,18 @@ public class StudyArticle {
 
     public void setStudyTags(List<String> tags){
         this.studyTags = String.join(",", tags);
+    }
+
+    public List<String> getStudyMembers(){
+        List<String> strings = new ArrayList<>();
+        if (this.studyMembers != null) {
+            strings = Arrays.asList(this.studyMembers.split(","));
+        }
+        return strings;
+    }
+
+    public void setStudyMembers(List<String> studyMembers){
+        this.studyMembers = String.join(",", studyMembers);
     }
 
 }
