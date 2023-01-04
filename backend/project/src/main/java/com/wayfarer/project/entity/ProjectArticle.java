@@ -45,7 +45,7 @@ public class ProjectArticle {
 
     @Column
     @CreatedDate
-    private LocalDateTime createdTime; // null
+    private LocalDateTime createdTime;
 
     @Column
     private String projectMembers;
@@ -77,7 +77,6 @@ public class ProjectArticle {
     public void updateAll(ProjectArticleUpdateRequestDto projectArticleUpdateRequestDto) {
         this.title = projectArticleUpdateRequestDto.getTitle();
         this.projectTags = projectArticleUpdateRequestDto.getProjectTags();
-        this.projectMember.setTotalMember(projectArticleUpdateRequestDto.getProjectTotalMember());
         this.projectContent.setContent(projectArticleUpdateRequestDto.getProjectContent());
         this.projectTime.setStartTime(projectArticleUpdateRequestDto.getStartTime());
         this.projectSkills = projectArticleUpdateRequestDto.getProjectSkills();
