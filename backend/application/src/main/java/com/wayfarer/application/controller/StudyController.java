@@ -1,6 +1,7 @@
 package com.wayfarer.application.controller;
 
 import com.wayfarer.study.dto.*;
+import com.wayfarer.study.entity.enummodel.StudyStatus;
 import com.wayfarer.study.service.StudyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class StudyController {
     @GetMapping("/position")
     public ResponseEntity<MultiResponseDto<StudyArticleResponseDto>> readStudyWithPosition(@RequestParam int page,
                                                                                            @RequestParam(required = true) String position,
-                                                                                           @RequestParam(defaultValue = "true") Boolean status) {
+                                                                                           @RequestParam(required = false) StudyStatus status) {
         return new ResponseEntity<>(studyService.readStudyArticlesWithPosition(page, position, status), HttpStatus.OK);
     }
 
@@ -46,10 +47,16 @@ public class StudyController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PutMapping("/{studyId}")
+    public ResponseEntity<Void> putStudy(@PathVariable Long studyId,
+                                         @RequestBody StudyArticlePutRequestDto studyArticlePutRequestDto) {
+        studyService.putStudyArticle(studyId, studyArticlePutRequestDto);
+        return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
+    }
+
     @PatchMapping("/{studyId}")
     public ResponseEntity<Void> updateStudy(@PathVariable Long studyId,
                                             @RequestBody StudyArticleUpdateRequestDto studyArticleUpdateRequestDto) {
-        //target -> info, title, tag, time, contents, ....
         studyService.updateStudyArticle(studyId, studyArticleUpdateRequestDto);
         return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
     }

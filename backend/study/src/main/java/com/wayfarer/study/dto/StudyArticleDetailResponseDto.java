@@ -15,19 +15,15 @@ public class StudyArticleDetailResponseDto {
 
     private String title;
 
-    private String enabled;
-
     private String content;
 
     private List<String> studyTags;
 
-    private Long totalMember;
-
-    private Long countMember;
+    private List<StudyMemberResponseDto> studyMemberResponses;
 
     private LocalDateTime startTime;
 
-    private LocalDateTime deadline;
+    private LocalDateTime createdTime;
 
     private String status;
 
