@@ -152,7 +152,6 @@ public class StudyServiceImpl implements StudyService {
         if (updateContent(studyArticleUpdateRequestDto, studyArticle, target)) return;
         if (updateTotalMember(studyArticleUpdateRequestDto, studyArticle, target)) return;
         if (updateCountMember(studyArticleUpdateRequestDto, studyArticle, target)) return;
-        if (updateDeadLine(studyArticleUpdateRequestDto, studyArticle, target)) return;
         if (updateActive(studyArticleUpdateRequestDto, studyArticle, target)) return;
         if (updateStudyTags(studyArticleUpdateRequestDto, studyArticle, target)) return;
 
