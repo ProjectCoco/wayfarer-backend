@@ -1,6 +1,6 @@
 package com.wayfarer.project.entity;
 
-import com.wayfarer.project.dto.ProjectArticleUpdateRequestDto;
+import com.wayfarer.project.dto.ProjectArticlePutRequestDto;
 import com.wayfarer.project.entity.converter.BooleanToYNConverter;
 import com.wayfarer.project.entity.enummodel.ProjectSkillEnum;
 import com.wayfarer.project.entity.enummodel.ProjectStatus;
@@ -74,12 +74,12 @@ public class ProjectArticle {
         this.enabled = enabled;
     }
 
-    public void updateAll(ProjectArticleUpdateRequestDto projectArticleUpdateRequestDto) {
-        this.title = projectArticleUpdateRequestDto.getTitle();
-        this.projectTags = projectArticleUpdateRequestDto.getProjectTags();
-        this.projectContent.setContent(projectArticleUpdateRequestDto.getProjectContent());
-        this.projectTime.setStartTime(projectArticleUpdateRequestDto.getStartTime());
-        this.projectSkills = projectArticleUpdateRequestDto.getProjectSkills();
+    public void updateAll(ProjectArticlePutRequestDto projectArticlePutRequestDto) {
+        this.title = projectArticlePutRequestDto.getTitle();
+        this.projectContent.setContent(projectArticlePutRequestDto.getProjectContent());
+        this.projectTime.setStartTime(projectArticlePutRequestDto.getStartTime());
+        setProjectTags(projectArticlePutRequestDto.getProjectTags());
+        setProjectSkills(projectArticlePutRequestDto.getProjectSkills());
     }
 
     public List<String> getProjectTags(){
