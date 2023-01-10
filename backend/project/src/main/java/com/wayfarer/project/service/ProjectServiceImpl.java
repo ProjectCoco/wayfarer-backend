@@ -114,10 +114,21 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void updateProjectArticle(Long projectId, ProjectArticleUpdateRequestDto projectArticleUpdateRequestDto) {
+    public void updateProjectArticle(Long projectId, ProjectArticlePutRequestDto projectArticlePutRequestDto) {
         ProjectArticle projectArticle = projectArticleRepository.findById(projectId).orElseThrow();
-        projectArticle.updateAll(projectArticleUpdateRequestDto);
+        projectArticle.updateAll(projectArticlePutRequestDto);
         projectArticleRepository.save(projectArticle);
+
+        updateProjectMembers(projectArticlePutRequestDto);
+    }
+
+    private void updateProjectMembers(ProjectArticlePutRequestDto projectArticlePutRequestDto) {
+        projectArticlePutRequestDto.getProjectMembers().forEach(dto -> {
+            ProjectMember projectMember = projectMemberRepository.findById(dto.getProjectMemberId()).orElseThrow();
+            projectMember.setPosition(dto.getPosition());
+            projectMember.setTotalMember(dto.getTotalMember());
+            projectMember.setCountMember(dto.getCountMember());
+        });
     }
 
     @Override
