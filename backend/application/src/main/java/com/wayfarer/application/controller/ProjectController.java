@@ -25,8 +25,8 @@ public class ProjectController {
 
     @GetMapping("/tag")
     public ResponseEntity<MultiResponseDto<ProjectArticleResponseDto>> readProjectWithTag(@RequestParam int page,
-                                             @RequestParam(required = true) String tag,
-                                             @RequestParam(defaultValue = "true") Boolean status) {
+                                                                                          @RequestParam(required = true) String tag,
+                                                                                          @RequestParam(defaultValue = "true") Boolean status) {
         return new ResponseEntity<>(projectService.readProjectArticlesWithTag(page, tag, status), HttpStatus.OK);
     }
 
