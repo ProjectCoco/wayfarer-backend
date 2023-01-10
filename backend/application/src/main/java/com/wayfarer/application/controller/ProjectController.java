@@ -43,6 +43,13 @@ public class ProjectController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PutMapping("/{projectId}")
+    public ResponseEntity<Void> putProject(@PathVariable Long projectId,
+                                           @RequestBody ProjectArticlePutRequestDto projectArticlePutRequestDto) {
+        projectService.updateProjectArticle(projectId, projectArticlePutRequestDto);
+        return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
+    }
+
 
     @DeleteMapping("/{projectId}")
     public ResponseEntity<Void> deleteProject(@PathVariable Long projectId) {
