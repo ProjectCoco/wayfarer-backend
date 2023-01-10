@@ -8,7 +8,7 @@ public interface ProjectService {
 
     ProjectArticleDetailResponseDto readProjectArticle(Long projectId);
 
-    void updateProjectArticle(Long projectId, ProjectArticleUpdateRequestDto projectArticleUpdateRequestDto);
+    void updateProjectArticle(Long projectId, ProjectArticlePutRequestDto projectArticlePutRequestDto);
 
     void deleteProjectArticle(Long projectId);
 
