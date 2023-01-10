@@ -108,6 +108,15 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public MultiResponseDto<ProjectArticleResponseDto> readProjectArticlesWithSkills(int page, SkillParamDto skillParamDto, ProjectStatus status) {
+        Page<ProjectArticle> projectArticles = projectArticleRepository
+                .getAllBySkill(status, skillParamDto,
+                        PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
+
+        return new MultiResponseDto<>(projectMapper.projectArticleListToProjectArticleResponseDtoList(projectArticles.getContent()), projectArticles);
+    }
+
+    @Override
     public ProjectArticleDetailResponseDto readProjectArticle(Long projectId) {
         ProjectArticle projectArticle = projectArticleRepository.findById(projectId).orElseThrow(NullPointerException::new);
         return projectMapper.projectArticleToProjectArticleDetailResponseDto(projectArticle);
