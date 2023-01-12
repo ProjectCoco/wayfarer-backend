@@ -11,7 +11,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -55,10 +54,6 @@ public class ProjectArticleCustomRepositoryImpl implements ProjectArticleCustomR
                 .fetch();
         return new PageImpl<>(boardList, pageable, boardList.size());
     }
-// 테스트중
-    /*private BooleanExpression query(String[] a){
-        return enabledEq().and(statusEq()).or(skillContains());
-    }*/
 
     private BooleanExpression enabledEq(Boolean enabled){
         if (enabled == null) return null;
