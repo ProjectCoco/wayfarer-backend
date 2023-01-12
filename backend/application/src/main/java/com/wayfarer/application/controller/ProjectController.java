@@ -1,10 +1,8 @@
 package com.wayfarer.application.controller;
 
 
-import com.wayfarer.project.dto.MultiResponseDto;
-import com.wayfarer.project.dto.ProjectArticleDetailResponseDto;
-import com.wayfarer.project.dto.ProjectArticleRequestDto;
-import com.wayfarer.project.dto.ProjectArticleResponseDto;
+import com.wayfarer.project.dto.*;
+import com.wayfarer.project.entity.enummodel.ProjectStatus;
 import com.wayfarer.project.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,9 +25,16 @@ public class ProjectController {
 
     @GetMapping("/tag")
     public ResponseEntity<MultiResponseDto<ProjectArticleResponseDto>> readProjectWithTag(@RequestParam int page,
-                                             @RequestParam(required = true) String tag,
-                                             @RequestParam(defaultValue = "true") Boolean status) {
+                                                                                          @RequestParam(required = true) String tag,
+                                                                                          @RequestParam(defaultValue = "true") Boolean status) {
         return new ResponseEntity<>(projectService.readProjectArticlesWithTag(page, tag, status), HttpStatus.OK);
+    }
+
+    @GetMapping("/skill")
+    public ResponseEntity<MultiResponseDto<ProjectArticleResponseDto>> readProjectWithSkill(@RequestParam int page,
+                                                                                            @ModelAttribute SkillParamDto skills,
+                                                                                            @RequestParam(required = false) ProjectStatus status) {
+        return new ResponseEntity<>(projectService.readProjectArticlesWithSkills(page, skills, status), HttpStatus.OK);
     }
 
     @GetMapping("/{projectId}")
@@ -41,6 +46,13 @@ public class ProjectController {
     public ResponseEntity<Void> createProject(@RequestBody ProjectArticleRequestDto projectAritcleRequestDto) {
         projectService.createProjectArticle(projectAritcleRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{projectId}")
+    public ResponseEntity<Void> putProject(@PathVariable Long projectId,
+                                           @RequestBody ProjectArticlePutRequestDto projectArticlePutRequestDto) {
+        projectService.updateProjectArticle(projectId, projectArticlePutRequestDto);
+        return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
     }
 
 
