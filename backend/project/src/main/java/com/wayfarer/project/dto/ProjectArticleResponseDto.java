@@ -19,15 +19,13 @@ public class ProjectArticleResponseDto {
 
     private String title;
 
-    private String enabled;
-
-    private String positionName;
-
     private List<String> projectTags;
 
     private List<ProjectMemberResponseDto> projectMemberResponses;
 
     private LocalDateTime startTime;
+
+    private LocalDateTime createdTime;
 
     private ProjectStatus status;
 }
