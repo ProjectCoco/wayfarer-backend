@@ -20,8 +20,6 @@ public class ProjectArticleDetailResponseDto {
 
     private String title;
 
-    private String enabled;
-
     private String content;
 
     private List<String> projectTags;
@@ -29,6 +27,8 @@ public class ProjectArticleDetailResponseDto {
     private List<ProjectMemberResponseDto> projectMemberResponses;
 
     private LocalDateTime startTime;
+
+    private LocalDateTime createdTime;
 
     private String status;
 }
