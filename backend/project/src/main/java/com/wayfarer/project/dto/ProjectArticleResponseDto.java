@@ -25,9 +25,7 @@ public class ProjectArticleResponseDto {
 
     private List<String> projectTags;
 
-    private Long totalMember;
-
-    private Long countMember;
+    private List<ProjectMemberResponseDto> projectMemberResponses;
 
     private LocalDateTime startTime;
 
