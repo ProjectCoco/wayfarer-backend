@@ -113,7 +113,23 @@ public class ProjectServiceImpl implements ProjectService {
                 .getAllBySkill(status, skillParamDto,
                         PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
 
-        return new MultiResponseDto<>(projectMapper.projectArticleListToProjectArticleResponseDtoList(projectArticles.getContent()), projectArticles);
+        return new MultiResponseDto<>(joinProjectMember(projectArticles.getContent()), projectArticles);
+    }
+
+    private List<ProjectArticleResponseDto> joinProjectMember(List<ProjectArticle> projectArticles) {
+        return projectArticles.stream()
+                .map(this::projectMemberListToEntity)
+                .collect(Collectors.toList());
+    }
+
+    private ProjectArticleResponseDto projectMemberListToEntity(ProjectArticle projectArticle) {
+
+        List<ProjectMemberResponseDto> projectMembers = projectArticle.getProjectMembers().stream()
+                .map(memberId -> projectMemberRepository.findById(Long.valueOf(memberId)).orElseThrow())
+                .map(projectMemberMapper::projectMemberToProjectMemberResponseDto)
+                .collect(Collectors.toList());
+
+        return projectMapper.projectArticleToProjectArticleResponseDto(projectArticle, projectMembers);
     }
 
     @Override
