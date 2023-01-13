@@ -136,7 +136,10 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectArticleDetailResponseDto readProjectArticle(Long projectId) {
         ProjectArticle projectArticle = projectArticleRepository.findById(projectId).orElseThrow(NullPointerException::new);
-        return projectMapper.projectArticleToProjectArticleDetailResponseDto(projectArticle);
+        List<ProjectMember> projectMembers = projectMemberRepository.findByProjectArticleId(projectArticle.getProjectArticleId());
+        List<ProjectMemberResponseDto> projectMemberResponseDtos = projectMemberMapper.projectMembersToProjectMemberResponseDtos(projectMembers);
+
+        return projectMapper.projectArticleToProjectArticleDetailResponseDto(projectArticle, projectMemberResponseDtos);
     }
 
     @Override
