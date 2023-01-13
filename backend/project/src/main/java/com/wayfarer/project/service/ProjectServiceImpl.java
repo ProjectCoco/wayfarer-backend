@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Primary
 @Service
@@ -87,7 +88,7 @@ public class ProjectServiceImpl implements ProjectService {
             projectArticleList = projectArticleRepository
                     .getByEnabled(true, PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
         }
-        return new MultiResponseDto<>(projectMapper.projectArticleListToProjectArticleResponseDtoList(projectArticleList.getContent()), projectArticleList);
+        return new MultiResponseDto<>(joinProjectMember(projectArticleList.getContent()), projectArticleList);
     }
 
     @Override
@@ -104,7 +105,7 @@ public class ProjectServiceImpl implements ProjectService {
                     .findByProjectTagsContainsAndEnabled(tag, true,
                             PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
         }
-        return new MultiResponseDto<>(projectMapper.projectArticleListToProjectArticleResponseDtoList(projectArticleListWithTag.getContent()), projectArticleListWithTag);
+        return new MultiResponseDto<>(joinProjectMember(projectArticleListWithTag.getContent()), projectArticleListWithTag);
     }
 
     @Override
