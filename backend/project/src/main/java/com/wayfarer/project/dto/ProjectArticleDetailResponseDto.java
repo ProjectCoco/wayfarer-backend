@@ -20,17 +20,15 @@ public class ProjectArticleDetailResponseDto {
 
     private String title;
 
-    private String enabled;
-
     private String content;
 
     private List<String> projectTags;
 
-    private Long totalMember;
-
-    private Long countMember;
+    private List<ProjectMemberResponseDto> projectMemberResponses;
 
     private LocalDateTime startTime;
+
+    private LocalDateTime createdTime;
 
     private String status;
 }
