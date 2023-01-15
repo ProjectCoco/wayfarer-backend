@@ -21,6 +21,8 @@ public class ProjectArticleResponseDto {
 
     private List<String> projectTags;
 
+    private List<String> projectSkills;
+
     private List<ProjectMemberResponseDto> projectMemberResponses;
 
     private LocalDateTime startTime;
