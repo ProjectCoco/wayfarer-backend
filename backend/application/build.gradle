@@ -7,4 +7,5 @@ dependencies {
     implementation project(':member')
     implementation project(':study')
     implementation project(':project')
+    implementation project(':community')
 }
