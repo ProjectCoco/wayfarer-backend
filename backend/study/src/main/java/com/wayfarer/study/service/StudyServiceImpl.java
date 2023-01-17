@@ -72,7 +72,7 @@ public class StudyServiceImpl implements StudyService {
                     .findByStudyTagsContainsAndEnabled(tag, true,
                             PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
         }
-        return new MultiResponseDto<>(studyMapper.studyArticleListToStudyArticleResponseDtoList(studyArticleListWithTag.getContent()), studyArticleListWithTag);
+        return new MultiResponseDto<>(joinStudyMember(studyArticleListWithTag.getContent()), studyArticleListWithTag);
     }
 
     @Override
