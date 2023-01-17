@@ -218,4 +218,19 @@ public class StudyServiceImpl implements StudyService {
         return false;
     }
 
+    private List<StudyArticleResponseDto> joinStudyMember(List<StudyArticle> studyArticles) {
+        return studyArticles.stream()
+                .map(this::studyMemberListToEntity)
+                .collect(Collectors.toList());
+    }
+
+    private StudyArticleResponseDto studyMemberListToEntity(StudyArticle studyArticle) {
+
+        List<StudyMemberResponseDto> studyMembers = studyArticle.getStudyMembers().stream()
+                .map(memberId -> studyMemberRepository.findById(Long.valueOf(memberId)).orElseThrow())
+                .map(studyMemberMapper::studyMemberToStudyMemberResponseDto)
+                .collect(Collectors.toList());
+
+        return studyMapper.studyArticleToStudyResponseDto(studyArticle, studyMembers);
+    }
 }
