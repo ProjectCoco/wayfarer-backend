@@ -55,14 +55,7 @@ public class StudyServiceImpl implements StudyService {
                 .getByPositionAndStatus(status, positionName,
                         PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
 
-        List<StudyArticleResponseDto> studyArticleResponseDtos = studyArticleList.getContent().stream()
-                .map(studyArticle -> {
-                    List<StudyMember> studyMembers = studyArticle.getStudyMembers().stream()
-                            .map(memberId -> studyMemberRepository.findById(Long.valueOf(memberId)).orElseThrow()).collect(Collectors.toList());
-                    return studyMapper.studyArticleToStudyResponseDto(studyArticle, studyMemberMapper.studyMembersToStudyMemberResponseDtos(studyMembers));
-                }).collect(Collectors.toList());
-
-        return new MultiResponseDto<>(studyArticleResponseDtos, studyArticleList);
+        return new MultiResponseDto<>(joinStudyMember(studyArticleList.getContent()), studyArticleList);
     }
 
     @Override
