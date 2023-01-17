@@ -84,7 +84,7 @@ public class StudyServiceImpl implements StudyService {
 
     @Override
     public StudyArticleDetailResponseDto readStudyArticle(Long studyId) {
-        StudyArticle studyArticle = studyArticleRepository.findById(studyId).orElseThrow(() -> new NullPointerException());
+        StudyArticle studyArticle = studyArticleRepository.findById(studyId).orElseThrow(NullPointerException::new);
         List<StudyMember> studyMembers = studyMemberRepository.findByStudyArticleId(studyArticle.getStudyArticleId());
         List<StudyMemberResponseDto> studyMemberResponseDtos = studyMemberMapper.studyMembersToStudyMemberResponseDtos(studyMembers);
         return studyMapper.studyArticleToStudyDetailResponseDto(studyArticle, studyMemberResponseDtos);
