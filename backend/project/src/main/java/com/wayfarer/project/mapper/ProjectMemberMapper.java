@@ -12,4 +12,6 @@ public interface ProjectMemberMapper {
     ProjectMember projectMemberDtoToProjectMember(ProjectMemberDto projectMemberDto);
 
     List<ProjectMemberResponseDto> projectMembersToProjectMemberResponseDtos(List<ProjectMember> projectMembers);
+
+    ProjectMemberResponseDto projectMemberToProjectMemberResponseDto(ProjectMember projectMember);
 }

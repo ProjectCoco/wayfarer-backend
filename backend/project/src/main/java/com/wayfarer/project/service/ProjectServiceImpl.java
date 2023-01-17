@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Primary
 @Service
@@ -87,7 +88,7 @@ public class ProjectServiceImpl implements ProjectService {
             projectArticleList = projectArticleRepository
                     .getByEnabled(true, PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
         }
-        return new MultiResponseDto<>(projectMapper.projectArticleListToProjectArticleResponseDtoList(projectArticleList.getContent()), projectArticleList);
+        return new MultiResponseDto<>(joinProjectMember(projectArticleList.getContent()), projectArticleList);
     }
 
     @Override
@@ -104,7 +105,7 @@ public class ProjectServiceImpl implements ProjectService {
                     .findByProjectTagsContainsAndEnabled(tag, true,
                             PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
         }
-        return new MultiResponseDto<>(projectMapper.projectArticleListToProjectArticleResponseDtoList(projectArticleListWithTag.getContent()), projectArticleListWithTag);
+        return new MultiResponseDto<>(joinProjectMember(projectArticleListWithTag.getContent()), projectArticleListWithTag);
     }
 
     @Override
@@ -113,13 +114,32 @@ public class ProjectServiceImpl implements ProjectService {
                 .getAllBySkill(status, skillParamDto,
                         PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
 
-        return new MultiResponseDto<>(projectMapper.projectArticleListToProjectArticleResponseDtoList(projectArticles.getContent()), projectArticles);
+        return new MultiResponseDto<>(joinProjectMember(projectArticles.getContent()), projectArticles);
+    }
+
+    private List<ProjectArticleResponseDto> joinProjectMember(List<ProjectArticle> projectArticles) {
+        return projectArticles.stream()
+                .map(this::projectMemberListToEntity)
+                .collect(Collectors.toList());
+    }
+
+    private ProjectArticleResponseDto projectMemberListToEntity(ProjectArticle projectArticle) {
+
+        List<ProjectMemberResponseDto> projectMembers = projectArticle.getProjectMembers().stream()
+                .map(memberId -> projectMemberRepository.findById(Long.valueOf(memberId)).orElseThrow())
+                .map(projectMemberMapper::projectMemberToProjectMemberResponseDto)
+                .collect(Collectors.toList());
+
+        return projectMapper.projectArticleToProjectArticleResponseDto(projectArticle, projectMembers);
     }
 
     @Override
     public ProjectArticleDetailResponseDto readProjectArticle(Long projectId) {
         ProjectArticle projectArticle = projectArticleRepository.findById(projectId).orElseThrow(NullPointerException::new);
-        return projectMapper.projectArticleToProjectArticleDetailResponseDto(projectArticle);
+        List<ProjectMember> projectMembers = projectMemberRepository.findByProjectArticleId(projectArticle.getProjectArticleId());
+        List<ProjectMemberResponseDto> projectMemberResponseDtos = projectMemberMapper.projectMembersToProjectMemberResponseDtos(projectMembers);
+
+        return projectMapper.projectArticleToProjectArticleDetailResponseDto(projectArticle, projectMemberResponseDtos);
     }
 
     @Override
