@@ -46,7 +46,7 @@ public class StudyServiceImpl implements StudyService {
             studyArticleList = studyArticleRepository
                     .findByEnabled(true, PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
         }
-        return new MultiResponseDto<>(studyMapper.studyArticleListToStudyArticleResponseDtoList(studyArticleList.getContent()), studyArticleList);
+        return new MultiResponseDto<>(joinStudyMember(studyArticleList.getContent()), studyArticleList);
     }
 
     @Override
