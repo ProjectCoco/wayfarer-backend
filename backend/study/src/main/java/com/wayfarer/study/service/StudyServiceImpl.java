@@ -46,7 +46,7 @@ public class StudyServiceImpl implements StudyService {
             studyArticleList = studyArticleRepository
                     .findByEnabled(true, PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
         }
-        return new MultiResponseDto<>(studyMapper.studyArticleListToStudyArticleResponseDtoList(studyArticleList.getContent()), studyArticleList);
+        return new MultiResponseDto<>(joinStudyMember(studyArticleList.getContent()), studyArticleList);
     }
 
     @Override
@@ -55,14 +55,7 @@ public class StudyServiceImpl implements StudyService {
                 .getByPositionAndStatus(status, positionName,
                         PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
 
-        List<StudyArticleResponseDto> studyArticleResponseDtos = studyArticleList.getContent().stream()
-                .map(studyArticle -> {
-                    List<StudyMember> studyMembers = studyArticle.getStudyMembers().stream()
-                            .map(memberId -> studyMemberRepository.findById(Long.valueOf(memberId)).orElseThrow()).collect(Collectors.toList());
-                    return studyMapper.studyArticleToStudyResponseDto(studyArticle, studyMemberMapper.studyMembersToStudyMemberResponseDtos(studyMembers));
-                }).collect(Collectors.toList());
-
-        return new MultiResponseDto<>(studyArticleResponseDtos, studyArticleList);
+        return new MultiResponseDto<>(joinStudyMember(studyArticleList.getContent()), studyArticleList);
     }
 
     @Override
@@ -79,12 +72,12 @@ public class StudyServiceImpl implements StudyService {
                     .findByStudyTagsContainsAndEnabled(tag, true,
                             PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
         }
-        return new MultiResponseDto<>(studyMapper.studyArticleListToStudyArticleResponseDtoList(studyArticleListWithTag.getContent()), studyArticleListWithTag);
+        return new MultiResponseDto<>(joinStudyMember(studyArticleListWithTag.getContent()), studyArticleListWithTag);
     }
 
     @Override
     public StudyArticleDetailResponseDto readStudyArticle(Long studyId) {
-        StudyArticle studyArticle = studyArticleRepository.findById(studyId).orElseThrow(() -> new NullPointerException());
+        StudyArticle studyArticle = studyArticleRepository.findById(studyId).orElseThrow(NullPointerException::new);
         List<StudyMember> studyMembers = studyMemberRepository.findByStudyArticleId(studyArticle.getStudyArticleId());
         List<StudyMemberResponseDto> studyMemberResponseDtos = studyMemberMapper.studyMembersToStudyMemberResponseDtos(studyMembers);
         return studyMapper.studyArticleToStudyDetailResponseDto(studyArticle, studyMemberResponseDtos);
@@ -218,4 +211,19 @@ public class StudyServiceImpl implements StudyService {
         return false;
     }
 
+    private List<StudyArticleResponseDto> joinStudyMember(List<StudyArticle> studyArticles) {
+        return studyArticles.stream()
+                .map(this::studyMemberListToEntity)
+                .collect(Collectors.toList());
+    }
+
+    private StudyArticleResponseDto studyMemberListToEntity(StudyArticle studyArticle) {
+
+        List<StudyMemberResponseDto> studyMembers = studyArticle.getStudyMembers().stream()
+                .map(memberId -> studyMemberRepository.findById(Long.valueOf(memberId)).orElseThrow())
+                .map(studyMemberMapper::studyMemberToStudyMemberResponseDto)
+                .collect(Collectors.toList());
+
+        return studyMapper.studyArticleToStudyResponseDto(studyArticle, studyMembers);
+    }
 }

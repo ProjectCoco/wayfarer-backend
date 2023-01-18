@@ -12,5 +12,7 @@ public interface StudyMemberMapper {
 
     StudyMember studyMemberDtoToStudyMember(StudyMemberDto studyMemberDto);
 
+    StudyMemberResponseDto studyMemberToStudyMemberResponseDto(StudyMember studyMember);
+
     List<StudyMemberResponseDto> studyMembersToStudyMemberResponseDtos(List<StudyMember> studyMembers);
 }
