@@ -32,10 +32,10 @@ public class CommunityArticle {
     private String topic;
 
     @Column
-    private String comment;     //  1,2,3,5
+    private String comment;
 
     @Column
-    private String replyComment;    //  2,5,6
+    private String replyComment;
 
     @Column
     private Boolean enabled;
@@ -44,9 +44,4 @@ public class CommunityArticle {
     @CreatedDate
     private LocalDateTime createdTime;
 
-    //제목
-    //내용
-    //태그
-    //좋아요
-    //댓글
 }
