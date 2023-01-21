@@ -16,6 +16,7 @@ public interface StudyMapper {
     StudyArticleDetailResponseDto studyArticleToStudyDetailResponseDto(StudyArticle studyArticle, List<StudyMemberResponseDto> studyMemberResponses);
 
     @Mapping(source = "studyArticle.studyInfo.status", target = "status")
+    @Mapping(source = "studyArticle.studyTime.startTime", target = "startTime")
     StudyArticleResponseDto studyArticleToStudyResponseDto(StudyArticle studyArticle, List<StudyMemberResponseDto> studyMemberResponses);
 
     List<StudyArticleResponseDto> studyArticleListToStudyArticleResponseDtoList(List<StudyArticle> studyArticleList);
