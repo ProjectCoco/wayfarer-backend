@@ -18,6 +18,8 @@ public class StudyArticleResponseDto {
 
     private List<StudyMemberResponseDto> studyMemberResponses;
 
+    private LocalDateTime startTime;
+
     private LocalDateTime createdTime;
 
     private String status;
