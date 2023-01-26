@@ -35,7 +35,12 @@
 
 ## 🚀 서비스 아키텍쳐
 
+![wayfarer drawio](https://user-images.githubusercontent.com/44282342/214735805-bed9215a-55e9-4eff-98da-70af5cf8e102.png)
+
 <br>
+
+![wayfarer drawio (1)](https://user-images.githubusercontent.com/44282342/214735797-9dc79268-0c07-47e9-819d-ded5b4824b68.png)
+
 
 ## 🚀 팀원
 
@@ -62,8 +67,8 @@ npm run start
 
 ### BackEnd
 ```
-./gradlew build
-java -jar build/libs/coco-*-SNAPSHOT.jar
+./gradlew :application:clean :application:build
+java -jar build/libs/application-0.0.1-SNAPSHOT.jar
 ```
 
 <br>
