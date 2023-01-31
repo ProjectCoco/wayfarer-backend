@@ -6,11 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-//@Entity
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Topic {
 
     @Id
@@ -19,4 +22,7 @@ public class Topic {
 
     @Column
     private String topicName;
+
+    @OneToMany(mappedBy = "topic", cascade = { CascadeType.REFRESH, CascadeType.PERSIST})
+    public List<ArticleTopic> articleTopics = new ArrayList<>();
 }
