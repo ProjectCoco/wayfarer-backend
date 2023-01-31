@@ -1,5 +1,6 @@
 package com.wayfarer.community.entity;
 
+import com.wayfarer.community.dto.CommunityArticleUpdateRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -43,6 +46,9 @@ public class CommunityArticle {
     @Column
     @CreatedDate
     private LocalDateTime createdTime;
+
+    @OneToMany(mappedBy = "communityArticle", cascade = CascadeType.ALL)
+    private List<ArticleTopic> articleTopics = new ArrayList<>();
 
     public void changeEnabled(Boolean enabled) {
         this.enabled = enabled;
