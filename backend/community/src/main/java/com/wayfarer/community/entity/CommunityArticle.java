@@ -47,4 +47,9 @@ public class CommunityArticle {
     public void changeEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
+
+    public void updateAll(CommunityArticleUpdateRequestDto communityArticleUpdateRequestDTO) {
+        this.title = communityArticleUpdateRequestDTO.getTitle();
+        this.content = communityArticleUpdateRequestDTO.getContent();
+    }
 }
