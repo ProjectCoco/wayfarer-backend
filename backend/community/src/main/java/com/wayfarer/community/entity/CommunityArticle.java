@@ -44,4 +44,7 @@ public class CommunityArticle {
     @CreatedDate
     private LocalDateTime createdTime;
 
+    public void changeEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 }
