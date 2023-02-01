@@ -4,7 +4,7 @@ import com.wayfarer.community.dto.*;
 
 public interface CommunityService {
 
-    MultiResponseDto<CommunityArticleResponseDto> readAllCommunityArticles(Long communityId);
+    MultiResponseDto<CommunityArticleResponseDto> readAllCommunityArticles(int page);
 
     CommunityArticleDetailResponseDto readCommunityArticle(Long communityId);
 
