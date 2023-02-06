@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class CommunityServiceImpl implements CommunityService{
+public class CommunityServiceImpl implements CommunityService {
 
     private final CommunityArticleRepository communityArticleRepository;
     private final CommunityMapper communityMapper;
@@ -28,7 +28,7 @@ public class CommunityServiceImpl implements CommunityService{
                                 ArticleTopicRepository articleTopicRepository, TopicRepository topicRepository) {
         this.communityArticleRepository = communityArticleRepository;
         this.communityMapper = communityMapper;
-        this.articleTopicRepository =articleTopicRepository;
+        this.articleTopicRepository = articleTopicRepository;
         this.topicRepository = topicRepository;
     }
 
@@ -54,16 +54,17 @@ public class CommunityServiceImpl implements CommunityService{
         CommunityArticle communityArticle = communityMapper.communityArticleRequestDtoToCommunityArticle(communityArticleRequestDTO);
         CommunityArticle savedCommunityArticle = communityArticleRepository.save(communityArticle);
 
-        communityArticleRequestDTO.getTopics().forEach( id -> {
-            try {
-                articleTopicRepository.save(
-                        ArticleTopic.builder()
-                                .topic(topicRepository.getReferenceById(id))
-                                .communityArticle(savedCommunityArticle).build());
-            } catch (RuntimeException runtimeException) {
-                throw new NullPointerException("존재하지 않는 토픽" + id);
-            }
-        }
+        communityArticleRequestDTO.getTopics().forEach(id -> {
+                    try {
+                        articleTopicRepository.save(
+                                ArticleTopic.builder()
+                                        .topic(topicRepository.getReferenceById(id))
+                                        .communityArticle(savedCommunityArticle).build())
+                        ;
+                    } catch (RuntimeException runtimeException) {
+                        throw new NullPointerException("존재하지 않는 토픽" + id);
+                    }
+                }
         );
 
     }
