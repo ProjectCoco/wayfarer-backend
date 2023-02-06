@@ -15,5 +15,7 @@ public interface CommunityMapper {
 
     CommunityArticleDetailResponseDto communityArticleToCommunityArticleDetailResponseDto(CommunityArticle communityArticle);
 
+    CommunityArticleResponseDto communityArticleToCommunityArticleResponseDto(CommunityArticle communityArticle);
+
     List<CommunityArticleResponseDto> communityArticlesToCommunityArticleResponseDtos(List<CommunityArticle> content);
 }
