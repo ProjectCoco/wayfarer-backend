@@ -27,7 +27,7 @@ public class CommunityComment {
     private CommunityArticle communityArticle;
 
     @Column
-    private String contents;
+    private String content;
 
     @Column
     @CreatedDate
