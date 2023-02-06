@@ -24,10 +24,10 @@ public class ReplyComment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comment_id")
-    private Comment comment;
+    private CommunityComment communityComment;
 
     @Column
-    private String contents;
+    private String content;
 
     @Column
     @CreatedDate
