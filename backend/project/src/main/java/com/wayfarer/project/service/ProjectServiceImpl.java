@@ -167,5 +167,9 @@ public class ProjectServiceImpl implements ProjectService {
         projectArticleRepository.save(projectArticle);
     }
 
-
+    @Override
+    public MultiResponseDto<ProjectArticleResponseDto> readAllPopularProjectArticles() {
+        List<ProjectArticle> projectArticleList = projectArticleRepository.findByRandomArticles();
+        return new MultiResponseDto<>(joinProjectMember(projectArticleList), Page.empty());
+    }
 }
