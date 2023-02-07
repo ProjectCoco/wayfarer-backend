@@ -19,4 +19,6 @@ public interface ProjectService {
     MultiResponseDto<ProjectArticleResponseDto> readProjectArticlesWithTag(int page, String tag, Boolean status);
 
     MultiResponseDto<ProjectArticleResponseDto> readProjectArticlesWithSkills(int page, SkillParamDto skillParamDto, ProjectStatus status);
+
+    MultiResponseDto<ProjectArticleResponseDto> readAllPopularProjectArticles();
 }
