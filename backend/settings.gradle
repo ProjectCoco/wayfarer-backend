@@ -3,4 +3,5 @@ include 'study'
 include 'member'
 include 'application'
 include 'project'
+include 'community'
 
