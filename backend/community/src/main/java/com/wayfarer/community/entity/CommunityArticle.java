@@ -1,6 +1,6 @@
 package com.wayfarer.community.entity;
 
-import com.wayfarer.community.dto.CommunityArticleUpdateRequestDto;
+import com.wayfarer.community.dto.article.CommunityArticleUpdateRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -49,6 +49,9 @@ public class CommunityArticle {
 
     @OneToMany(mappedBy = "communityArticle", cascade = CascadeType.ALL)
     private List<ArticleTopic> articleTopics = new ArrayList<>();
+
+    @OneToMany(mappedBy = "communityArticle", cascade = CascadeType.ALL)
+    private List<CommunityComment> communityComments = new ArrayList<>();
 
     public void changeEnabled(Boolean enabled) {
         this.enabled = enabled;
