@@ -9,6 +9,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,6 +27,9 @@ public class CommunityComment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "community_article_id")
     private CommunityArticle communityArticle;
+
+    @OneToMany(mappedBy = "communityComment", cascade = CascadeType.ALL)
+    private List<ReplyComment> replyComments = new ArrayList<>();
 
     @Column
     private String content;
