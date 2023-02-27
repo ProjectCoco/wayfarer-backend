@@ -1,4 +1,4 @@
-package com.wayfarer.community.dto;
+package com.wayfarer.community.dto.article;
 
 import lombok.Getter;
 
@@ -16,5 +16,5 @@ public class CommunityArticleDetailResponseDto {
 
     private List<Long> topics;
 
-    private List<CommentResponseDto> comments;
+//    private List<CommentResponseDto> comments;
 }

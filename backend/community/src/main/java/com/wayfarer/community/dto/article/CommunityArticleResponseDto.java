@@ -1,4 +1,4 @@
-package com.wayfarer.community.dto;
+package com.wayfarer.community.dto.article;
 
 import lombok.Getter;
 

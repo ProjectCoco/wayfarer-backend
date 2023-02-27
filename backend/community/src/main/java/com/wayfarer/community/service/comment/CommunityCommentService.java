@@ -1,6 +1,6 @@
-package com.wayfarer.community.service;
+package com.wayfarer.community.service.comment;
 
-import com.wayfarer.community.dto.CommunityCommentRequestDto;
+import com.wayfarer.community.dto.comment.CommunityCommentRequestDto;
 
 
 public interface CommunityCommentService {
