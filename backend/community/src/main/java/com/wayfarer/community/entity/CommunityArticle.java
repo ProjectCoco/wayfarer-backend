@@ -32,6 +32,7 @@ public class CommunityArticle {
     private String content;
 
     @Column
+    private Boolean enabled = Boolean.TRUE;
 
     @Column
     @CreatedDate
