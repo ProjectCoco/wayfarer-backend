@@ -32,16 +32,6 @@ public class CommunityArticle {
     private String content;
 
     @Column
-    private String topic;
-
-    @Column
-    private String comment;
-
-    @Column
-    private String replyComment;
-
-    @Column
-    private Boolean enabled;
 
     @Column
     @CreatedDate
