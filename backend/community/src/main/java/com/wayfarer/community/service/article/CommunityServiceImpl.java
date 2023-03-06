@@ -1,6 +1,6 @@
 package com.wayfarer.community.service.article;
 
-import com.wayfarer.community.dto.*;
+import com.wayfarer.community.dto.MultiResponseDto;
 import com.wayfarer.community.dto.article.CommunityArticleDetailResponseDto;
 import com.wayfarer.community.dto.article.CommunityArticleRequestDto;
 import com.wayfarer.community.dto.article.CommunityArticleResponseDto;
@@ -29,7 +29,8 @@ public class CommunityServiceImpl implements CommunityService {
 
     public CommunityServiceImpl(CommunityArticleRepository communityArticleRepository,
                                 CommunityMapper communityMapper,
-                                ArticleTopicRepository articleTopicRepository, TopicRepository topicRepository) {
+                                ArticleTopicRepository articleTopicRepository,
+                                TopicRepository topicRepository) {
         this.communityArticleRepository = communityArticleRepository;
         this.communityMapper = communityMapper;
         this.articleTopicRepository = articleTopicRepository;
