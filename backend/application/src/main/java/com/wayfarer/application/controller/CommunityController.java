@@ -18,8 +18,12 @@ public class CommunityController {
 
     private final CommunityService communityService;
 
-    public CommunityController(CommunityService communityService) {
+    private final CommunityCommentService commentService;
+
+    public CommunityController(CommunityService communityService,
+                               CommunityCommentService commentService) {
         this.communityService = communityService;
+        this.commentService = commentService;
     }
 
     @GetMapping("")
