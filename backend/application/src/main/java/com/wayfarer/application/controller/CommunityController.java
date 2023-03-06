@@ -55,4 +55,13 @@ public class CommunityController {
         communityService.deleteCommunityArticle(communityId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PostMapping("/{communityId}/comment")
+    public ResponseEntity<Void> createComment(@PathVariable Long communityId,
+                                              @RequestBody CommunityCommentRequestDto communityCommentRequestDto) {
+        commentService.postComment(communityId, communityCommentRequestDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
 }
