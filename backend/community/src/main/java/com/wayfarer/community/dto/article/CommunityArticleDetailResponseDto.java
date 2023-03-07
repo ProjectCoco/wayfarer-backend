@@ -1,5 +1,6 @@
 package com.wayfarer.community.dto.article;
 
+import com.wayfarer.community.dto.comment.CommunityCommentResponseDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +17,5 @@ public class CommunityArticleDetailResponseDto {
 
     private LocalDateTime createdTime;
 
-    private List<Long> topics;
-
-//    private List<CommentResponseDto> comments;
+    private List<CommunityCommentResponseDto> comments;
 }
