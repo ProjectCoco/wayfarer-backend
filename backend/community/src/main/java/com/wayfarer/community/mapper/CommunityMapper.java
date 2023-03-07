@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = CommonCommunityMapper.class)
 public interface CommunityMapper {
 
     CommunityArticle communityArticleRequestDtoToCommunityArticle(CommunityArticleRequestDto communityArticleRequestDTO);
