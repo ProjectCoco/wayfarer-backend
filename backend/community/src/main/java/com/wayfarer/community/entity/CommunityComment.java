@@ -36,7 +36,7 @@ public class CommunityComment {
 
     @Column
     @CreatedDate
-    private LocalDateTime cratedTime;
+    private LocalDateTime createdTime;
 
     @Column()
     private Boolean enabled;
