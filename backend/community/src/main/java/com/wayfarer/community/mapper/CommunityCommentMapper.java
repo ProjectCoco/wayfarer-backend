@@ -1,6 +1,6 @@
 package com.wayfarer.community.mapper;
 
-import com.wayfarer.community.dto.CommunityCommentRequestDto;
+import com.wayfarer.community.dto.comment.CommunityCommentRequestDto;
 import com.wayfarer.community.entity.CommunityArticle;
 import com.wayfarer.community.entity.CommunityComment;
 import org.mapstruct.Mapper;
