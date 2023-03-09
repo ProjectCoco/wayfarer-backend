@@ -11,6 +11,8 @@ import java.util.List;
 @Setter
 public class CommunityArticleDetailResponseDto {
 
+    private Long communityId;
+
     private String title;
 
     private String content;
