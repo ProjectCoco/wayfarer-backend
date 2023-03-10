@@ -40,7 +40,7 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public MultiResponseDto<CommunityArticleResponseDto> readAllCommunityArticles(int page) {
         Page<CommunityArticle> communityArticles = communityArticleRepository
-                .findAll(PageRequest.of(page - 1, 10, Sort.by("communityArticleId").descending()));
+                .findAll(PageRequest.of(page - 1, 9, Sort.by("communityArticleId").descending()));
         List<CommunityArticleResponseDto> communityArticleResponseDtos =
                 communityMapper.communityArticlesToCommunityArticleResponseDtos(communityArticles.getContent());
         return new MultiResponseDto<>(communityArticleResponseDtos, communityArticles);
