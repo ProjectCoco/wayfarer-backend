@@ -65,12 +65,12 @@ public class StudyServiceImpl implements StudyService {
             studyArticleListWithTag = studyArticleRepository
                     .findByStudyTagsContainsAndEnabledAndStudyInfo(tag, true,
                             new StudyInfo(StudyStatus.PROCEED),
-                            PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
+                            PageRequest.of(page - 1, 9, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
         }
         if (!status) {
             studyArticleListWithTag = studyArticleRepository
                     .findByStudyTagsContainsAndEnabled(tag, true,
-                            PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
+                            PageRequest.of(page - 1, 9, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
         }
         return new MultiResponseDto<>(joinStudyMember(studyArticleListWithTag.getContent()), studyArticleListWithTag);
     }
