@@ -81,12 +81,12 @@ public class ProjectServiceImpl implements ProjectService {
         Page<ProjectArticle> projectArticleList = null;
         if (status) {
             projectArticleList = projectArticleRepository
-                    .findByEnabledAndProjectInfo(true, new ProjectInfo(ProjectStatus.PROCEED), PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
+                    .findByEnabledAndProjectInfo(true, new ProjectInfo(ProjectStatus.PROCEED), PageRequest.of(page - 1, 9, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
         }
 
         if (!status) {
             projectArticleList = projectArticleRepository
-                    .getByEnabled(true, PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
+                    .getByEnabled(true, PageRequest.of(page - 1, 9, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
         }
         return new MultiResponseDto<>(joinProjectMember(projectArticleList.getContent()), projectArticleList);
     }
