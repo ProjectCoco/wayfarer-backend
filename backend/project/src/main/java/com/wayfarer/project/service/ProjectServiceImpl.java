@@ -112,7 +112,7 @@ public class ProjectServiceImpl implements ProjectService {
     public MultiResponseDto<ProjectArticleResponseDto> readProjectArticlesWithSkills(int page, SkillParamDto skillParamDto, ProjectStatus status) {
         Page<ProjectArticle> projectArticles = projectArticleRepository
                 .getAllBySkill(status, skillParamDto,
-                        PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
+                        PageRequest.of(page - 1, 9, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
 
         return new MultiResponseDto<>(joinProjectMember(projectArticles.getContent()), projectArticles);
     }
