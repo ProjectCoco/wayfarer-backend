@@ -53,7 +53,7 @@ public class StudyServiceImpl implements StudyService {
     public MultiResponseDto<StudyArticleResponseDto> readStudyArticlesWithPosition(int page, String positionName, StudyStatus status) {
         Page<StudyArticle> studyArticleList = studyArticleRepository
                 .getByPositionAndStatus(status, positionName,
-                        PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
+                        PageRequest.of(page - 1, 9, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
 
         return new MultiResponseDto<>(joinStudyMember(studyArticleList.getContent()), studyArticleList);
     }
