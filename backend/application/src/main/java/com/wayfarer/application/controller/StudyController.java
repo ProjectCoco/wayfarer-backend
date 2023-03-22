@@ -1,5 +1,6 @@
 package com.wayfarer.application.controller;
 
+import com.wayfarer.common.dto.MultiResponseDto;
 import com.wayfarer.study.dto.*;
 import com.wayfarer.study.entity.enummodel.StudyStatus;
 import com.wayfarer.study.service.StudyService;
