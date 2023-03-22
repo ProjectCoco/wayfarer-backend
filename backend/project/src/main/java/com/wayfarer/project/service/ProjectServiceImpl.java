@@ -116,7 +116,7 @@ public class ProjectServiceImpl implements ProjectService {
                 .getAllBySkill(status, skillParamDto,
                         PageRequest.of(page - 1, 9, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
 
-        return new MultiResponseDto<>(joinProjectMember(projectArticles.getContent()), projectArticles);
+        return new MultiResponseDto<>(joinProjectMember(projectArticles.getContent()), new PageInfo(projectArticles.getNumber() + 1, projectArticles.getSize(), projectArticles.getTotalElements(), projectArticles.getTotalPages()));
     }
 
     private List<ProjectArticleResponseDto> joinProjectMember(List<ProjectArticle> projectArticles) {
