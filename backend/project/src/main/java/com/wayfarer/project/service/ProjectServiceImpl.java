@@ -1,6 +1,8 @@
 package com.wayfarer.project.service;
 
 
+import com.wayfarer.common.dto.MultiResponseDto;
+import com.wayfarer.common.dto.PageInfo;
 import com.wayfarer.project.dto.*;
 import com.wayfarer.project.entity.ProjectArticle;
 import com.wayfarer.project.entity.ProjectMember;
@@ -88,7 +90,7 @@ public class ProjectServiceImpl implements ProjectService {
             projectArticleList = projectArticleRepository
                     .getByEnabled(true, PageRequest.of(page - 1, 9, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
         }
-        return new MultiResponseDto<>(joinProjectMember(projectArticleList.getContent()), projectArticleList);
+        return new MultiResponseDto<>(joinProjectMember(projectArticleList.getContent()), new PageInfo(projectArticleList.getNumber() + 1, projectArticleList.getSize(), projectArticleList.getTotalElements(), projectArticleList.getTotalPages()));
     }
 
     @Override
