@@ -1,5 +1,7 @@
 package com.wayfarer.study.service;
 
+import com.wayfarer.common.dto.MultiResponseDto;
+import com.wayfarer.common.dto.PageInfo;
 import com.wayfarer.study.dto.*;
 import com.wayfarer.study.entity.StudyArticle;
 import com.wayfarer.study.entity.StudyMember;
@@ -46,7 +48,7 @@ public class StudyServiceImpl implements StudyService {
             studyArticleList = studyArticleRepository
                     .findByEnabled(true, PageRequest.of(page - 1, 9, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
         }
-        return new MultiResponseDto<>(joinStudyMember(studyArticleList.getContent()), studyArticleList);
+        return new MultiResponseDto<>(joinStudyMember(studyArticleList.getContent()), new PageInfo(studyArticleList.getNumber() + 1, studyArticleList.getSize(), studyArticleList.getTotalElements(), studyArticleList.getTotalPages()));
     }
 
     @Override
