@@ -107,7 +107,7 @@ public class ProjectServiceImpl implements ProjectService {
                     .findByProjectTagsContainsAndEnabled(tag, true,
                             PageRequest.of(page - 1, 9, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
         }
-        return new MultiResponseDto<>(joinProjectMember(projectArticleListWithTag.getContent()), projectArticleListWithTag);
+        return new MultiResponseDto<>(joinProjectMember(projectArticleListWithTag.getContent()), new PageInfo(projectArticleListWithTag.getNumber() + 1, projectArticleListWithTag.getSize(), projectArticleListWithTag.getTotalElements(), projectArticleListWithTag.getTotalPages()));
     }
 
     @Override
