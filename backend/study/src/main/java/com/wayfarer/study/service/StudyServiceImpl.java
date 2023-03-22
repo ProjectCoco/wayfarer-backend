@@ -57,7 +57,7 @@ public class StudyServiceImpl implements StudyService {
                 .getByPositionAndStatus(status, positionName,
                         PageRequest.of(page - 1, 9, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
 
-        return new MultiResponseDto<>(joinStudyMember(studyArticleList.getContent()), studyArticleList);
+        return new MultiResponseDto<>(joinStudyMember(studyArticleList.getContent()), new PageInfo(studyArticleList.getNumber() + 1, studyArticleList.getSize(), studyArticleList.getTotalElements(), studyArticleList.getTotalPages()));
     }
 
     @Override
