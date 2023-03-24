@@ -96,6 +96,10 @@ public class StudyServiceImpl implements StudyService {
         return studyArticleRepository.save(studyArticle);
     }
 
+    private StudyArticle findStudyArticle(Long studyId) {
+        return studyArticleRepository.findById(studyId).orElseThrow(() -> new BusinessException(ExceptionCode.STUDY_ARTICLE_NOT_FOUND));
+    }
+
     private void putStudyArticleMember(StudyArticle studyArticle, List<String> studyMemberIds) {
         studyArticle.setStudyMembers(studyMemberIds);
         studyArticleRepository.save(studyArticle);
