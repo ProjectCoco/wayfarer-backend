@@ -6,6 +6,8 @@ import com.wayfarer.study.entity.StudyMember;
 import com.wayfarer.study.entity.enummodel.StudyArticleEnum;
 import com.wayfarer.study.entity.enummodel.StudyStatus;
 import com.wayfarer.study.entity.vo.StudyInfo;
+import com.wayfarer.study.exception.BusinessException;
+import com.wayfarer.study.exception.ExceptionCode;
 import com.wayfarer.study.mapper.StudyMapper;
 import com.wayfarer.study.mapper.StudyMemberMapper;
 import com.wayfarer.study.repository.StudyArticleRepository;
@@ -77,7 +79,7 @@ public class StudyServiceImpl implements StudyService {
 
     @Override
     public StudyArticleDetailResponseDto readStudyArticle(Long studyId) {
-        StudyArticle studyArticle = studyArticleRepository.findById(studyId).orElseThrow(NullPointerException::new);
+        StudyArticle studyArticle = findStudyArticle(studyId);
         List<StudyMember> studyMembers = studyMemberRepository.findByStudyArticleId(studyArticle.getStudyArticleId());
         List<StudyMemberResponseDto> studyMemberResponseDtos = studyMemberMapper.studyMembersToStudyMemberResponseDtos(studyMembers);
         return studyMapper.studyArticleToStudyDetailResponseDto(studyArticle, studyMemberResponseDtos);
@@ -122,7 +124,7 @@ public class StudyServiceImpl implements StudyService {
 
     @Override
     public void putStudyArticle(Long studyId, StudyArticlePutRequestDto studyArticlePutRequestDto) {
-        StudyArticle studyArticle = studyArticleRepository.findById(studyId).orElseThrow(NullPointerException::new);
+        StudyArticle studyArticle = findStudyArticle(studyId);
         studyArticle.setTitle(studyArticlePutRequestDto.getTitle());
         studyArticle.getStudyTime().setStartTime(studyArticlePutRequestDto.getStartTime());
         studyArticle.setStudyTags(studyArticlePutRequestDto.getStudyTags());
@@ -142,7 +144,7 @@ public class StudyServiceImpl implements StudyService {
 
     @Override
     public void updateStudyArticle(Long studyId, StudyArticleUpdateRequestDto studyArticleUpdateRequestDto) {
-        StudyArticle studyArticle = studyArticleRepository.findById(studyId).orElseThrow();
+        StudyArticle studyArticle = findStudyArticle(studyId);
         String target = studyArticleUpdateRequestDto.getTarget();
 
         if (updateTitle(studyArticleUpdateRequestDto, studyArticle, target)) return;
@@ -156,7 +158,7 @@ public class StudyServiceImpl implements StudyService {
 
     @Override
     public void deleteStudyArticle(Long studyId) {
-        StudyArticle studyArticle = studyArticleRepository.findById(studyId).orElseThrow(NullPointerException::new);
+        StudyArticle studyArticle = findStudyArticle(studyId);
         studyArticle.changeEnabled(false);
         studyArticleRepository.save(studyArticle);
     }
