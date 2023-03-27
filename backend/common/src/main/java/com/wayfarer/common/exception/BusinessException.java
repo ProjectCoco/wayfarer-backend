@@ -1,4 +1,4 @@
-package com.wayfarer.study.exception;
+package com.wayfarer.common.exception;
 
 import lombok.Getter;
 
