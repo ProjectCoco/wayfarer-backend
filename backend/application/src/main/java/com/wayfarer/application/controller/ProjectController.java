@@ -38,7 +38,7 @@ public class ProjectController {
     }
 
     @GetMapping("/{projectId}")
-    public ResponseEntity<ProjectArticleDetailResponseDto> readStudy(@PathVariable Long projectId) {
+    public ResponseEntity<ProjectArticleDetailResponseDto> readProject(@PathVariable Long projectId) {
         return new ResponseEntity<>(projectService.readProjectArticle(projectId), HttpStatus.OK);
     }
 
