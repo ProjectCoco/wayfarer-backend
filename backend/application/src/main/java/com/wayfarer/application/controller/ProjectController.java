@@ -62,4 +62,10 @@ public class ProjectController {
         projectService.deleteProjectArticle(projectId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/popular")
+    //todo: 찜 기능 추가시 로직 개선
+    public ResponseEntity<MultiResponseDto<ProjectArticleResponseDto>> popularAllProjects() {
+        return new ResponseEntity<>(projectService.readAllPopularProjectArticles(), HttpStatus.OK);
+    }
 }
