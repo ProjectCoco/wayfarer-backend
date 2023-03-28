@@ -39,12 +39,12 @@ public class StudyServiceImpl implements StudyService {
         Page<StudyArticle> studyArticleList = null;
         if (status) {
             studyArticleList = studyArticleRepository
-                    .findByEnabledAndStudyInfo(true, new StudyInfo(StudyStatus.PROCEED), PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
+                    .findByEnabledAndStudyInfo(true, new StudyInfo(StudyStatus.PROCEED), PageRequest.of(page - 1, 9, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
         }
 
         if (!status) {
             studyArticleList = studyArticleRepository
-                    .findByEnabled(true, PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
+                    .findByEnabled(true, PageRequest.of(page - 1, 9, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
         }
         return new MultiResponseDto<>(joinStudyMember(studyArticleList.getContent()), studyArticleList);
     }
@@ -53,7 +53,7 @@ public class StudyServiceImpl implements StudyService {
     public MultiResponseDto<StudyArticleResponseDto> readStudyArticlesWithPosition(int page, String positionName, StudyStatus status) {
         Page<StudyArticle> studyArticleList = studyArticleRepository
                 .getByPositionAndStatus(status, positionName,
-                        PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
+                        PageRequest.of(page - 1, 9, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
 
         return new MultiResponseDto<>(joinStudyMember(studyArticleList.getContent()), studyArticleList);
     }
@@ -65,12 +65,12 @@ public class StudyServiceImpl implements StudyService {
             studyArticleListWithTag = studyArticleRepository
                     .findByStudyTagsContainsAndEnabledAndStudyInfo(tag, true,
                             new StudyInfo(StudyStatus.PROCEED),
-                            PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
+                            PageRequest.of(page - 1, 9, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
         }
         if (!status) {
             studyArticleListWithTag = studyArticleRepository
                     .findByStudyTagsContainsAndEnabled(tag, true,
-                            PageRequest.of(page - 1, 10, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
+                            PageRequest.of(page - 1, 9, Sort.by(StudyArticleEnum.STUDY_ARTICLE_ID.getValue()).descending()));
         }
         return new MultiResponseDto<>(joinStudyMember(studyArticleListWithTag.getContent()), studyArticleListWithTag);
     }
