@@ -8,4 +8,5 @@ dependencies {
     implementation project(':study')
     implementation project(':project')
     implementation project(':community')
+    implementation project(':common')
 }

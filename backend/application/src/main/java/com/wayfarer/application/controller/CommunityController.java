@@ -1,6 +1,6 @@
 package com.wayfarer.application.controller;
 
-import com.wayfarer.community.dto.MultiResponseDto;
+import com.wayfarer.common.dto.MultiResponseDto;
 import com.wayfarer.community.dto.article.CommunityArticleDetailResponseDto;
 import com.wayfarer.community.dto.article.CommunityArticleRequestDto;
 import com.wayfarer.community.dto.article.CommunityArticleResponseDto;

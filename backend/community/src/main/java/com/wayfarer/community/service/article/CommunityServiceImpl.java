@@ -1,6 +1,7 @@
 package com.wayfarer.community.service.article;
 
-import com.wayfarer.community.dto.MultiResponseDto;
+import com.wayfarer.common.dto.MultiResponseDto;
+import com.wayfarer.common.dto.PageInfo;
 import com.wayfarer.community.dto.article.CommunityArticleDetailResponseDto;
 import com.wayfarer.community.dto.article.CommunityArticleRequestDto;
 import com.wayfarer.community.dto.article.CommunityArticleResponseDto;
@@ -43,7 +44,7 @@ public class CommunityServiceImpl implements CommunityService {
                 .findAll(PageRequest.of(page - 1, 9, Sort.by("communityArticleId").descending()));
         List<CommunityArticleResponseDto> communityArticleResponseDtos =
                 communityMapper.communityArticlesToCommunityArticleResponseDtos(communityArticles.getContent());
-        return new MultiResponseDto<>(communityArticleResponseDtos, communityArticles);
+        return new MultiResponseDto<>(communityArticleResponseDtos, new PageInfo(communityArticles.getNumber() + 1, communityArticles.getSize(), communityArticles.getTotalElements(), communityArticles.getTotalPages()));
     }
 
     @Override

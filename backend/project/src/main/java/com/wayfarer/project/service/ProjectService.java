@@ -1,5 +1,6 @@
 package com.wayfarer.project.service;
 
+import com.wayfarer.common.dto.MultiResponseDto;
 import com.wayfarer.project.dto.*;
 import com.wayfarer.project.entity.enummodel.ProjectStatus;
 
