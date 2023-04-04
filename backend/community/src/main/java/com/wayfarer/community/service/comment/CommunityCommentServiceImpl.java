@@ -1,5 +1,7 @@
 package com.wayfarer.community.service.comment;
 
+import com.wayfarer.common.exception.BusinessException;
+import com.wayfarer.common.exception.ExceptionCode;
 import com.wayfarer.community.dto.comment.CommunityCommentRequestDto;
 import com.wayfarer.community.entity.CommunityArticle;
 import com.wayfarer.community.entity.CommunityComment;
@@ -39,7 +41,7 @@ public class CommunityCommentServiceImpl implements CommunityCommentService{
 
     @Override
     public void deleteComment(Long commentId) {
-        CommunityComment communityComment = communityCommentRepository.findById(commentId).orElseThrow(NullPointerException::new);
+        CommunityComment communityComment = communityCommentRepository.findById(commentId).orElseThrow(() -> new BusinessException(ExceptionCode.COMMENT_NOT_FOUND));
         communityComment.setContent("삭제된 댓글입니다.");
     }
 }
