@@ -14,7 +14,7 @@ import javax.persistence.Embeddable;
 @AllArgsConstructor
 public class ProjectContent {
 
-    @Column( )
+    @Column(nullable = false, length = 1000)
     private String content;
 
     private String version; // null
