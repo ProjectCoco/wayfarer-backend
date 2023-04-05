@@ -3,6 +3,7 @@ package com.wayfarer.project.entity.vo;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.time.LocalDateTime;
 
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 public class ProjectTime {
 
     @CreatedDate
+    @Column(nullable = false)
     private LocalDateTime startTime;
 
 }
