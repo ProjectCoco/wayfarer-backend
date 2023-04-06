@@ -20,7 +20,7 @@ public class Topic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long topicId;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String topicName;
 
     @OneToMany(mappedBy = "topic", cascade = { CascadeType.REFRESH, CascadeType.PERSIST})
