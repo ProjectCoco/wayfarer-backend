@@ -31,13 +31,13 @@ public class CommunityComment {
     @OneToMany(mappedBy = "communityComment", cascade = CascadeType.ALL)
     private List<ReplyComment> replyComments = new ArrayList<>();
 
-    @Column
+    @Column(nullable = false, length = 300)
     private String content;
 
-    @Column
+    @Column(nullable = false)
     @CreatedDate
     private LocalDateTime createdTime;
 
-    @Column()
+    @Column(nullable = false)
     private Boolean enabled;
 }
