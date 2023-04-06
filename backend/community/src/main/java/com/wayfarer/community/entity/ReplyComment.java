@@ -26,13 +26,13 @@ public class ReplyComment {
     @JoinColumn(name = "comment_id")
     private CommunityComment communityComment;
 
-    @Column
+    @Column(nullable = false, length = 300)
     private String content;
 
-    @Column
+    @Column(nullable = false)
     @CreatedDate
     private LocalDateTime createdTime;
 
-    @Column()
+    @Column(nullable = false)
     private Boolean enabled;
 }
