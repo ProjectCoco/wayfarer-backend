@@ -13,7 +13,7 @@ import javax.persistence.Embeddable;
 @AllArgsConstructor
 public class StudyContent {
 
-    @Column( )
+    @Column(nullable = false, length = 1000)
     private String content;
 
     private String version; // null
