@@ -16,7 +16,7 @@ import javax.persistence.Enumerated;
 @AllArgsConstructor
 public class StudyInfo {
 
-    @Column()
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private StudyStatus status; // null
 
