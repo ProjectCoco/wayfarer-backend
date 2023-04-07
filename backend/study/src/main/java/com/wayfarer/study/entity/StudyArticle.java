@@ -29,21 +29,22 @@ public class StudyArticle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studyArticleId;
 
-    @Column()
+    @Column(nullable = false, length = 30)
     private String title;
 
     @Convert(converter = BooleanToYNConverter.class)
+    @Column(nullable = false)
     private Boolean enabled;
 
 //    @Convert(converter = StudyTagConverter.class)
-    @Column
+    @Column(nullable = false)
     private String studyTags;
 
-    @Column
+    @Column(nullable = false)
     @CreatedDate
     private LocalDateTime createdTime;
 
-    @Column
+    @Column(nullable = false)
     private String studyMembers;
 
     @Embedded
