@@ -1,7 +1,6 @@
 package com.wayfarer.study.dto;
 
 
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class StudyMemberResponseDto {
+
     private Long studyMemberId;
 
     private String position;
@@ -17,4 +17,5 @@ public class StudyMemberResponseDto {
     private int totalMember;
 
     private int countMember;
+
 }
