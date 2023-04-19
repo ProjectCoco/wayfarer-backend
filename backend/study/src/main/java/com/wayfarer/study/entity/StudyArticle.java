@@ -1,18 +1,18 @@
 package com.wayfarer.study.entity;
 
 
+import com.wayfarer.common.audit.Auditable;
 import com.wayfarer.study.entity.converter.BooleanToYNConverter;
 import com.wayfarer.study.entity.enummodel.StudyStatus;
-import com.wayfarer.study.entity.vo.*;
+import com.wayfarer.study.entity.vo.StudyContent;
+import com.wayfarer.study.entity.vo.StudyInfo;
+import com.wayfarer.study.entity.vo.StudyTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,8 +22,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
-public class StudyArticle {
+public class StudyArticle extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,10 +38,6 @@ public class StudyArticle {
 //    @Convert(converter = StudyTagConverter.class)
     @Column(nullable = false)
     private String studyTags;
-
-    @Column(nullable = false)
-    @CreatedDate
-    private LocalDateTime createdTime;
 
     @Column(nullable = false)
     private String studyMembers;
