@@ -1,15 +1,13 @@
 package com.wayfarer.community.entity;
 
+import com.wayfarer.common.audit.Auditable;
 import com.wayfarer.community.dto.article.CommunityArticleUpdateRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +17,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
-public class CommunityArticle {
+public class CommunityArticle extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long communityArticleId;
@@ -33,10 +30,6 @@ public class CommunityArticle {
 
     @Column(nullable = false)
     private Boolean enabled = Boolean.TRUE;
-
-    @Column(nullable = false)
-    @CreatedDate
-    private LocalDateTime createdTime;
 
     @OneToMany(mappedBy = "communityArticle", cascade = CascadeType.ALL)
     private List<ArticleTopic> articleTopics = new ArrayList<>();
