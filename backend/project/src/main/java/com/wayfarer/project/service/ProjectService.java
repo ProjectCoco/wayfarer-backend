@@ -1,5 +1,6 @@
 package com.wayfarer.project.service;
 
+import com.wayfarer.common.dto.MultiResponseDto;
 import com.wayfarer.project.dto.*;
 import com.wayfarer.project.entity.enummodel.ProjectStatus;
 
@@ -19,4 +20,6 @@ public interface ProjectService {
     MultiResponseDto<ProjectArticleResponseDto> readProjectArticlesWithTag(int page, String tag, Boolean status);
 
     MultiResponseDto<ProjectArticleResponseDto> readProjectArticlesWithSkills(int page, SkillParamDto skillParamDto, ProjectStatus status);
+
+    MultiResponseDto<ProjectArticleResponseDto> readAllPopularProjectArticles();
 }

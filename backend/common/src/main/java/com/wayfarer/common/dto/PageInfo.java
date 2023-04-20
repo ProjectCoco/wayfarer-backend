@@ -1,4 +1,4 @@
-package com.wayfarer.project.dto;
+package com.wayfarer.common.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

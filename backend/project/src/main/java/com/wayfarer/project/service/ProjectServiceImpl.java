@@ -1,6 +1,8 @@
 package com.wayfarer.project.service;
 
 
+import com.wayfarer.common.dto.MultiResponseDto;
+import com.wayfarer.common.dto.PageInfo;
 import com.wayfarer.project.dto.*;
 import com.wayfarer.project.entity.ProjectArticle;
 import com.wayfarer.project.entity.ProjectMember;
@@ -81,14 +83,14 @@ public class ProjectServiceImpl implements ProjectService {
         Page<ProjectArticle> projectArticleList = null;
         if (status) {
             projectArticleList = projectArticleRepository
-                    .findByEnabledAndProjectInfo(true, new ProjectInfo(ProjectStatus.PROCEED), PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
+                    .findByEnabledAndProjectInfo(true, new ProjectInfo(ProjectStatus.PROCEED), PageRequest.of(page - 1, 9, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
         }
 
         if (!status) {
             projectArticleList = projectArticleRepository
-                    .getByEnabled(true, PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
+                    .getByEnabled(true, PageRequest.of(page - 1, 9, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
         }
-        return new MultiResponseDto<>(joinProjectMember(projectArticleList.getContent()), projectArticleList);
+        return new MultiResponseDto<>(joinProjectMember(projectArticleList.getContent()), new PageInfo(projectArticleList.getNumber() + 1, projectArticleList.getSize(), projectArticleList.getTotalElements(), projectArticleList.getTotalPages()));
     }
 
     @Override
@@ -98,23 +100,23 @@ public class ProjectServiceImpl implements ProjectService {
             projectArticleListWithTag = projectArticleRepository
                     .findByProjectTagsContainsAndEnabledAndProjectInfo(tag, true,
                             new ProjectInfo(ProjectStatus.PROCEED),
-                            PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
+                            PageRequest.of(page - 1, 9, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
         }
         if (!status) {
             projectArticleListWithTag = projectArticleRepository
                     .findByProjectTagsContainsAndEnabled(tag, true,
-                            PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
+                            PageRequest.of(page - 1, 9, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
         }
-        return new MultiResponseDto<>(joinProjectMember(projectArticleListWithTag.getContent()), projectArticleListWithTag);
+        return new MultiResponseDto<>(joinProjectMember(projectArticleListWithTag.getContent()), new PageInfo(projectArticleListWithTag.getNumber() + 1, projectArticleListWithTag.getSize(), projectArticleListWithTag.getTotalElements(), projectArticleListWithTag.getTotalPages()));
     }
 
     @Override
     public MultiResponseDto<ProjectArticleResponseDto> readProjectArticlesWithSkills(int page, SkillParamDto skillParamDto, ProjectStatus status) {
         Page<ProjectArticle> projectArticles = projectArticleRepository
                 .getAllBySkill(status, skillParamDto,
-                        PageRequest.of(page - 1, 10, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
+                        PageRequest.of(page - 1, 9, Sort.by(ProjectArticleEnum.PROJECT_ARTICLE_ID.getValue()).descending()));
 
-        return new MultiResponseDto<>(joinProjectMember(projectArticles.getContent()), projectArticles);
+        return new MultiResponseDto<>(joinProjectMember(projectArticles.getContent()), new PageInfo(projectArticles.getNumber() + 1, projectArticles.getSize(), projectArticles.getTotalElements(), projectArticles.getTotalPages()));
     }
 
     private List<ProjectArticleResponseDto> joinProjectMember(List<ProjectArticle> projectArticles) {
@@ -167,5 +169,9 @@ public class ProjectServiceImpl implements ProjectService {
         projectArticleRepository.save(projectArticle);
     }
 
-
+    @Override
+    public MultiResponseDto<ProjectArticleResponseDto> readAllPopularProjectArticles() {
+        List<ProjectArticle> projectArticleList = projectArticleRepository.findByRandomArticles();
+        return new MultiResponseDto<>(joinProjectMember(projectArticleList), null);
+    }
 }

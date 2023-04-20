@@ -1,6 +1,11 @@
-package com.wayfarer.community.service;
+package com.wayfarer.community.service.article;
 
-import com.wayfarer.community.dto.*;
+import com.wayfarer.common.dto.MultiResponseDto;
+import com.wayfarer.common.dto.PageInfo;
+import com.wayfarer.community.dto.article.CommunityArticleDetailResponseDto;
+import com.wayfarer.community.dto.article.CommunityArticleRequestDto;
+import com.wayfarer.community.dto.article.CommunityArticleResponseDto;
+import com.wayfarer.community.dto.article.CommunityArticleUpdateRequestDto;
 import com.wayfarer.community.entity.ArticleTopic;
 import com.wayfarer.community.entity.CommunityArticle;
 import com.wayfarer.community.mapper.CommunityMapper;
@@ -25,7 +30,8 @@ public class CommunityServiceImpl implements CommunityService {
 
     public CommunityServiceImpl(CommunityArticleRepository communityArticleRepository,
                                 CommunityMapper communityMapper,
-                                ArticleTopicRepository articleTopicRepository, TopicRepository topicRepository) {
+                                ArticleTopicRepository articleTopicRepository,
+                                TopicRepository topicRepository) {
         this.communityArticleRepository = communityArticleRepository;
         this.communityMapper = communityMapper;
         this.articleTopicRepository = articleTopicRepository;
@@ -35,10 +41,10 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public MultiResponseDto<CommunityArticleResponseDto> readAllCommunityArticles(int page) {
         Page<CommunityArticle> communityArticles = communityArticleRepository
-                .findAll(PageRequest.of(page, 10, Sort.by("community_article_id").descending()));
+                .findAll(PageRequest.of(page - 1, 9, Sort.by("communityArticleId").descending()));
         List<CommunityArticleResponseDto> communityArticleResponseDtos =
                 communityMapper.communityArticlesToCommunityArticleResponseDtos(communityArticles.getContent());
-        return new MultiResponseDto<>(communityArticleResponseDtos, communityArticles);
+        return new MultiResponseDto<>(communityArticleResponseDtos, new PageInfo(communityArticles.getNumber() + 1, communityArticles.getSize(), communityArticles.getTotalElements(), communityArticles.getTotalPages()));
     }
 
     @Override

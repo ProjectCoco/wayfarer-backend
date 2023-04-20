@@ -31,7 +31,7 @@ public class ReplyComment {
 
     @Column
     @CreatedDate
-    private LocalDateTime cratedTime;
+    private LocalDateTime createdTime;
 
     @Column()
     private Boolean enabled;

@@ -1,12 +1,17 @@
-package com.wayfarer.community.dto;
+package com.wayfarer.community.dto.article;
 
+import com.wayfarer.community.dto.comment.CommunityCommentResponseDto;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
+@Setter
 public class CommunityArticleDetailResponseDto {
+
+    private Long communityId;
 
     private String title;
 
@@ -14,7 +19,5 @@ public class CommunityArticleDetailResponseDto {
 
     private LocalDateTime createdTime;
 
-    private List<Long> topics;
-
-    private List<CommentResponseDto> comments;
+    private List<CommunityCommentResponseDto> comments;
 }

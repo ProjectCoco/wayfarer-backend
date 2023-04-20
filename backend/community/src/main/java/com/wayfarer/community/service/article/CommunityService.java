@@ -1,6 +1,10 @@
-package com.wayfarer.community.service;
+package com.wayfarer.community.service.article;
 
-import com.wayfarer.community.dto.*;
+import com.wayfarer.common.dto.MultiResponseDto;
+import com.wayfarer.community.dto.article.CommunityArticleDetailResponseDto;
+import com.wayfarer.community.dto.article.CommunityArticleRequestDto;
+import com.wayfarer.community.dto.article.CommunityArticleResponseDto;
+import com.wayfarer.community.dto.article.CommunityArticleUpdateRequestDto;
 
 public interface CommunityService {
 

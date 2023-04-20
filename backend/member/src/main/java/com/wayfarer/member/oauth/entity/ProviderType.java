@@ -9,10 +9,10 @@ public enum ProviderType {
     NAVER("naver", "네이버 로그인");
 
     final String providerId;
-    final String decription;
+    final String description;
 
-    ProviderType(String providerId, String decription) {
+    ProviderType(String providerId, String description) {
         this.providerId = providerId;
-        this.decription = decription;
+        this.description = description;
     }
 }

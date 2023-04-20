@@ -1,6 +1,7 @@
 package com.wayfarer.application.controller;
 
 
+import com.wayfarer.common.dto.MultiResponseDto;
 import com.wayfarer.project.dto.*;
 import com.wayfarer.project.entity.enummodel.ProjectStatus;
 import com.wayfarer.project.service.ProjectService;
@@ -38,7 +39,7 @@ public class ProjectController {
     }
 
     @GetMapping("/{projectId}")
-    public ResponseEntity<ProjectArticleDetailResponseDto> readStudy(@PathVariable Long projectId) {
+    public ResponseEntity<ProjectArticleDetailResponseDto> readProject(@PathVariable Long projectId) {
         return new ResponseEntity<>(projectService.readProjectArticle(projectId), HttpStatus.OK);
     }
 
@@ -61,5 +62,11 @@ public class ProjectController {
         //delete -> status 변경
         projectService.deleteProjectArticle(projectId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/popular")
+    //todo: 찜 기능 추가시 로직 개선
+    public ResponseEntity<MultiResponseDto<ProjectArticleResponseDto>> popularAllProjects() {
+        return new ResponseEntity<>(projectService.readAllPopularProjectArticles(), HttpStatus.OK);
     }
 }
