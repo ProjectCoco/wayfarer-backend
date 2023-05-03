@@ -23,6 +23,8 @@ dependencies {
 
     // validation
     implementation "org.springframework.boot:spring-boot-starter-validation"
+
+    implementation project(':common')
 }
 
 def querydslDir = "$buildDir/generated/querydsl"
