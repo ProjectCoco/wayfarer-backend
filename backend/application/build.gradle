@@ -4,6 +4,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    //validation
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+
     implementation project(':member')
     implementation project(':study')
     implementation project(':project')

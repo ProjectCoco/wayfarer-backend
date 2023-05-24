@@ -15,15 +15,15 @@ public class ProjectMember {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long projectMemberId;
 
-    @Column
+    @Column(nullable = false)
     private Long projectArticleId;
 
-    @Column
+    @Column(nullable = false)
     private String position;
 
-    @Column
+    @Column(nullable = false)
     private int totalMember;
 
-    @Column
+    @Column(nullable = false)
     private int countMember;
 }

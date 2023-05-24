@@ -31,23 +31,23 @@ public class ProjectArticle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column()
     private Long projectArticleId;
 
-    @Column()
+    @Column(nullable = false, length = 30)
     private String title;
 
     @Convert(converter = BooleanToYNConverter.class)
+    @Column(nullable = false)
     private Boolean enabled;
 
-    @Column
+    @Column(nullable = false)
     private String projectTags;
 
-    @Column
+    @Column(nullable = false)
     @CreatedDate
     private LocalDateTime createdTime;
 
-    @Column
+    @Column(nullable = false)
     private String projectMembers;
 
     @Embedded
@@ -62,7 +62,7 @@ public class ProjectArticle {
     @Embedded
     private ProjectOwner projectOwner;
 
-    @Column
+    @Column(nullable = false)
     private String projectSkills;
 
     public void initProjectArticle() {

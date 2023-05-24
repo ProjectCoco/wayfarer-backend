@@ -13,16 +13,16 @@ public class StudyMember {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studyMemberId;
 
-    @Column
+    @Column(nullable = false)
     private Long studyArticleId;
 
-    @Column
+    @Column(nullable = false)
     private String position;
 
-    @Column
+    @Column(nullable = false)
     private int totalMember;
 
-    @Column
+    @Column(nullable = false)
     private int countMember;
 
 }

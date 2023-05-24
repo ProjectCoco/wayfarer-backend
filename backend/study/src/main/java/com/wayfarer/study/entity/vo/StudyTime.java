@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class StudyTime {
 
-    @Column()
+    @Column(nullable = false)
     @CreatedDate
     private LocalDateTime startTime;
 

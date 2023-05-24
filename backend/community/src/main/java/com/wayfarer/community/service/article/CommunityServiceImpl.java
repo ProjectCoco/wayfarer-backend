@@ -2,6 +2,8 @@ package com.wayfarer.community.service.article;
 
 import com.wayfarer.common.dto.MultiResponseDto;
 import com.wayfarer.common.dto.PageInfo;
+import com.wayfarer.common.exception.BusinessException;
+import com.wayfarer.common.exception.ExceptionCode;
 import com.wayfarer.community.dto.article.CommunityArticleDetailResponseDto;
 import com.wayfarer.community.dto.article.CommunityArticleRequestDto;
 import com.wayfarer.community.dto.article.CommunityArticleResponseDto;
@@ -50,7 +52,7 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public CommunityArticleDetailResponseDto readCommunityArticle(Long communityId) {
         CommunityArticle communityArticle = communityArticleRepository.findById(communityId)
-                .orElseThrow(NullPointerException::new);
+                .orElseThrow(() -> new BusinessException(ExceptionCode.COMMUNITY_ARTICLE_NOT_FOUND));
         return communityMapper.communityArticleToCommunityArticleDetailResponseDto(communityArticle);
     }
 
@@ -68,7 +70,7 @@ public class CommunityServiceImpl implements CommunityService {
                                         .communityArticle(savedCommunityArticle).build())
                         ;
                     } catch (RuntimeException runtimeException) {
-                        throw new NullPointerException("존재하지 않는 토픽" + id);
+                        throw new BusinessException(ExceptionCode.TOPIC_NOT_FOUND);
                     }
                 }
         );
@@ -77,7 +79,7 @@ public class CommunityServiceImpl implements CommunityService {
 
     @Override
     public void updateCommunityArticle(Long communityId, CommunityArticleUpdateRequestDto communityArticleUpdateRequestDTO) {
-        CommunityArticle communityArticle = communityArticleRepository.findById(communityId).orElseThrow(NullPointerException::new);
+        CommunityArticle communityArticle = communityArticleRepository.findById(communityId).orElseThrow(() -> new BusinessException(ExceptionCode.COMMUNITY_ARTICLE_NOT_FOUND));
         // Topic 변경 로직
         communityArticle.updateAll(communityArticleUpdateRequestDTO);
         communityArticleRepository.save(communityArticle);
@@ -85,7 +87,7 @@ public class CommunityServiceImpl implements CommunityService {
 
     @Override
     public void deleteCommunityArticle(Long communityId) {
-        CommunityArticle communityArticle = communityArticleRepository.findById(communityId).orElseThrow(NullPointerException::new);
+        CommunityArticle communityArticle = communityArticleRepository.findById(communityId).orElseThrow(() -> new BusinessException(ExceptionCode.COMMUNITY_ARTICLE_NOT_FOUND));
         communityArticle.changeEnabled(false);
         communityArticleRepository.save(communityArticle);
     }

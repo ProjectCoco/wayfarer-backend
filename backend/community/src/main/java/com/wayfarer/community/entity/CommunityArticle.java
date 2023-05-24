@@ -25,16 +25,16 @@ public class CommunityArticle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long communityArticleId;
 
-    @Column()
+    @Column(nullable = false, length = 50)
     private String title;
 
-    @Column
+    @Column(nullable = false, length = 1000)
     private String content;
 
-    @Column
+    @Column(nullable = false)
     private Boolean enabled = Boolean.TRUE;
 
-    @Column
+    @Column(nullable = false)
     @CreatedDate
     private LocalDateTime createdTime;
 

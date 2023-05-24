@@ -3,6 +3,8 @@ package com.wayfarer.project.service;
 
 import com.wayfarer.common.dto.MultiResponseDto;
 import com.wayfarer.common.dto.PageInfo;
+import com.wayfarer.common.exception.BusinessException;
+import com.wayfarer.common.exception.ExceptionCode;
 import com.wayfarer.project.dto.*;
 import com.wayfarer.project.entity.ProjectArticle;
 import com.wayfarer.project.entity.ProjectMember;
@@ -137,7 +139,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectArticleDetailResponseDto readProjectArticle(Long projectId) {
-        ProjectArticle projectArticle = projectArticleRepository.findById(projectId).orElseThrow(NullPointerException::new);
+        ProjectArticle projectArticle = projectArticleRepository.findById(projectId).orElseThrow(() -> new BusinessException(ExceptionCode.PROJECT_ARTICLE_NOT_FOUND));
         List<ProjectMember> projectMembers = projectMemberRepository.findByProjectArticleId(projectArticle.getProjectArticleId());
         List<ProjectMemberResponseDto> projectMemberResponseDtos = projectMemberMapper.projectMembersToProjectMemberResponseDtos(projectMembers);
 
@@ -146,7 +148,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void updateProjectArticle(Long projectId, ProjectArticlePutRequestDto projectArticlePutRequestDto) {
-        ProjectArticle projectArticle = projectArticleRepository.findById(projectId).orElseThrow();
+        ProjectArticle projectArticle = projectArticleRepository.findById(projectId).orElseThrow(() -> new BusinessException(ExceptionCode.PROJECT_ARTICLE_NOT_FOUND));
         projectArticle.updateAll(projectArticlePutRequestDto);
         projectArticleRepository.save(projectArticle);
 
@@ -155,7 +157,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     private void updateProjectMembers(ProjectArticlePutRequestDto projectArticlePutRequestDto) {
         projectArticlePutRequestDto.getProjectMembers().forEach(dto -> {
-            ProjectMember projectMember = projectMemberRepository.findById(dto.getProjectMemberId()).orElseThrow();
+            ProjectMember projectMember = projectMemberRepository.findById(dto.getProjectMemberId()).orElseThrow(() -> new BusinessException(ExceptionCode.MEMBER_NOT_FOUND));
             projectMember.setPosition(dto.getPosition());
             projectMember.setTotalMember(dto.getTotalMember());
             projectMember.setCountMember(dto.getCountMember());
@@ -164,7 +166,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void deleteProjectArticle(Long projectId) {
-        ProjectArticle projectArticle = projectArticleRepository.findById(projectId).orElseThrow(NullPointerException::new);
+        ProjectArticle projectArticle = projectArticleRepository.findById(projectId).orElseThrow(() -> new BusinessException(ExceptionCode.MEMBER_NOT_FOUND));
         projectArticle.changeEnabled(false);
         projectArticleRepository.save(projectArticle);
     }
