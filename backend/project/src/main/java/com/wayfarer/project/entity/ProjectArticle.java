@@ -1,5 +1,6 @@
 package com.wayfarer.project.entity;
 
+import com.wayfarer.common.audit.Auditable;
 import com.wayfarer.project.dto.ProjectArticlePutRequestDto;
 import com.wayfarer.project.entity.converter.BooleanToYNConverter;
 import com.wayfarer.project.entity.enummodel.ProjectSkillEnum;
@@ -11,11 +12,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,8 +24,7 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
-public class ProjectArticle {
+public class ProjectArticle extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,10 +39,6 @@ public class ProjectArticle {
 
     @Column(nullable = false)
     private String projectTags;
-
-    @Column(nullable = false)
-    @CreatedDate
-    private LocalDateTime createdTime;
 
     @Column(nullable = false)
     private String projectMembers;
